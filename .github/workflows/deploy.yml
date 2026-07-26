@@ -21,6 +21,7 @@ jobs:
         run: |
           echo "set ftp:passive-mode yes" > /tmp/lftp_cmds.txt
           echo "set ftp:ssl-allow no" >> /tmp/lftp_cmds.txt
+          echo "open -u $FTP_USER,$FTP_PASS ftpupload.net" >> /tmp/lftp_cmds.txt
           echo "mirror --reverse --verbose --delete --exclude .git/ --exclude uploads/ --exclude logs/ --exclude .github/ --exclude config/ --exclude .htaccess ./ /" >> /tmp/lftp_cmds.txt
           echo "quit" >> /tmp/lftp_cmds.txt
-          lftp -f /tmp/lftp_cmds.txt -u "$FTP_USER","$FTP_PASS" ftpupload.net
+          lftp -f /tmp/lftp_cmds.txt
