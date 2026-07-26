@@ -4,8 +4,8 @@
 // ============================================================
 
 define('APP_NAME', 'ASAAS STUDIO');
-define('APP_URL', 'http://localhost/sas_studio');
-define('BASE_URL', '/sas_studio/');
+define('APP_URL', 'https://asaas-studio.tech');
+define('BASE_URL', '/');
 define('APP_ENV', 'production');
 define('APP_DEBUG', false);
 define('APP_VERSION', '1.0.0');

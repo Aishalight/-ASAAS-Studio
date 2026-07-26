@@ -1,5 +1,5 @@
 RewriteEngine On
-RewriteBase /sas_studio/
+RewriteBase /
 
 # Redirect to index.php
 RewriteCond %{REQUEST_FILENAME} !-f
