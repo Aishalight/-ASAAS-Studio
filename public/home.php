@@ -42,7 +42,7 @@ $usersPct = min(round(($totalUsersCount / $maxVal) * 100), 100);
                         Digital Agency
                     </div>
                     <h1 class="hero-title">
-                        We Engineer<br>
+                        We Engineer Your<br>
                         <span class="gradient-text">Digital Growth</span><br>
                         From Vision to Revenue
                     </h1>
