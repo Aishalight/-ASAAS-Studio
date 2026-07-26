@@ -19,4 +19,8 @@ jobs:
           FTP_USER: ${{ secrets.FTP_USERNAME }}
           FTP_PASS: ${{ secrets.FTP_PASSWORD }}
         run: |
-          lftp -c "set ftp:passive-mode yes; set ftp:ssl-allow no; mirror --reverse --verbose --delete --exclude .git/ --exclude uploads/ --exclude logs/ --exclude .github/ --exclude config/ --exclude .htaccess ./ /; quit" -u "$FTP_USER","$FTP_PASS" ftpupload.net
+          echo "set ftp:passive-mode yes" > /tmp/lftp_cmds.txt
+          echo "set ftp:ssl-allow no" >> /tmp/lftp_cmds.txt
+          echo "mirror --reverse --verbose --delete --exclude .git/ --exclude uploads/ --exclude logs/ --exclude .github/ --exclude config/ --exclude .htaccess ./ /" >> /tmp/lftp_cmds.txt
+          echo "quit" >> /tmp/lftp_cmds.txt
+          lftp -f /tmp/lftp_cmds.txt -u "$FTP_USER","$FTP_PASS" ftpupload.net
