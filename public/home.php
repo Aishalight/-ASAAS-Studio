@@ -42,11 +42,12 @@ $usersPct = min(round(($totalUsersCount / $maxVal) * 100), 100);
                         Digital Agency
                     </div>
                     <h1 class="hero-title">
-                        We Engineer <span class="gradient-text">Digital Growth</span><br>
-                        From Vision to Reality
+                        We Engineer<br>
+                        <span class="gradient-text">Digital Growth</span><br>
+                        From Vision to Revenue
                     </h1>
                     <p class="hero-desc">
-                        Purpose-driven digital experiences that blend strategy, design, and technology to accelerate your business forward.
+                        Strategy-first digital agency. We turn your brand into a lead-generating machine — through high-performance websites, conversion-focused design, and marketing that actually moves the needle.
                     </p>
                     <div class="hero-actions">
                         <a href="<?= BASE_URL ?>contact#booking" class="btn btn-primary btn-lg">
@@ -96,8 +97,8 @@ $usersPct = min(round(($totalUsersCount / $maxVal) * 100), 100);
                                     <div style="flex:1;display:flex;flex-direction:column">
                                         <div style="font-size:7px;color:rgba(255,255,255,0.15);letter-spacing:1px;margin-bottom:4px">DIGITAL AGENCY</div>
                                         <div style="font-size:20px;font-weight:800;color:white;line-height:1.1;margin-bottom:1px">We Build</div>
-                                        <div style="font-size:20px;font-weight:800;color:#E8632A;line-height:1.1;margin-bottom:6px;text-shadow:0 0 15px rgba(232,99,42,0.15)">Digital Excellence</div>
-                                        <div style="font-size:7px;color:rgba(255,255,255,0.25);margin-bottom:8px;line-height:1.4">Full-stack digital agency crafting modern web solutions.</div>
+                                        <div style="font-size:20px;font-weight:800;color:#E8632A;line-height:1.1;margin-bottom:6px;text-shadow:0 0 15px rgba(232,99,42,0.15)">Revenue-Driven Brands</div>
+                                        <div style="font-size:7px;color:rgba(255,255,255,0.25);margin-bottom:8px;line-height:1.4">High-performance websites & marketing that converts.</div>
                                         <div style="font-size:8px;color:#E8632A;font-family:monospace;margin-bottom:8px;padding:5px 8px;background:rgba(232,99,42,0.04);border-radius:3px;border:1px solid rgba(232,99,42,0.08)">admin@asaas:~$ <span style="background:#E8632A;display:inline-block;width:4px;height:9px;margin-left:2px;vertical-align:text-bottom"></span></div>
                                         <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;flex:1">
                                             <div style="padding:6px;background:rgba(232,99,42,0.04);border-radius:3px;border:1px solid rgba(232,99,42,0.08)">
