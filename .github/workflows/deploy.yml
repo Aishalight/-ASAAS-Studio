@@ -11,16 +11,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Upload via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ftpupload.net
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: /
-          exclude: |
-            .git*
-            uploads/**
-            logs/**
-            .github/**
-            config/database.php
+      - name: Deploy via FTP
+        run: |
+          apt-get update -qq && apt-get install -y -qq lftp
+          lftp -e "set ftp:passive-mode yes; mirror --reverse --verbose --delete --exclude .git/ --exclude uploads/ --exclude logs/ --exclude .github/ --exclude config/database.php ./ /; quit" -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ftpupload.net
