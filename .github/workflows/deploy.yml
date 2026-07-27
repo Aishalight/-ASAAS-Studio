@@ -23,6 +23,6 @@ jobs:
           echo "set ftp:ssl-allow no" >> /tmp/lftp_cmds.txt
           echo "set net:max-retries 2" >> /tmp/lftp_cmds.txt
           echo "open -u $FTP_USER,$FTP_PASS ftpupload.net" >> /tmp/lftp_cmds.txt
-          echo "mirror --reverse --verbose --no-perms --exclude .git/ --exclude uploads/ --exclude logs/ --exclude .github/ --exclude config/ ./ /htdocs/asaas-studio.tech/htdocs/" >> /tmp/lftp_cmds.txt
+          echo "mirror --reverse --verbose --no-perms --exclude .git/ --exclude uploads/ --exclude logs/ --exclude .github/ --exclude config/ ./ /asaas-studio.tech/htdocs/" >> /tmp/lftp_cmds.txt
           echo "quit" >> /tmp/lftp_cmds.txt
           lftp -f /tmp/lftp_cmds.txt || true
