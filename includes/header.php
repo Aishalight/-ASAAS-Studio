@@ -14,6 +14,9 @@
     <link rel="icon" type="image/png" sizes="192x192" href="<?= BASE_URL ?>assets/images/favicon_io/android-chrome-192x192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="<?= BASE_URL ?>assets/images/favicon_io/android-chrome-512x512.png">
     <link rel="manifest" href="<?= BASE_URL ?>assets/images/favicon_io/site.webmanifest">
+    <meta name="msapplication-TileColor" content="#25D366">
+    <meta name="msapplication-TileImage" content="<?= BASE_URL ?>assets/images/favicon_io/favicon-32x32.png">
+    <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/main.css">
     <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/animations.css">
     <style>
