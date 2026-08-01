@@ -182,8 +182,8 @@ $usersPct = min(round(($totalUsersCount / $maxVal) * 100), 100);
                 <p style="font-size:12px;color:var(--text-muted);letter-spacing:2.5px;text-transform:uppercase;font-weight:600">Trusted by teams at</p>
             </div>
             <div class="reveal" style="display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:24px 64px">
-                <?php $clients = ['TechVolve', 'GreenLeaf', 'Pulse', 'FinFlow', 'Bloom', 'CloudBase']; foreach ($clients as $c): ?>
-                    <span style="font-size:20px;font-weight:700;color:var(--text-muted);letter-spacing:0.5px;opacity:0.4;transition:opacity var(--transition);white-space:nowrap" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='0.4'"><?= $c ?></span>
+                <?php $clients = array_filter(array_map('trim', explode(',', getSetting('trusted_clients', 'TechVolve,GreenLeaf,Pulse,FinFlow,Bloom,CloudBase')))); foreach ($clients as $c): ?>
+                    <span style="font-size:20px;font-weight:700;color:var(--text-muted);letter-spacing:0.5px;opacity:0.4;transition:opacity var(--transition);white-space:nowrap" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='0.4'"><?= htmlspecialchars($c) ?></span>
                 <?php endforeach; ?>
             </div>
         </div>

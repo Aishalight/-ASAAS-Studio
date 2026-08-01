@@ -39,6 +39,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 
     <div class="reveal" style="background:var(--bg-white);border-radius:var(--radius-lg);border:1px solid var(--border);padding:32px;margin-bottom:24px">
+        <h3 style="font-size:18px;font-weight:700;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--border)">Homepage</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+            <div class="form-group" style="grid-column:1/-1"><label class="form-label">Trusted By Client Names</label><input type="text" name="trusted_clients" class="form-input" value="<?= htmlspecialchars(getSetting('trusted_clients', 'TechVolve,GreenLeaf,Pulse,FinFlow,Bloom,CloudBase')) ?>"><p style="font-size:12px;color:var(--text-muted);margin-top:4px">Comma-separated list of company names shown in the "Trusted by teams at" section on the homepage.</p></div>
+        </div>
+    </div>
+
+    <div class="reveal" style="background:var(--bg-white);border-radius:var(--radius-lg);border:1px solid var(--border);padding:32px;margin-bottom:24px">
         <h3 style="font-size:18px;font-weight:700;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--border)">Social Media</h3>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
             <div class="form-group"><label class="form-label">Twitter URL</label><input type="url" name="social_twitter" class="form-input" value="<?= htmlspecialchars(getSetting('social_twitter')) ?>"></div>
