@@ -24,8 +24,8 @@ $totalUsersCount = (int)$db->query("SELECT COUNT(*) FROM users WHERE status='act
             </div>
         </div>
         <div class="container">
-            <div style="display:flex;align-items:flex-start;gap:60px;width:100%;padding-top:20px">
-                <div class="hero-content fade-in-up" style="flex:1;max-width:600px">
+            <div class="hero-row" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);align-items:center;gap:56px;width:100%;padding-top:20px">
+                <div class="hero-content fade-in-up">
                     <div class="hero-tag">
                         <span class="hero-tag-dot"></span>
                         Digital Agency
@@ -70,8 +70,8 @@ $totalUsersCount = (int)$db->query("SELECT COUNT(*) FROM users WHERE status='act
                         </div>
                     </div>
                 </div>
-                <div class="fade-in-up" style="flex:1;display:none;justify-content:center;align-items:center;position:relative" id="hero-visual">
-                    <div style="position:relative;width:100%;max-width:640px">
+                <div class="fade-in-up" style="display:none;justify-content:center;align-items:center;position:relative;margin-right:-28px" id="hero-visual">
+                    <div style="position:relative;width:100%">
                         <?php
                         $heroProjects = $db->query("SELECT id, title, slug, featured_image FROM portfolio_projects WHERE status='published' AND featured_image IS NOT NULL AND featured_image != '' ORDER BY featured DESC, created_at DESC LIMIT 6")->fetchAll();
                         if (empty($heroProjects)) {
@@ -113,15 +113,16 @@ $totalUsersCount = (int)$db->query("SELECT COUNT(*) FROM users WHERE status='act
         </div>
         <style>
         @media (min-width:1024px) { #hero-visual { display:flex !important } }
+        @media (max-width:1023px) { .hero-row { grid-template-columns:1fr !important } }
         .hero-carousel { position:relative; width:100% }
-        .hero-carousel-viewport { position:relative; height:420px; border-radius:20px; overflow:hidden; box-shadow:0 40px 100px rgba(0,0,0,0.35); background:#0d0d1a }
+        .hero-carousel-viewport { position:relative; aspect-ratio:4/3; min-height:440px; border-radius:20px; overflow:hidden; box-shadow:0 40px 100px rgba(0,0,0,0.35); background:#0d0d1a }
         .hero-slide { position:absolute; inset:0; background-size:cover; background-position:center; opacity:0; transform:scale(1.06); transition:opacity .7s ease, transform .7s ease; display:block }
         .hero-slide.active { opacity:1; transform:scale(1); z-index:1 }
         .hero-slide::after { content:''; position:absolute; inset:0; background:linear-gradient(180deg, rgba(13,13,26,0.05) 45%, rgba(13,13,26,0.85) 100%) }
-        .hero-slide-overlay { position:absolute; left:0; right:0; bottom:0; padding:32px; z-index:2; display:flex; flex-direction:column; align-items:flex-start; gap:8px }
-        .hero-slide-tag { font-size:11px; letter-spacing:2px; text-transform:uppercase; font-weight:600; color:#E8632A; background:rgba(232,99,42,0.12); border:1px solid rgba(232,99,42,0.25); padding:4px 12px; border-radius:20px }
-        .hero-slide-title { color:#fff; font-size:26px; font-weight:700; line-height:1.2; margin:0 }
-        .hero-slide-link { display:inline-flex; align-items:center; gap:8px; color:#fff; font-size:14px; font-weight:600; text-decoration:none; transition:color .2s }
+        .hero-slide-overlay { position:absolute; left:0; right:0; bottom:0; padding:34px; z-index:2; display:flex; flex-direction:column; align-items:flex-start; gap:10px }
+        .hero-slide-tag { font-size:11px; letter-spacing:2px; text-transform:uppercase; font-weight:600; color:#E8632A; background:rgba(232,99,42,0.12); border:1px solid rgba(232,99,42,0.25); padding:5px 14px; border-radius:20px }
+        .hero-slide-title { color:#fff; font-size:clamp(22px,2.6vw,30px); font-weight:700; line-height:1.15; margin:0 }
+        .hero-slide-link { display:inline-flex; align-items:center; gap:8px; color:#fff; font-size:15px; font-weight:600; text-decoration:none; transition:color .2s }
         .hero-slide-link span { transition:transform .2s }
         .hero-slide-link:hover { color:#E8632A }
         .hero-slide-link:hover span { transform:translateX(4px) }
@@ -129,7 +130,7 @@ $totalUsersCount = (int)$db->query("SELECT COUNT(*) FROM users WHERE status='act
         .hero-carousel-dots { position:absolute; bottom:20px; right:20px; z-index:3; display:flex; gap:8px }
         .hero-slide-dot { width:8px; height:8px; border-radius:50%; border:none; background:rgba(255,255,255,0.4); cursor:pointer; padding:0; transition:background .2s, transform .2s }
         .hero-slide-dot.active { background:#E8632A; transform:scale(1.25) }
-        .hero-arrow { position:absolute; top:50%; transform:translateY(-50%); z-index:3; width:44px; height:44px; border-radius:50%; border:1px solid rgba(255,255,255,0.15); background:rgba(13,13,26,0.45); backdrop-filter:blur(6px); color:#fff; font-size:26px; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background .2s, border-color .2s }
+        .hero-arrow { position:absolute; top:50%; transform:translateY(-50%); z-index:3; width:46px; height:46px; border-radius:50%; border:1px solid rgba(255,255,255,0.15); background:rgba(13,13,26,0.45); backdrop-filter:blur(6px); color:#fff; font-size:28px; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background .2s, border-color .2s }
         .hero-arrow:hover { background:#E8632A; border-color:#E8632A }
         .hero-arrow-prev { left:16px }
         .hero-arrow-next { right:16px }
