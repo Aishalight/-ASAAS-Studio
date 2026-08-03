@@ -70,42 +70,42 @@ $totalUsersCount = (int)$db->query("SELECT COUNT(*) FROM users WHERE status='act
                         </div>
                     </div>
                 </div>
-                <div class="fade-in-up" style="flex:1;display:none;justify-content:center;align-items:flex-start;position:relative;margin-top:60px" id="hero-visual">
-                    <div style="position:relative;width:100%;max-width:540px;padding-left:20px">
+                <div class="fade-in-up" style="flex:1;display:none;justify-content:center;align-items:center;position:relative" id="hero-visual">
+                    <div style="position:relative;width:100%;max-width:640px">
                         <?php
                         $heroProjects = $db->query("SELECT id, title, slug, featured_image FROM portfolio_projects WHERE status='published' AND featured_image IS NOT NULL AND featured_image != '' ORDER BY featured DESC, created_at DESC LIMIT 6")->fetchAll();
                         if (empty($heroProjects)) {
                             $heroProjects = [
-                                ['id' => 1, 'title' => 'TechVolve Platform', 'slug' => 'techvolve-platform', 'featured_image' => 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop'],
-                                ['id' => 2, 'title' => 'FinFlow Dashboard', 'slug' => 'finflow-dashboard', 'featured_image' => 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop'],
-                                ['id' => 3, 'title' => 'Bloom E-Commerce', 'slug' => 'bloom-ecommerce', 'featured_image' => 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop'],
-                                ['id' => 4, 'title' => 'CloudBase SaaS', 'slug' => 'cloudbase-saas', 'featured_image' => 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=400&fit=crop'],
+                                ['id' => 1, 'title' => 'TechVolve Platform', 'slug' => 'techvolve-platform', 'featured_image' => 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=500&fit=crop'],
+                                ['id' => 2, 'title' => 'FinFlow Dashboard', 'slug' => 'finflow-dashboard', 'featured_image' => 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=500&fit=crop'],
+                                ['id' => 3, 'title' => 'Bloom E-Commerce', 'slug' => 'bloom-ecommerce', 'featured_image' => 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=500&fit=crop'],
+                                ['id' => 4, 'title' => 'CloudBase SaaS', 'slug' => 'cloudbase-saas', 'featured_image' => 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&h=500&fit=crop'],
                             ];
                         }
                         ?>
-                        <div class="hero-browser">
-                            <div class="hero-browser-bar">
-                                <span class="hb-dot"></span><span class="hb-dot"></span><span class="hb-dot"></span>
-                                <span class="hero-browser-url">asaasstudio.com/work</span>
-                            </div>
-                            <div class="hero-browser-body">
+                        <div class="hero-carousel">
+                            <div class="hero-carousel-viewport">
                                 <?php foreach ($heroProjects as $hi => $hp):
                                     $hImg = strpos($hp['featured_image'], 'uploads/') === 0 ? BASE_URL . $hp['featured_image'] : $hp['featured_image'];
                                     $hUrl = BASE_URL . 'portfolio/' . htmlspecialchars($hp['slug'] ?? 'project'); ?>
-                                    <a class="hero-slide<?= $hi === 0 ? ' active' : '' ?>" href="<?= $hUrl ?>" style="background-image:url('<?= $hImg ?>')" aria-label="<?= htmlspecialchars($hp['title']) ?>">
-                                        <span class="hero-slide-label"><?= htmlspecialchars($hp['title']) ?></span>
-                                    </a>
+                                    <a class="hero-slide<?= $hi === 0 ? ' active' : '' ?>" href="<?= $hUrl ?>" data-title="<?= htmlspecialchars($hp['title']) ?>" data-url="<?= $hUrl ?>" style="background-image:url('<?= $hImg ?>')" aria-label="<?= htmlspecialchars($hp['title']) ?>"></a>
                                 <?php endforeach; ?>
+                                <div class="hero-slide-overlay">
+                                    <span class="hero-slide-tag">Featured Work</span>
+                                    <h3 class="hero-slide-title"><?= htmlspecialchars($heroProjects[0]['title']) ?></h3>
+                                    <a class="hero-slide-link" href="<?= BASE_URL . 'portfolio/' . htmlspecialchars($heroProjects[0]['slug'] ?? 'project') ?>">View Case Study <span>&rarr;</span></a>
+                                </div>
+                                <?php if (count($heroProjects) > 1): ?>
+                                <span class="hero-slide-counter">01 / <?= count($heroProjects) ?></span>
+                                <div class="hero-carousel-dots">
+                                    <?php foreach ($heroProjects as $hi => $hp): ?>
+                                        <button class="hero-slide-dot<?= $hi === 0 ? ' active' : '' ?>" data-slide="<?= $hi ?>" aria-label="Slide <?= $hi + 1 ?>"></button>
+                                    <?php endforeach; ?>
+                                </div>
+                                <button class="hero-arrow hero-arrow-prev" aria-label="Previous slide">&lsaquo;</button>
+                                <button class="hero-arrow hero-arrow-next" aria-label="Next slide">&rsaquo;</button>
+                                <?php endif; ?>
                             </div>
-                            <?php if (count($heroProjects) > 1): ?>
-                            <div class="hero-slide-dots">
-                                <?php foreach ($heroProjects as $hi => $hp): ?>
-                                    <button class="hero-slide-dot<?= $hi === 0 ? ' active' : '' ?>" data-slide="<?= $hi ?>" aria-label="Slide <?= $hi + 1 ?>"></button>
-                                <?php endforeach; ?>
-                            </div>
-                            <button class="hero-arrow hero-arrow-prev" aria-label="Previous slide">&lsaquo;</button>
-                            <button class="hero-arrow hero-arrow-next" aria-label="Next slide">&rsaquo;</button>
-                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
@@ -113,32 +113,36 @@ $totalUsersCount = (int)$db->query("SELECT COUNT(*) FROM users WHERE status='act
         </div>
         <style>
         @media (min-width:1024px) { #hero-visual { display:flex !important } }
-        .hero-browser { position:relative; border-radius:14px; overflow:hidden; background:#0d0d1a; box-shadow:0 30px 80px rgba(0,0,0,0.35) }
-        .hero-browser-bar { display:flex; align-items:center; gap:6px; padding:12px 16px; border-bottom:1px solid rgba(255,255,255,0.06) }
-        .hero-browser-bar .hb-dot { width:10px; height:10px; border-radius:50%; background:#3a3a4a }
-        .hero-browser-bar .hb-dot:nth-child(1){background:#ff5f57}
-        .hero-browser-bar .hb-dot:nth-child(2){background:#febc2e}
-        .hero-browser-bar .hb-dot:nth-child(3){background:#28c840}
-        .hero-browser-url { margin-left:12px; flex:1; background:rgba(255,255,255,0.05); border-radius:6px; padding:4px 10px; font-size:11px; color:rgba(255,255,255,0.45); font-family:monospace; text-align:center; overflow:hidden; white-space:nowrap; text-overflow:ellipsis }
-        .hero-browser-body { position:relative; height:320px }
-        .hero-slide { position:absolute; inset:0; background-size:cover; background-position:center top; opacity:0; transform:scale(1.04); transition:opacity .7s ease, transform .7s ease; display:block }
+        .hero-carousel { position:relative; width:100% }
+        .hero-carousel-viewport { position:relative; height:420px; border-radius:20px; overflow:hidden; box-shadow:0 40px 100px rgba(0,0,0,0.35); background:#0d0d1a }
+        .hero-slide { position:absolute; inset:0; background-size:cover; background-position:center; opacity:0; transform:scale(1.06); transition:opacity .7s ease, transform .7s ease; display:block }
         .hero-slide.active { opacity:1; transform:scale(1); z-index:1 }
-        .hero-slide::after { content:''; position:absolute; inset:0; background:linear-gradient(180deg, rgba(13,13,26,0.05) 60%, rgba(13,13,26,0.65) 100%) }
-        .hero-slide-label { position:absolute; left:14px; bottom:12px; background:rgba(13,13,26,0.75); backdrop-filter:blur(6px); color:#fff; font-size:12px; font-weight:600; padding:6px 12px; border-radius:6px; letter-spacing:0.3px; z-index:2 }
-        .hero-slide-dots { position:absolute; bottom:14px; right:14px; display:flex; gap:6px; z-index:3 }
-        .hero-slide-dot { width:8px; height:8px; border-radius:50%; border:none; background:rgba(255,255,255,0.35); cursor:pointer; padding:0; transition:background .2s, transform .2s }
+        .hero-slide::after { content:''; position:absolute; inset:0; background:linear-gradient(180deg, rgba(13,13,26,0.05) 45%, rgba(13,13,26,0.85) 100%) }
+        .hero-slide-overlay { position:absolute; left:0; right:0; bottom:0; padding:32px; z-index:2; display:flex; flex-direction:column; align-items:flex-start; gap:8px }
+        .hero-slide-tag { font-size:11px; letter-spacing:2px; text-transform:uppercase; font-weight:600; color:#E8632A; background:rgba(232,99,42,0.12); border:1px solid rgba(232,99,42,0.25); padding:4px 12px; border-radius:20px }
+        .hero-slide-title { color:#fff; font-size:26px; font-weight:700; line-height:1.2; margin:0 }
+        .hero-slide-link { display:inline-flex; align-items:center; gap:8px; color:#fff; font-size:14px; font-weight:600; text-decoration:none; transition:color .2s }
+        .hero-slide-link span { transition:transform .2s }
+        .hero-slide-link:hover { color:#E8632A }
+        .hero-slide-link:hover span { transform:translateX(4px) }
+        .hero-slide-counter { position:absolute; top:20px; right:20px; z-index:3; color:#fff; font-size:13px; font-weight:600; font-family:monospace; background:rgba(13,13,26,0.5); backdrop-filter:blur(6px); padding:6px 12px; border-radius:20px; letter-spacing:1px }
+        .hero-carousel-dots { position:absolute; bottom:20px; right:20px; z-index:3; display:flex; gap:8px }
+        .hero-slide-dot { width:8px; height:8px; border-radius:50%; border:none; background:rgba(255,255,255,0.4); cursor:pointer; padding:0; transition:background .2s, transform .2s }
         .hero-slide-dot.active { background:#E8632A; transform:scale(1.25) }
-        .hero-arrow { position:absolute; top:50%; transform:translateY(-50%); z-index:3; width:34px; height:34px; border-radius:50%; border:none; background:rgba(13,13,26,0.55); color:#fff; font-size:24px; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background .2s; backdrop-filter:blur(4px) }
-        .hero-arrow:hover { background:rgba(232,99,42,0.9) }
-        .hero-arrow-prev { left:10px }
-        .hero-arrow-next { right:10px }
-        [data-theme="dark"] .hero-browser { background:#0d0d1a }
+        .hero-arrow { position:absolute; top:50%; transform:translateY(-50%); z-index:3; width:44px; height:44px; border-radius:50%; border:1px solid rgba(255,255,255,0.15); background:rgba(13,13,26,0.45); backdrop-filter:blur(6px); color:#fff; font-size:26px; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background .2s, border-color .2s }
+        .hero-arrow:hover { background:#E8632A; border-color:#E8632A }
+        .hero-arrow-prev { left:16px }
+        .hero-arrow-next { right:16px }
+        [data-theme="dark"] .hero-carousel-viewport { background:#0d0d1a }
         </style>
         <script>
         (function(){
             var slides = document.querySelectorAll('#hero-visual .hero-slide');
-            if (slides.length < 2) return;
+            if (slides.length < 1) return;
             var dots = document.querySelectorAll('#hero-visual .hero-slide-dot');
+            var counter = document.querySelector('#hero-visual .hero-slide-counter');
+            var title = document.querySelector('#hero-visual .hero-slide-title');
+            var link = document.querySelector('#hero-visual .hero-slide-link');
             var current = 0, timer = null;
             function goTo(i) {
                 slides[current].classList.remove('active');
@@ -146,15 +150,18 @@ $totalUsersCount = (int)$db->query("SELECT COUNT(*) FROM users WHERE status='act
                 current = (i + slides.length) % slides.length;
                 slides[current].classList.add('active');
                 if (dots[current]) dots[current].classList.add('active');
+                if (title) title.textContent = slides[current].getAttribute('data-title');
+                if (link) link.setAttribute('href', slides[current].getAttribute('data-url'));
+                if (counter) counter.textContent = String(current + 1).padStart(2, '0') + ' / ' + String(slides.length).padStart(2, '0');
             }
             function next() { goTo(current + 1); }
             function prev() { goTo(current - 1); }
-            function startTimer() { stopTimer(); timer = setInterval(next, 4500); }
+            function startTimer() { stopTimer(); timer = setInterval(next, 5000); }
             function stopTimer() { if (timer) { clearInterval(timer); timer = null; } }
-            var browser = document.querySelector('#hero-visual .hero-browser');
-            if (browser) {
-                browser.addEventListener('mouseenter', stopTimer);
-                browser.addEventListener('mouseleave', startTimer);
+            var viewport = document.querySelector('#hero-visual .hero-carousel-viewport');
+            if (viewport) {
+                viewport.addEventListener('mouseenter', stopTimer);
+                viewport.addEventListener('mouseleave', startTimer);
             }
             var prevBtn = document.querySelector('#hero-visual .hero-arrow-prev');
             var nextBtn = document.querySelector('#hero-visual .hero-arrow-next');
