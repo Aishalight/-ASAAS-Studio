@@ -5,6 +5,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!validateCSRFToken($_POST['csrf_token'] ?? '')) {
         $success = 'Invalid security token.';
     } else {
+        $team = [];
+        for ($i = 1; $i <= 3; $i++) {
+            $name = trim($_POST["team_member_name_$i"] ?? '');
+            $role = trim($_POST["team_member_role_$i"] ?? '');
+            $img = trim($_POST["team_member_img_$i"] ?? '');
+            if (!empty($_FILES["team_member_photo_$i"]['tmp_name']) && $_FILES["team_member_photo_$i"]['error'] === UPLOAD_ERR_OK) {
+                $file = $_FILES["team_member_photo_$i"];
+                $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+                $allowed = ['jpg','jpeg','png','gif','webp'];
+                if (in_array($ext, $allowed)) {
+                    $filename = 'team_' . time() . '_' . $i . '_' . bin2hex(random_bytes(4)) . '.' . $ext;
+                    $uploadDir = __DIR__ . '/../uploads';
+                    if (!is_dir($uploadDir)) mkdir($uploadDir, 0755, true);
+                    if (move_uploaded_file($file['tmp_name'], $uploadDir . '/' . $filename)) {
+                        $img = 'uploads/' . $filename;
+                    }
+                }
+            }
+            if ($name || $role || $img) {
+                $team[] = ['name' => $name, 'role' => $role, 'img' => $img];
+            }
+            unset($_POST["team_member_name_$i"], $_POST["team_member_role_$i"], $_POST["team_member_img_$i"]);
+        }
+        updateSetting('team_members', json_encode($team));
         foreach ($_POST as $key => $value) {
             if ($key !== 'csrf_token') {
                 updateSetting($key, sanitize($value));
@@ -13,6 +37,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $success = 'Settings updated successfully.';
         logActivity('settings_update', 'Admin updated site settings', [], 'info');
     }
+}
+
+$teamMembers = [];
+$teamJson = getSetting('team_members', '');
+if ($teamJson) {
+    $decoded = json_decode($teamJson, true);
+    if (is_array($decoded)) $teamMembers = $decoded;
 }
 ?>
 <div class="page-header fade-in-up">
@@ -24,8 +55,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <?php if ($success): ?><div class="alert alert-success"><i data-lucide="check-circle" size="18"></i> <?= $success ?></div><?php endif; ?>
 
-<form method="POST">
+<form method="POST" enctype="multipart/form-data">
     <input type="hidden" name="csrf_token" value="<?= getCSRFToken() ?>">
+
+    <div class="reveal" style="background:var(--bg-white);border-radius:var(--radius-lg);border:1px solid var(--border);padding:32px;margin-bottom:24px">
+        <h3 style="font-size:18px;font-weight:700;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--border)">Team Members</h3>
+        <p style="font-size:13px;color:var(--text-muted);margin-bottom:24px">Shown in the "Meet Our Team" section on the About page. Leave the photo empty to keep the current one.</p>
+        <?php for ($i = 0; $i < 3; $i++): ?>
+            <?php $m = $teamMembers[$i] ?? ['name' => '', 'role' => '', 'img' => '']; $n = $i + 1; ?>
+            <div style="border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;margin-bottom:16px">
+                <h4 style="font-size:14px;font-weight:700;margin-bottom:16px;color:var(--text-muted)">Member <?= $n ?></h4>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+                    <div class="form-group"><label class="form-label">Name</label><input type="text" name="team_member_name_<?= $n ?>" class="form-input" value="<?= htmlspecialchars($m['name']) ?>"></div>
+                    <div class="form-group"><label class="form-label">Role</label><input type="text" name="team_member_role_<?= $n ?>" class="form-input" value="<?= htmlspecialchars($m['role']) ?>"></div>
+                </div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:center">
+                    <div class="form-group"><label class="form-label">Photo</label><input type="file" name="team_member_photo_<?= $n ?>" class="form-input" accept="image/*"></div>
+                    <?php if (!empty($m['img'])): ?>
+                        <div style="display:flex;align-items:center;gap:12px">
+                            <img src="<?= strpos($m['img'], 'uploads/') === 0 ? BASE_URL . $m['img'] : $m['img'] ?>" alt="Member <?= $n ?>" style="width:56px;height:56px;border-radius:50%;object-fit:cover;border:1px solid var(--border)">
+                            <input type="hidden" name="team_member_img_<?= $n ?>" value="<?= htmlspecialchars($m['img']) ?>">
+                        </div>
+                    <?php endif; ?>
+                </div>
+            </div>
+        <?php endfor; ?>
+    </div>
 
     <div class="reveal" style="background:var(--bg-white);border-radius:var(--radius-lg);border:1px solid var(--border);padding:32px;margin-bottom:24px">
         <h3 style="font-size:18px;font-weight:700;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--border)">General Settings</h3>

@@ -19,7 +19,7 @@ require __DIR__ . '/../includes/header.php'; ?>
                             <div style="font-size:14px;color:var(--text-muted)">Projects</div>
                         </div>
                         <div>
-                            <div style="font-size:36px;font-weight:800;color:var(--primary)">50+</div>
+                            <div style="font-size:36px;font-weight:800;color:var(--primary)">3</div>
                             <div style="font-size:14px;color:var(--text-muted)">Team Members</div>
                         </div>
                         <div>
@@ -69,18 +69,22 @@ require __DIR__ . '/../includes/header.php'; ?>
                 <div class="section-tag"><i data-lucide="users" size="16"></i>Leadership</div>
                 <h2 class="section-title">Meet Our <span class="gradient-text">Team</span></h2>
             </div>
-            <div class="grid grid-4 stagger-children">
-                <?php $team = [
-                    ['name' => 'Alex Mercer', 'role' => 'CEO & Founder', 'img' => 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=300&h=300&fit=crop'],
-                    ['name' => 'Sarah Chen', 'role' => 'Creative Director', 'img' => 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300&h=300&fit=crop'],
-                    ['name' => 'Marcus Williams', 'role' => 'Technical Lead', 'img' => 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop'],
-                    ['name' => 'Emily Zhao', 'role' => 'Head of Marketing', 'img' => 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=300&h=300&fit=crop'],
-                ];
+            <div class="grid grid-3 stagger-children">
+                <?php
+                $teamJson = getSetting('team_members', '');
+                $team = $teamJson ? json_decode($teamJson, true) : [];
+                if (!is_array($team) || empty($team)) {
+                    $team = [
+                        ['name' => 'Alex Mercer', 'role' => 'CEO & Founder', 'img' => 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=300&h=300&fit=crop'],
+                        ['name' => 'Sarah Chen', 'role' => 'Creative Director', 'img' => 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300&h=300&fit=crop'],
+                        ['name' => 'Marcus Williams', 'role' => 'Technical Lead', 'img' => 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop'],
+                    ];
+                }
                 foreach ($team as $t): ?>
                     <div class="card hover-lift" style="text-align:center;padding:24px">
-                        <img src="<?= $t['img'] ?>" alt="<?= $t['name'] ?>" style="width:120px;height:120px;border-radius:50%;object-fit:cover;margin:0 auto 16px">
-                        <h6 style="font-weight:700"><?= $t['name'] ?></h6>
-                        <p style="font-size:13px;color:var(--text-muted)"><?= $t['role'] ?></p>
+                        <img src="<?= strpos($t['img'] ?? '', 'uploads/') === 0 ? BASE_URL . $t['img'] : htmlspecialchars($t['img'] ?? '') ?>" alt="<?= htmlspecialchars($t['name']) ?>" style="width:120px;height:120px;border-radius:50%;object-fit:cover;margin:0 auto 16px">
+                        <h6 style="font-weight:700"><?= htmlspecialchars($t['name']) ?></h6>
+                        <p style="font-size:13px;color:var(--text-muted)"><?= htmlspecialchars($t['role']) ?></p>
                     </div>
                 <?php endforeach; ?>
             </div>

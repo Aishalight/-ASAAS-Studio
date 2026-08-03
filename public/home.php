@@ -8,17 +8,6 @@ $totalProjectsCount = (int)$db->query("SELECT COUNT(*) FROM portfolio_projects W
 $avgRatingVal = $db->query("SELECT ROUND(AVG(rating),1) FROM ratings WHERE is_approved=1")->fetchColumn() ?: 0;
 $totalRatingsCount = (int)$db->query("SELECT COUNT(*) FROM ratings WHERE is_approved=1")->fetchColumn() ?: 0;
 $totalUsersCount = (int)$db->query("SELECT COUNT(*) FROM users WHERE status='active'")->fetchColumn() ?: 0;
-$totalVisits = (int)$db->query("SELECT COUNT(*) FROM page_visits")->fetchColumn() ?: 0;
-$visitsToday = (int)$db->query("SELECT COUNT(*) FROM page_visits WHERE visit_date = CURDATE()")->fetchColumn() ?: 0;
-$visitsYesterday = (int)$db->query("SELECT COUNT(*) FROM page_visits WHERE visit_date = DATE_SUB(CURDATE(), INTERVAL 1 DAY)")->fetchColumn() ?: 0;
-$pageViewGrowth = $visitsYesterday > 0 ? round((($visitsToday - $visitsYesterday) / $visitsYesterday) * 100) : ($visitsToday > 0 ? 100 : 0);
-$uniqueToday = (int)$db->query("SELECT COUNT(DISTINCT visitor_ip) FROM page_visits WHERE visit_date = CURDATE()")->fetchColumn() ?: 0;
-$uniqueYesterday = (int)$db->query("SELECT COUNT(DISTINCT visitor_ip) FROM page_visits WHERE visit_date = DATE_SUB(CURDATE(), INTERVAL 1 DAY)")->fetchColumn() ?: 0;
-$userGrowth = $uniqueYesterday > 0 ? round((($uniqueToday - $uniqueYesterday) / $uniqueYesterday) * 100) : ($uniqueToday > 0 ? 100 : 0);
-$maxVal = max($totalVisits, $totalProjectsCount, $totalUsersCount, 1);
-$visitsPct = min(round(($totalVisits / $maxVal) * 100), 100);
-$projectsPct = min(round(($totalProjectsCount / $maxVal) * 100), 100);
-$usersPct = min(round(($totalUsersCount / $maxVal) * 100), 100);
 ?>
 
 <main class="page-transition">
@@ -83,86 +72,40 @@ $usersPct = min(round(($totalUsersCount / $maxVal) * 100), 100);
                 </div>
                 <div class="fade-in-up" style="flex:1;display:none;justify-content:center;align-items:flex-start;position:relative;margin-top:60px" id="hero-visual">
                     <div style="position:relative;width:100%;max-width:540px;padding-left:20px">
-                        <div style="background:#0d0d1a;border-radius:14px 14px 4px 4px;padding:10px;box-shadow:0 30px 80px rgba(0,0,0,0.25)">
-                            <div style="border-radius:8px;overflow:hidden;background:#2a2a2a;height:300px;position:relative">
-                                <div style="display:flex;align-items:center;padding:10px 16px;border-bottom:1px solid rgba(255,255,255,0.04)">
-                                    <span style="font-weight:700;font-size:13px;color:#E8632A;letter-spacing:1px;text-shadow:0 0 10px rgba(232,99,42,0.2)">ASAAS STUDIO</span>
-                                    <div style="margin-left:auto;display:flex;gap:12px">
-                                        <span style="font-size:8px;color:rgba(255,255,255,0.2);letter-spacing:0.5px">SERVICES</span>
-                                        <span style="font-size:8px;color:rgba(255,255,255,0.2);letter-spacing:0.5px">WORK</span>
-                                        <span style="font-size:8px;color:rgba(255,255,255,0.2);letter-spacing:0.5px">CONTACT</span>
-                                    </div>
-                                </div>
-                                <div style="display:flex;padding:18px 16px 10px;gap:12px;height:228px">
-                                    <div style="flex:1;display:flex;flex-direction:column">
-                                        <div style="font-size:7px;color:rgba(255,255,255,0.15);letter-spacing:1px;margin-bottom:4px">DIGITAL AGENCY</div>
-                                        <div style="font-size:20px;font-weight:800;color:white;line-height:1.1;margin-bottom:1px">We Build</div>
-                                        <div style="font-size:20px;font-weight:800;color:#E8632A;line-height:1.1;margin-bottom:6px;text-shadow:0 0 15px rgba(232,99,42,0.15)">Revenue-Driven Brands</div>
-                                        <div style="font-size:7px;color:rgba(255,255,255,0.25);margin-bottom:8px;line-height:1.4">High-performance websites & marketing that converts.</div>
-                                        <div style="font-size:8px;color:#E8632A;font-family:monospace;margin-bottom:8px;padding:5px 8px;background:rgba(232,99,42,0.04);border-radius:3px;border:1px solid rgba(232,99,42,0.08)">admin@asaas:~$ <span style="background:#E8632A;display:inline-block;width:4px;height:9px;margin-left:2px;vertical-align:text-bottom"></span></div>
-                                        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;flex:1">
-                                            <div style="padding:6px;background:rgba(232,99,42,0.04);border-radius:3px;border:1px solid rgba(232,99,42,0.08)">
-                                                <div style="width:12px;height:12px;border-radius:2px;background:rgba(232,99,42,0.15);margin-bottom:3px;display:flex;align-items:center;justify-content:center"><span style="font-size:6px;color:#E8632A">&#60;/&#62;</span></div>
-                                                <div style="font-size:6px;font-weight:600;color:rgba(255,255,255,0.5);margin-bottom:1px">Web Dev</div>
-                                                <div style="font-size:5px;color:rgba(255,255,255,0.15)">React, Node</div>
-                                            </div>
-                                            <div style="padding:6px;background:rgba(232,99,42,0.04);border-radius:3px;border:1px solid rgba(232,99,42,0.08)">
-                                                <div style="width:12px;height:12px;border-radius:2px;background:rgba(232,99,42,0.15);margin-bottom:3px;display:flex;align-items:center;justify-content:center"><span style="font-size:6px;color:#E8632A">&#9830;</span></div>
-                                                <div style="font-size:6px;font-weight:600;color:rgba(255,255,255,0.5);margin-bottom:1px">UI/UX</div>
-                                                <div style="font-size:5px;color:rgba(255,255,255,0.15)">Design</div>
-                                            </div>
-                                            <div style="padding:6px;background:rgba(232,99,42,0.04);border-radius:3px;border:1px solid rgba(232,99,42,0.08)">
-                                                <div style="width:12px;height:12px;border-radius:2px;background:rgba(232,99,42,0.15);margin-bottom:3px;display:flex;align-items:center;justify-content:center"><span style="font-size:6px;color:#E8632A">&#9650;</span></div>
-                                                <div style="font-size:6px;font-weight:600;color:rgba(255,255,255,0.5);margin-bottom:1px">Branding</div>
-                                                <div style="font-size:5px;color:rgba(255,255,255,0.15)">Strategy</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div style="width:110px;background:rgba(255,255,255,0.02);border-radius:6px;border:1px solid rgba(255,255,255,0.04);padding:10px 8px;display:flex;flex-direction:column">
-                                        <div style="font-size:6px;color:rgba(255,255,255,0.2);letter-spacing:0.5px;margin-bottom:6px">ANALYTICS</div>
-                                        <div style="margin-bottom:6px">
-                                            <div style="display:flex;justify-content:space-between;margin-bottom:2px"><span style="font-size:6px;color:rgba(255,255,255,0.25)">Page Views</span><span style="font-size:6px;color:<?= $pageViewGrowth >= 0 ? '#22c55e' : '#ef4444' ?>"><?= $pageViewGrowth >= 0 ? '+' : '' ?><?= $pageViewGrowth ?>%</span></div>
-                                            <div style="height:3px;background:rgba(255,255,255,0.04);border-radius:2px"><div style="width:<?= $visitsPct ?>%;height:100%;background:linear-gradient(90deg,#E8632A,rgba(232,99,42,0.3));border-radius:2px"></div></div>
-                                        </div>
-                                        <div style="margin-bottom:6px">
-                                            <div style="display:flex;justify-content:space-between;margin-bottom:2px"><span style="font-size:6px;color:rgba(255,255,255,0.25)">Users</span><span style="font-size:6px;color:<?= $userGrowth >= 0 ? '#22c55e' : '#ef4444' ?>"><?= $userGrowth >= 0 ? '+' : '' ?><?= $userGrowth ?>%</span></div>
-                                            <div style="height:3px;background:rgba(255,255,255,0.04);border-radius:2px"><div style="width:<?= $usersPct ?>%;height:100%;background:linear-gradient(90deg,#E8632A,rgba(232,99,42,0.3));border-radius:2px"></div></div>
-                                        </div>
-                                        <div style="margin-bottom:6px">
-                                            <div style="display:flex;justify-content:space-between;margin-bottom:2px"><span style="font-size:6px;color:rgba(255,255,255,0.25)">Projects</span><span style="font-size:6px;color:#22c55e">+<?= $totalProjectsCount ?></span></div>
-                                            <div style="height:3px;background:rgba(255,255,255,0.04);border-radius:2px"><div style="width:<?= $projectsPct ?>%;height:100%;background:linear-gradient(90deg,#E8632A,rgba(232,99,42,0.3));border-radius:2px"></div></div>
-                                        </div>
-                                        <div style="border-top:1px solid rgba(255,255,255,0.04);padding-top:6px;margin-top:auto">
-                                            <div style="font-size:12px;font-weight:700;color:#E8632A;text-shadow:0 0 10px rgba(232,99,42,0.2)"><?= $totalProjectsCount ?: 0 ?></div>
-                                            <div style="font-size:5px;color:rgba(255,255,255,0.15)">TOTAL PROJECTS</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div style="display:flex;gap:6px;padding:0 16px 10px">
-                                    <div style="flex:1;height:2px;background:rgba(232,99,42,0.08);border-radius:2px;position:relative;overflow:hidden"><div style="position:absolute;inset:0;width:80%;background:#E8632A;border-radius:2px;box-shadow:0 0 4px rgba(232,99,42,0.2)"></div></div>
-                                    <div style="flex:1;height:2px;background:rgba(232,99,42,0.08);border-radius:2px;position:relative;overflow:hidden"><div style="position:absolute;inset:0;width:55%;background:#E8632A;border-radius:2px;box-shadow:0 0 4px rgba(232,99,42,0.2)"></div></div>
-                                </div>
+                        <?php
+                        $heroProjects = $db->query("SELECT id, title, slug, featured_image FROM portfolio_projects WHERE status='published' AND featured_image IS NOT NULL AND featured_image != '' ORDER BY featured DESC, created_at DESC LIMIT 6")->fetchAll();
+                        if (empty($heroProjects)) {
+                            $heroProjects = [
+                                ['id' => 1, 'title' => 'TechVolve Platform', 'slug' => 'techvolve-platform', 'featured_image' => 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop'],
+                                ['id' => 2, 'title' => 'FinFlow Dashboard', 'slug' => 'finflow-dashboard', 'featured_image' => 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop'],
+                                ['id' => 3, 'title' => 'Bloom E-Commerce', 'slug' => 'bloom-ecommerce', 'featured_image' => 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop'],
+                                ['id' => 4, 'title' => 'CloudBase SaaS', 'slug' => 'cloudbase-saas', 'featured_image' => 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=400&fit=crop'],
+                            ];
+                        }
+                        ?>
+                        <div class="hero-browser">
+                            <div class="hero-browser-bar">
+                                <span class="hb-dot"></span><span class="hb-dot"></span><span class="hb-dot"></span>
+                                <span class="hero-browser-url">asaasstudio.com/work</span>
                             </div>
-                        </div>
-                        <div style="width:103%;height:8px;background:linear-gradient(#15152a,#0a0a16);border-radius:0 0 6px 6px;margin:0 auto 0 -5px;box-shadow:0 8px 25px rgba(0,0,0,0.2)"></div>
-                        <div style="position:absolute;bottom:-20px;right:-30px;width:100px;height:210px;background:linear-gradient(145deg,#3a3a44,#1a1a22);border-radius:12px;padding:3px;box-shadow:0 25px 60px rgba(0,0,0,0.45);transform:rotate(-8deg);border:1px solid rgba(255,255,255,0.06)">
-                            <div style="height:100%;background:white;border-radius:10px;overflow:hidden;position:relative">
-                                <div style="position:absolute;top:10px;left:50%;transform:translateX(-50%);width:8px;height:8px;border-radius:50%;background:#1a1a22;z-index:2;box-shadow:0 0 0 2px rgba(26,26,34,0.3)"></div>
-                                <div style="padding:28px 10px 10px;height:100%">
-                                    <div style="margin-bottom:4px">
-                                        <span style="font-weight:700;font-size:9px;color:#E8632A;letter-spacing:1px">ASAAS</span>
-                                    </div>
-                                    <div style="font-size:13px;font-weight:700;color:#1a1a2e;line-height:1.2;margin-bottom:1px">Digital</div>
-                                    <div style="font-size:13px;font-weight:700;color:#E8632A;line-height:1.2;margin-bottom:5px">Excellence</div>
-                                    <div style="font-size:6px;color:#888;line-height:1.4;margin-bottom:6px">We build digital experiences that drive growth.</div>
-                                    <div style="height:24px;border-radius:4px;background:#E8632A;display:flex;align-items:center;justify-content:center;margin-bottom:5px"><span style="font-size:6px;color:white;font-weight:600">Start Project</span></div>
-                                    <div style="display:flex;gap:3px">
-                                        <div style="flex:1;height:16px;border-radius:2px;background:#f5f5f5"></div>
-                                        <div style="flex:1;height:16px;border-radius:2px;background:#f5f5f5"></div>
-                                    </div>
-                                </div>
-                                <div style="position:absolute;bottom:4px;left:50%;transform:translateX(-50%);width:40px;height:3px;background:rgba(0,0,0,0.08);border-radius:2px"></div>
+                            <div class="hero-browser-body">
+                                <?php foreach ($heroProjects as $hi => $hp):
+                                    $hImg = strpos($hp['featured_image'], 'uploads/') === 0 ? BASE_URL . $hp['featured_image'] : $hp['featured_image'];
+                                    $hUrl = BASE_URL . 'portfolio/' . htmlspecialchars($hp['slug'] ?? 'project'); ?>
+                                    <a class="hero-slide<?= $hi === 0 ? ' active' : '' ?>" href="<?= $hUrl ?>" style="background-image:url('<?= $hImg ?>')" aria-label="<?= htmlspecialchars($hp['title']) ?>">
+                                        <span class="hero-slide-label"><?= htmlspecialchars($hp['title']) ?></span>
+                                    </a>
+                                <?php endforeach; ?>
                             </div>
+                            <?php if (count($heroProjects) > 1): ?>
+                            <div class="hero-slide-dots">
+                                <?php foreach ($heroProjects as $hi => $hp): ?>
+                                    <button class="hero-slide-dot<?= $hi === 0 ? ' active' : '' ?>" data-slide="<?= $hi ?>" aria-label="Slide <?= $hi + 1 ?>"></button>
+                                <?php endforeach; ?>
+                            </div>
+                            <button class="hero-arrow hero-arrow-prev" aria-label="Previous slide">&lsaquo;</button>
+                            <button class="hero-arrow hero-arrow-next" aria-label="Next slide">&rsaquo;</button>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
@@ -170,7 +113,59 @@ $usersPct = min(round(($totalUsersCount / $maxVal) * 100), 100);
         </div>
         <style>
         @media (min-width:1024px) { #hero-visual { display:flex !important } }
+        .hero-browser { position:relative; border-radius:14px; overflow:hidden; background:#0d0d1a; box-shadow:0 30px 80px rgba(0,0,0,0.35) }
+        .hero-browser-bar { display:flex; align-items:center; gap:6px; padding:12px 16px; border-bottom:1px solid rgba(255,255,255,0.06) }
+        .hero-browser-bar .hb-dot { width:10px; height:10px; border-radius:50%; background:#3a3a4a }
+        .hero-browser-bar .hb-dot:nth-child(1){background:#ff5f57}
+        .hero-browser-bar .hb-dot:nth-child(2){background:#febc2e}
+        .hero-browser-bar .hb-dot:nth-child(3){background:#28c840}
+        .hero-browser-url { margin-left:12px; flex:1; background:rgba(255,255,255,0.05); border-radius:6px; padding:4px 10px; font-size:11px; color:rgba(255,255,255,0.45); font-family:monospace; text-align:center; overflow:hidden; white-space:nowrap; text-overflow:ellipsis }
+        .hero-browser-body { position:relative; height:320px }
+        .hero-slide { position:absolute; inset:0; background-size:cover; background-position:center top; opacity:0; transform:scale(1.04); transition:opacity .7s ease, transform .7s ease; display:block }
+        .hero-slide.active { opacity:1; transform:scale(1); z-index:1 }
+        .hero-slide::after { content:''; position:absolute; inset:0; background:linear-gradient(180deg, rgba(13,13,26,0.05) 60%, rgba(13,13,26,0.65) 100%) }
+        .hero-slide-label { position:absolute; left:14px; bottom:12px; background:rgba(13,13,26,0.75); backdrop-filter:blur(6px); color:#fff; font-size:12px; font-weight:600; padding:6px 12px; border-radius:6px; letter-spacing:0.3px; z-index:2 }
+        .hero-slide-dots { position:absolute; bottom:14px; right:14px; display:flex; gap:6px; z-index:3 }
+        .hero-slide-dot { width:8px; height:8px; border-radius:50%; border:none; background:rgba(255,255,255,0.35); cursor:pointer; padding:0; transition:background .2s, transform .2s }
+        .hero-slide-dot.active { background:#E8632A; transform:scale(1.25) }
+        .hero-arrow { position:absolute; top:50%; transform:translateY(-50%); z-index:3; width:34px; height:34px; border-radius:50%; border:none; background:rgba(13,13,26,0.55); color:#fff; font-size:24px; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background .2s; backdrop-filter:blur(4px) }
+        .hero-arrow:hover { background:rgba(232,99,42,0.9) }
+        .hero-arrow-prev { left:10px }
+        .hero-arrow-next { right:10px }
+        [data-theme="dark"] .hero-browser { background:#0d0d1a }
         </style>
+        <script>
+        (function(){
+            var slides = document.querySelectorAll('#hero-visual .hero-slide');
+            if (slides.length < 2) return;
+            var dots = document.querySelectorAll('#hero-visual .hero-slide-dot');
+            var current = 0, timer = null;
+            function goTo(i) {
+                slides[current].classList.remove('active');
+                if (dots[current]) dots[current].classList.remove('active');
+                current = (i + slides.length) % slides.length;
+                slides[current].classList.add('active');
+                if (dots[current]) dots[current].classList.add('active');
+            }
+            function next() { goTo(current + 1); }
+            function prev() { goTo(current - 1); }
+            function startTimer() { stopTimer(); timer = setInterval(next, 4500); }
+            function stopTimer() { if (timer) { clearInterval(timer); timer = null; } }
+            var browser = document.querySelector('#hero-visual .hero-browser');
+            if (browser) {
+                browser.addEventListener('mouseenter', stopTimer);
+                browser.addEventListener('mouseleave', startTimer);
+            }
+            var prevBtn = document.querySelector('#hero-visual .hero-arrow-prev');
+            var nextBtn = document.querySelector('#hero-visual .hero-arrow-next');
+            if (prevBtn) prevBtn.addEventListener('click', function(){ stopTimer(); prev(); startTimer(); });
+            if (nextBtn) nextBtn.addEventListener('click', function(){ stopTimer(); next(); startTimer(); });
+            dots.forEach(function(d, i) {
+                d.addEventListener('click', function(){ stopTimer(); goTo(i); startTimer(); });
+            });
+            startTimer();
+        })();
+        </script>
     </section>
 
     <!-- ============================================================
