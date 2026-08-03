@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $emailBody .= "If you didn't request this, please ignore this email.\n\n";
                 $emailBody .= "Best regards,\n" . APP_NAME;
 
-                $headers = 'From: ' . APP_NAME . ' <noreply@asaasstudio.com>';
+                $headers = 'From: ' . APP_NAME . ' <noreply@asaas-studio.tech>';
                 @mail($email, $emailSubject, $emailBody, $headers);
 
                 logActivity('password_reset_request', 'Password reset link sent', ['email' => $email], 'info');

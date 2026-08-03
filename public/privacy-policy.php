@@ -65,7 +65,7 @@ require __DIR__ . '/../includes/header.php'; ?>
                 <p style="margin-bottom:24px">We may update this Privacy Policy from time to time. Changes will be posted on this page with an updated revision date. We encourage you to review this policy periodically.</p>
 
                 <h2 style="color:var(--text-white);margin-bottom:16px">10. Contact Us</h2>
-                <p style="margin-bottom:24px">If you have questions or concerns about this Privacy Policy, please contact us at <a href="mailto:privacy@asaasstudio.com" style="color:var(--primary)">privacy@asaasstudio.com</a> or through our <a href="<?= BASE_URL ?>contact" style="color:var(--primary)">contact page</a>.</p>
+                <p style="margin-bottom:24px">If you have questions or concerns about this Privacy Policy, please contact us at <a href="mailto:privacy@asaas-studio.tech" style="color:var(--primary)">privacy@asaas-studio.tech</a> or through our <a href="<?= BASE_URL ?>contact" style="color:var(--primary)">contact page</a>.</p>
             </div>
         </div>
     </section>

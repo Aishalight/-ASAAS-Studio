@@ -497,16 +497,16 @@ INSERT INTO page_visits (page_url, visitor_ip, user_agent, device_type, browser,
 
 -- Default Admin User (password: 4saas@2020$$)
 INSERT INTO users (name, username, email, password, role, status, email_verified_at) VALUES
-('AsaasTeams', 'AsaasTeams', 'admin@asaasstudio.com', '$2y$10$igfefJRegA5G.9PO1ZEwD.buSetY84CmiQa9YFpvZIn/yFif33yH2', 'superadmin', 'active', NOW()),
-('Demo User', 'DemoUser', 'user@asaasstudio.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'user', 'active', NOW());
+('AsaasTeams', 'AsaasTeams', 'admin@asaas-studio.tech', '$2y$10$igfefJRegA5G.9PO1ZEwD.buSetY84CmiQa9YFpvZIn/yFif33yH2', 'superadmin', 'active', NOW()),
 
+('Demo User', 'DemoUser', 'user@asaas-studio.tech', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'user', 'active', NOW());
 -- Default Settings
 INSERT INTO settings (setting_key, setting_value, setting_group, type, is_public) VALUES
 ('site_name', 'ASAAS STUDIO', 'general', 'text', 1),
 ('site_description', 'Premium Digital Agency – Branding, Web Development & Creative Design', 'general', 'text', 1),
-('site_email', 'hello@asaasstudio.com', 'general', 'email', 1),
-('site_phone', '+1 (555) 123-4567', 'general', 'text', 1),
-('site_address', '123 Creative Lane, Design District, NY 10001', 'general', 'text', 1),
+('site_email', 'info@asaas-studio.tech', 'general', 'email', 1),
+('site_phone', '', 'general', 'text', 1),
+('site_address', 'Km4 Hodan, Mogadishu, Somalia', 'general', 'text', 1),
 ('social_twitter', 'https://twitter.com/asaasstudio', 'social', 'url', 1),
 ('social_instagram', 'https://instagram.com/asaasstudio', 'social', 'url', 1),
 ('social_linkedin', 'https://linkedin.com/company/asaasstudio', 'social', 'url', 1),

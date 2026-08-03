@@ -58,7 +58,7 @@ require __DIR__ . '/../includes/header.php'; ?>
                 <p style="margin-bottom:24px">These terms shall be governed by and construed in accordance with the laws of the State of New York, without regard to its conflict of law provisions.</p>
 
                 <h2 style="color:var(--text-white);margin-bottom:16px">11. Contact</h2>
-                <p style="margin-bottom:24px">For questions about these Terms of Service, please contact us at <a href="mailto:legal@asaasstudio.com" style="color:var(--primary)">legal@asaasstudio.com</a>.</p>
+                <p style="margin-bottom:24px">For questions about these Terms of Service, please contact us at <a href="mailto:legal@asaas-studio.tech" style="color:var(--primary)">legal@asaas-studio.tech</a>.</p>
             </div>
         </div>
     </section>

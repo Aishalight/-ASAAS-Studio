@@ -130,16 +130,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $formType === 'booking') {
                                 </div>
                                 <div>
                                     <p style="font-size:13px;font-weight:600;color:var(--text-muted);margin-bottom:1px">Email</p>
-                                    <a href="mailto:hello@asaasstudio.com" style="font-size:14px;color:var(--text-primary);text-decoration:none">hello@asaasstudio.com</a>
-                                </div>
-                            </div>
-                            <div style="display:flex;align-items:center;gap:14px">
-                                <div style="width:40px;height:40px;min-width:40px;border-radius:var(--radius-sm);background:var(--primary-alpha);display:flex;align-items:center;justify-content:center;color:var(--primary)">
-                                    <i data-lucide="phone" size="18"></i>
-                                </div>
-                                <div>
-                                    <p style="font-size:13px;font-weight:600;color:var(--text-muted);margin-bottom:1px">Phone</p>
-                                    <a href="tel:+15551234567" style="font-size:14px;color:var(--text-primary);text-decoration:none">+1 (555) 123-4567</a>
+                                    <a href="mailto:info@asaas-studio.tech" style="font-size:14px;color:var(--text-primary);text-decoration:none">info@asaas-studio.tech</a>
                                 </div>
                             </div>
                             <div style="display:flex;align-items:center;gap:14px">
@@ -148,7 +139,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $formType === 'booking') {
                                 </div>
                                 <div>
                                     <p style="font-size:13px;font-weight:600;color:var(--text-muted);margin-bottom:1px">Office</p>
-                                    <p style="font-size:14px;color:var(--text-primary)">123 Creative Lane<br>Design District, NY 10001</p>
+                                    <p style="font-size:14px;color:var(--text-primary)">Km4 Hodan<br>Mogadishu, Somalia</p>
                                 </div>
                             </div>
                             <div style="display:flex;align-items:center;gap:14px">
@@ -198,7 +189,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $formType === 'booking') {
                         <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:12px">
                             <div class="form-group" style="margin-bottom:0">
                                 <label class="form-label" style="color:rgba(255,255,255,0.6);font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:0.5px">Phone</label>
-                                <input type="tel" name="phone" class="form-input" placeholder="+1 (555) 000-0000" style="background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.1);color:white;font-size:13px;padding:10px 12px">
+                                <input type="tel" name="phone" class="form-input" placeholder="+252 61 234 5678" style="background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.1);color:white;font-size:13px;padding:10px 12px">
                             </div>
                             <div class="form-group" style="margin-bottom:0">
                                 <label class="form-label" style="color:rgba(255,255,255,0.6);font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:0.5px">Date <span style="color:var(--primary)">*</span></label>

@@ -50,9 +50,8 @@
             <div>
                 <h4 class="footer-title">Contact</h4>
                 <ul class="footer-links">
-                    <li><a href="mailto:hello@asaasstudio.com">hello@asaasstudio.com</a></li>
-                    <li><a href="tel:+15551234567">+1 (555) 123-4567</a></li>
-                    <li>123 Creative Lane<br>Design District, NY 10001</li>
+                    <li><a href="mailto:info@asaas-studio.tech">info@asaas-studio.tech</a></li>
+                    <li>Km4 Hodan<br>Mogadishu, Somalia</li>
                 </ul>
             </div>
         </div>

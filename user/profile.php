@@ -217,7 +217,7 @@ a { color: var(--primary); text-decoration: none; }
             </div>
             <div class="form-group">
                 <label class="form-label">Phone</label>
-                <input type="text" name="phone" class="form-input" value="<?= htmlspecialchars($user['phone'] ?? '') ?>" placeholder="+1 (555) 000-0000">
+                <input type="text" name="phone" class="form-input" value="<?= htmlspecialchars($user['phone'] ?? '') ?>" placeholder="+252 61 234 5678">
             </div>
             <div class="form-group">
                 <label class="form-label">Company</label>

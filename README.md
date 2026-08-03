@@ -9,8 +9,8 @@
 
 ### Default Credentials
 
-- **Admin**: admin@asaasstudio.com / admin123
-- **User**: user@asaasstudio.com / admin123
+- **Admin**: admin@asaas-studio.tech / admin123
+- **User**: user@asaas-studio.tech / admin123
 
 ## Structure
 
