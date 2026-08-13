@@ -41,7 +41,7 @@ function handlePortfolioGalleryUpload() {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!validateCSRFToken($_POST['csrf_token'] ?? '')) {
         $msg = 'Invalid security token.';
-    } else {
+    } else { try {
         if (isset($_POST['create_project'])) {
             $title = trim($_POST['title'] ?? '');
             $slug = slugify($title);
@@ -129,6 +129,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 exit;
             }
         }
+    } catch (Exception $e) {
+        logActivity('portfolio_error', 'Portfolio error: ' . $e->getMessage(), [], 'error');
+        $msg = 'Error: ' . $e->getMessage();
+    }
     }
 }
 
@@ -143,6 +147,10 @@ $projects = $db->query("SELECT p.*, c.name as category_name FROM portfolio_proje
         <button class="btn btn-primary btn-sm" onclick="openModal('newProjectModal')"><i data-lucide="plus" size="16"></i> New Project</button>
     </div>
 </div>
+
+<?php if ($msg): ?>
+<div class="alert alert-error" style="margin-bottom:16px"><i data-lucide="alert-circle" size="18"></i> <?= htmlspecialchars($msg) ?></div>
+<?php endif; ?>
 
 <div class="table-container reveal">
     <table class="table">
