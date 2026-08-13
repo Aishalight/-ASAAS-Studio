@@ -467,7 +467,7 @@ $db = Database::getInstance()->getConnection();
                 <?php else: ?>
                 <div class="slider-track" style="display:flex;transition:transform 0.5s ease">
                     <?php foreach ($reviews as $t): ?>
-                        <div style="min-width:100%;padding:0 40px">
+                        <div class="testimonial-card" style="min-width:100%;padding:0 40px">
                             <div style="max-width:700px;margin:0 auto;text-align:center;padding:40px;background:var(--bg-white);border-radius:var(--radius-xl);border:1px solid var(--border);box-shadow:var(--shadow-md)">
                                 <div style="width:64px;height:64px;border-radius:50%;background:var(--primary);margin:0 auto 20px;display:flex;align-items:center;justify-content:center;color:white;font-size:28px;font-weight:700"><?= strtoupper($t['user_name'][0]) ?></div>
                                 <div style="display:flex;justify-content:center;gap:4px;margin-bottom:16px;color:#FFC107">
