@@ -95,7 +95,7 @@ require __DIR__ . '/../includes/header.php'; ?>
             ?>
             <?php if (empty($realTeam)): ?>
                 <div class="grid grid-2 stagger-children" style="max-width:760px;margin:0 auto">
-                    <?php foreach ([1, 2, 3] as $i): ?>
+                    <?php foreach ([1, 2] as $i): ?>
                         <div class="card" style="text-align:center;padding:24px">
                             <div style="width:120px;height:120px;border-radius:50%;background:var(--bg-light);margin:0 auto 16px;display:flex;align-items:center;justify-content:center">
                                 <i data-lucide="user" size="48" style="color:var(--text-muted)"></i>
