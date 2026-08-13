@@ -81,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $showForm) {
     <div class="auth-page">
         <div class="auth-card fade-in-up">
             <a href="<?= BASE_URL ?>home" class="auth-brand">
-                <img src="<?= BASE_URL ?>uploads/logo2_blackbackground.png" alt="ASAAS" style="height:32px;width:auto">
+                <img src="<?= BASE_URL ?>assets/images/logo2_blackbackground.png" alt="ASAAS" style="height:32px;width:auto">
                 <?= APP_NAME ?>
             </a>
             <div style="margin-bottom:32px">

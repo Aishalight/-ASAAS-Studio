@@ -105,7 +105,7 @@ $navItems = [
 <div class="dashboard-layout">
     <aside class="user-sidebar" id="user-sidebar">
         <div class="user-sidebar-brand">
-            <img src="<?= BASE_URL ?>uploads/logo2_blackbackground.png" alt="ASAAS" style="height:46px;width:auto">
+            <img src="<?= BASE_URL ?>assets/images/logo2_blackbackground.png" alt="ASAAS" style="height:46px;width:auto">
             <span class="user-sidebar-name">ASAAS</span>
         </div>
 

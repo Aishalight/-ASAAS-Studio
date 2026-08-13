@@ -30,7 +30,7 @@ require __DIR__ . '/../includes/header.php'; ?>
                 </div>
                 <div class="fade-in-right">
                     <div style="width:100%;aspect-ratio:1/1;border-radius:var(--radius-xl);box-shadow:var(--shadow-lg);background:linear-gradient(135deg,#14141f,#1a1a2e);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;padding:40px;text-align:center">
-                        <img src="<?= BASE_URL ?>uploads/logo1_whitebackground.png" alt="ASAAS" style="height:72px;width:auto;border-radius:12px">
+                        <img src="<?= BASE_URL ?>assets/images/logo1_whitebackground.png" alt="ASAAS" style="height:72px;width:auto;border-radius:12px">
                         <p style="color:#aab;font-size:15px;max-width:260px;margin:0">Designing and building digital products for businesses and organizations.</p>
                     </div>
                 </div>

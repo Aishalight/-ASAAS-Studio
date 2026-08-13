@@ -83,7 +83,7 @@
 <div class="admin-layout">
     <aside class="admin-sidebar" id="admin-sidebar">
         <div class="sidebar-header">
-            <img src="<?= BASE_URL ?>uploads/logo2_blackbackground.png" alt="ASAAS" style="height:38px;width:auto">
+            <img src="<?= BASE_URL ?>assets/images/logo2_blackbackground.png" alt="ASAAS" style="height:38px;width:auto">
             <span class="sidebar-brand" style="font-size:14px;letter-spacing:0.3px"><?= APP_NAME ?></span>
         </div>
         <?php

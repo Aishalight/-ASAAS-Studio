@@ -92,7 +92,7 @@ $db = Database::getInstance()->getConnection();
                         </div>
                         <?php else: ?>
                         <div style="width:100%;aspect-ratio:4/3;min-height:440px;border-radius:20px;overflow:hidden;box-shadow:0 40px 100px rgba(0,0,0,0.35);background:linear-gradient(135deg,#14141f,#1a1a2e);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;padding:40px;text-align:center">
-                            <img src="<?= BASE_URL ?>uploads/logo1_whitebackground.png" alt="ASAAS" style="height:72px;width:auto;border-radius:12px;opacity:0.95">
+                            <img src="<?= BASE_URL ?>assets/images/logo1_whitebackground.png" alt="ASAAS" style="height:72px;width:auto;border-radius:12px;opacity:0.95">
                             <p style="color:#aab;font-size:16px;max-width:360px;margin:0">Websites, web systems, and digital experiences designed and built by ASAAS. New project showcases will appear here as they are completed.</p>
                         </div>
                         <?php endif; ?>

@@ -81,8 +81,8 @@
 <header class="header" id="header">
     <div class="header-inner">
         <a href="<?= BASE_URL ?>home" class="logo">
-            <img src="<?= BASE_URL ?>uploads/logo2_blackbackground.png" alt="ASAAS" class="logo-light" style="height:64px;width:auto">
-            <img src="<?= BASE_URL ?>uploads/logo1_whitebackground.png" alt="ASAAS" class="logo-dark" style="height:64px;width:auto;display:none">
+            <img src="<?= BASE_URL ?>assets/images/logo2_blackbackground.png" alt="ASAAS" class="logo-light" style="height:64px;width:auto">
+            <img src="<?= BASE_URL ?>assets/images/logo1_whitebackground.png" alt="ASAAS" class="logo-dark" style="height:64px;width:auto;display:none">
         </a>
         <nav class="nav" id="main-nav">
             <a href="<?= BASE_URL ?>home" class="nav-link <?= $page === 'home' ? 'active' : '' ?>">Home</a>

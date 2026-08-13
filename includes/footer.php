@@ -3,7 +3,7 @@
         <div class="footer-grid">
             <div>
                 <a href="<?= BASE_URL ?>home" class="footer-brand">
-                    <img src="<?= BASE_URL ?>uploads/logo2_blackbackground.png" alt="ASAAS" style="height:56px;width:auto">
+                    <img src="<?= BASE_URL ?>assets/images/logo2_blackbackground.png" alt="ASAAS" style="height:56px;width:auto">
                 </a>
                 <p class="footer-desc">A digital studio based in Mogadishu, designing and building websites, custom web systems, and digital experiences.</p>
                 <?php

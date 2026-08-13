@@ -198,7 +198,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="auth-container fade-in-up">
             <div class="auth-form-side">
                 <a href="<?= BASE_URL ?>home" class="auth-brand">
-                    <img src="<?= BASE_URL ?>uploads/logo2_blackbackground.png" alt="ASAAS" style="height:32px;width:auto">
+                    <img src="<?= BASE_URL ?>assets/images/logo2_blackbackground.png" alt="ASAAS" style="height:32px;width:auto">
                     <?= APP_NAME ?>
                 </a>
 
