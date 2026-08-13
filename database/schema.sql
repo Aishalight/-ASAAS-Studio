@@ -483,7 +483,7 @@ INSERT INTO users (name, username, email, password, role, status, email_verified
 -- Default Settings
 INSERT INTO settings (setting_key, setting_value, setting_group, type, is_public) VALUES
 ('site_name', 'ASAAS STUDIO', 'general', 'text', 1),
-('site_description', 'ASAAS STUDIO is a small digital studio based in Mogadishu, Somalia. We build simple, useful websites and custom web systems.', 'general', 'text', 1),
+('site_description', 'ASAAS STUDIO is a digital studio based in Mogadishu, Somalia, designing and building websites, custom web systems, and digital experiences for businesses and organizations.', 'general', 'text', 1),
 ('site_email', 'info@asaas-studio.tech', 'general', 'email', 1),
 ('site_phone', '', 'general', 'text', 1),
 ('site_address', 'Mogadishu, Somalia', 'general', 'text', 1),

@@ -1,6 +1,6 @@
 <?php
 $seoTitle = 'ASAAS Studio | Web Design and Web Systems in Somalia';
-$seoDesc = 'ASAAS Studio is a small digital studio based in Mogadishu, Somalia. We design and build simple, useful websites, custom web systems, and clear UI/UX.';
+$seoDesc = 'ASAAS Studio is a digital studio based in Mogadishu, Somalia, designing and building websites, custom web systems, and digital experiences for businesses and organizations.';
 $seoKeywords = 'ASAAS studio, web design Somalia, web development Somalia, custom web systems, UI UX design Mogadishu, websites Somalia';
 require __DIR__ . '/../includes/header.php';
 $db = Database::getInstance()->getConnection();
@@ -24,14 +24,14 @@ $db = Database::getInstance()->getConnection();
                 <div class="hero-content fade-in-up">
                     <div class="hero-tag">
                         <span class="hero-tag-dot"></span>
-                        A Small Digital Studio in Mogadishu
+                        Digital Studio in Mogadishu
                     </div>
                     <h1 class="hero-title">
                         Turning Ideas Into<br>
                         <span class="gradient-text">Digital Products</span>
                     </h1>
                     <p class="hero-desc">
-                        We are a two-person studio that designs and builds simple, useful websites, custom web systems, and interfaces that do their job well.
+                        We design and build websites, custom web systems, and interfaces around the real needs of businesses and organizations.
                     </p>
                     <div class="hero-actions">
                         <a href="<?= BASE_URL ?>contact" class="btn btn-primary btn-lg">
@@ -50,8 +50,8 @@ $db = Database::getInstance()->getConnection();
                         </div>
                         <div class="hero-stat-divider"></div>
                         <div>
-                            <div class="hero-stat-value">2</div>
-                            <div class="hero-stat-label">Founders</div>
+                            <div class="hero-stat-value">Direct</div>
+                            <div class="hero-stat-label">Collaboration</div>
                         </div>
                         <div class="hero-stat-divider"></div>
                         <div>
@@ -93,7 +93,7 @@ $db = Database::getInstance()->getConnection();
                         <?php else: ?>
                         <div style="width:100%;aspect-ratio:4/3;min-height:440px;border-radius:20px;overflow:hidden;box-shadow:0 40px 100px rgba(0,0,0,0.35);background:linear-gradient(135deg,#14141f,#1a1a2e);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;padding:40px;text-align:center">
                             <img src="<?= BASE_URL ?>uploads/logo2_blackbackground.png" alt="ASAAS" style="height:64px;width:auto;opacity:0.9">
-                            <p style="color:#aab;font-size:16px;max-width:360px;margin:0">Simple, useful digital products. New project showcases will appear here as we ship them.</p>
+                            <p style="color:#aab;font-size:16px;max-width:360px;margin:0">Websites, web systems, and digital experiences designed and built by ASAAS. New project showcases will appear here as they are completed.</p>
                         </div>
                         <?php endif; ?>
                     </div>
@@ -176,7 +176,7 @@ $db = Database::getInstance()->getConnection();
                     What We Do
                 </div>
                 <h2 class="section-title">Focused on the <span class="gradient-text">Essentials</span></h2>
-                <p class="section-desc">A small studio, focused on the essentials: clear design, solid development, and honest communication.</p>
+                <p class="section-desc">We focus on clear design, solid development, and honest communication.</p>
             </div>
 
             <div class="grid grid-3 stagger-children">
@@ -228,14 +228,14 @@ $db = Database::getInstance()->getConnection();
                         Why Work With Us
                     </div>
                     <h2 style="font-size:clamp(1.75rem,3vw,2.75rem);margin-bottom:20px">
-                        A Small Team, Focused on <span class="gradient-text">the Work</span>
+                        Focused on <span class="gradient-text">the Work</span>
                     </h2>
                     <p style="color:var(--text-secondary);margin-bottom:32px;font-size:17px">
-                        ASAAS is run by two people. That means you talk directly with the people building your project, with no account managers and no handoffs.
+                        You work directly with the people building your project, with no account managers and no handoffs. We stay closely involved from the first conversation to the final product.
                     </p>
                     <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
                         <?php $features = [
-                            ['icon' => 'message-circle', 'title' => 'Direct Communication', 'desc' => 'You work directly with the founders on every project'],
+                            ['icon' => 'message-circle', 'title' => 'Direct Communication', 'desc' => 'Direct access to the people building your project'],
                             ['icon' => 'wallet', 'title' => 'Transparent Pricing', 'desc' => 'Clear starting prices and honest quotes before we start'],
                             ['icon' => 'clock', 'title' => 'Realistic Timelines', 'desc' => 'We commit to schedules we can actually meet, and keep you updated'],
                             ['icon' => 'shield', 'title' => 'Built to Last', 'desc' => 'Clean, maintainable code and documentation you can extend later']
@@ -262,8 +262,8 @@ $db = Database::getInstance()->getConnection();
                                 <div style="font-size:14px;color:var(--text-muted)">Based in</div>
                             </div>
                             <div style="text-align:center;padding:24px;background:var(--bg-light);border-radius:var(--radius-md)">
-                                <div style="font-size:24px;font-weight:800;color:var(--primary)">Two founders</div>
-                                <div style="font-size:14px;color:var(--text-muted)">Team</div>
+                                <div style="font-size:24px;font-weight:800;color:var(--primary)">End-to-End</div>
+                                <div style="font-size:14px;color:var(--text-muted)">Delivery</div>
                             </div>
                             <div style="text-align:center;padding:24px;background:var(--bg-light);border-radius:var(--radius-md)">
                                 <div style="font-size:24px;font-weight:800;color:var(--primary)">Websites, Systems &amp; UI/UX</div>

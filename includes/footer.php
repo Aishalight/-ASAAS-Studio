@@ -5,7 +5,7 @@
                 <a href="<?= BASE_URL ?>home" class="footer-brand">
                     <img src="<?= BASE_URL ?>uploads/logo2_blackbackground.png" alt="ASAAS" style="height:56px;width:auto">
                 </a>
-                <p class="footer-desc">A small digital studio based in Mogadishu, building simple, useful websites and web systems.</p>
+                <p class="footer-desc">A digital studio based in Mogadishu, designing and building websites, custom web systems, and digital experiences.</p>
                 <?php
                 $socialTwitter = getSetting('social_twitter', '#');
                 $socialInstagram = getSetting('social_instagram', '#');

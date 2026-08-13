@@ -1,6 +1,6 @@
 <?php
 $seoTitle = 'Contact | ASAAS Studio Somalia';
-$seoDesc = 'Get in touch with ASAAS Studio, a small digital studio in Mogadishu, Somalia. We build simple, useful websites and custom web systems.';
+$seoDesc = 'Get in touch with ASAAS Studio in Mogadishu, Somalia. Tell us about your project and we will reply with next steps and a clear quote.';
 $seoKeywords = 'contact ASAAS studio, hire web designer Somalia, book consultation Somalia, web design inquiry Mogadishu, ASAAS studio contact';
 require __DIR__ . '/../includes/header.php'; ?>
 
@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $formType === 'booking') {
             <div class="fade-in-up" style="text-align:center;margin-bottom:56px">
                 <div class="section-tag"><i data-lucide="mail" size="16"></i>Get in Touch</div>
                 <h1 style="font-size:clamp(2rem,4vw,3rem);margin-bottom:12px">Let's Start a <span class="gradient-text">Conversation</span></h1>
-                <p style="color:var(--text-secondary);font-size:17px;max-width:520px;margin:0 auto">Ready to transform your digital presence? Reach out and let's discuss how we can help your business grow.</p>
+                <p style="color:var(--text-secondary);font-size:17px;max-width:520px;margin:0 auto">Tell us what you want to build and we will get back to you with next steps and a clear quote.</p>
             </div>
 
             <div class="grid" style="grid-template-columns:1.4fr 1fr;gap:32px;align-items:start;margin-bottom:32px">

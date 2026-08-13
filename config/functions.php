@@ -698,7 +698,7 @@ function jsonSuccess($data = [], $message = 'Success') {
 
 function getSEOTags($title, $description = '', $image = '', $url = '', $keywords = '') {
     $siteName = APP_NAME;
-    $defaultDesc = 'ASAAS Studio is a small digital studio based in Mogadishu, Somalia. We build simple, useful websites and custom web systems.';
+    $defaultDesc = 'ASAAS Studio is a digital studio based in Mogadishu, Somalia, designing and building websites, custom web systems, and digital experiences for businesses and organizations.';
     $description = $description ?: $defaultDesc;
     $defaultKeywords = 'ASAAS studio, web design Somalia, web development Somalia, custom web systems, websites Somalia, ASAAS studio Mogadishu';
     $keywords = $keywords ?: $defaultKeywords;

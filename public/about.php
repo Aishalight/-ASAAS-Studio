@@ -1,7 +1,7 @@
 <?php
 $seoTitle = 'About | ASAAS Studio Somalia';
-$seoDesc = 'ASAAS Studio is a small digital studio based in Mogadishu, Somalia, run by two people. We build simple, useful websites, custom web systems, and clear UI/UX design.';
-$seoKeywords = 'about ASAAS studio, digital studio Somalia, web design company Somalia, web development Mogadishu, two founders studio';
+$seoDesc = 'ASAAS Studio is a digital studio based in Mogadishu, Somalia, designing and building websites, custom web systems, and UI/UX design for businesses and organizations.';
+$seoKeywords = 'about ASAAS studio, digital studio Somalia, web design company Somalia, web development Mogadishu, ASAAS studio Mogadishu';
 require __DIR__ . '/../includes/header.php'; ?>
 
 <main class="page-transition">
@@ -11,16 +11,16 @@ require __DIR__ . '/../includes/header.php'; ?>
                 <div class="fade-in-up">
                     <div class="section-tag"><i data-lucide="info" size="16"></i>About</div>
                     <h1 style="font-size:clamp(2rem,4vw,3.5rem);margin-bottom:16px">We Are <span class="gradient-text">ASAAS</span></h1>
-                    <p style="color:var(--text-secondary);font-size:18px;line-height:1.8;margin-bottom:24px">ASAAS is a small digital studio based in Mogadishu, founded by two people who believe good digital products should be simple, useful, and built with care.</p>
-                    <p style="color:var(--text-secondary);line-height:1.8">We do not try to be everything to everyone. We focus on websites, custom web systems, and clear UI/UX design, and we take on projects we can genuinely do well.</p>
+                    <p style="color:var(--text-secondary);font-size:18px;line-height:1.8;margin-bottom:24px">ASAAS is a digital studio based in Mogadishu, Somalia, designing and building websites, web systems, and digital experiences for businesses and organizations.</p>
+                    <p style="color:var(--text-secondary);line-height:1.8">We focus on the areas where we can create the most value: websites, web systems, UI/UX, and digital support. We take on projects we can genuinely do well.</p>
                     <div style="display:flex;gap:24px;margin-top:32px">
-                        <div>
-                            <div style="font-size:36px;font-weight:800;color:var(--primary)">2</div>
-                            <div style="font-size:14px;color:var(--text-muted)">Founders</div>
-                        </div>
                         <div>
                             <div style="font-size:36px;font-weight:800;color:var(--primary)">Mogadishu</div>
                             <div style="font-size:14px;color:var(--text-muted)">Based in</div>
+                        </div>
+                        <div>
+                            <div style="font-size:36px;font-weight:800;color:var(--primary)">End-to-End</div>
+                            <div style="font-size:14px;color:var(--text-muted)">Delivery</div>
                         </div>
                         <div>
                             <div style="font-size:36px;font-weight:800;color:var(--primary)">$99</div>
@@ -31,7 +31,7 @@ require __DIR__ . '/../includes/header.php'; ?>
                 <div class="fade-in-right">
                     <div style="width:100%;aspect-ratio:1/1;border-radius:var(--radius-xl);box-shadow:var(--shadow-lg);background:linear-gradient(135deg,#14141f,#1a1a2e);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;padding:40px;text-align:center">
                         <img src="<?= BASE_URL ?>uploads/logo2_blackbackground.png" alt="ASAAS" style="height:64px;width:auto">
-                        <p style="color:#aab;font-size:15px;max-width:260px;margin:0">A small studio building simple, useful digital products.</p>
+                        <p style="color:#aab;font-size:15px;max-width:260px;margin:0">Designing and building digital products for businesses and organizations.</p>
                     </div>
                 </div>
             </div>
@@ -43,7 +43,7 @@ require __DIR__ . '/../includes/header.php'; ?>
             <div class="reveal" style="background:var(--bg-white);border-radius:var(--radius-xl);border:1px solid var(--border);padding:40px;box-shadow:var(--shadow-sm);margin-bottom:24px">
                 <div class="section-tag"><i data-lucide="compass" size="16"></i>Why ASAAS Exists</div>
                 <h2 style="font-size:clamp(1.5rem,2.5vw,2.25rem);margin:16px 0 12px">Good software should not be hard to get</h2>
-                <p style="color:var(--text-secondary);font-size:16px;line-height:1.8;margin:0">Most businesses in Mogadishu do not need a huge team or a big budget. They need someone who can listen, build what is actually needed, and keep it simple. That is what we set out to do.</p>
+                <p style="color:var(--text-secondary);font-size:16px;line-height:1.8;margin:0">Many businesses and organizations need digital products that are practical, well-built, and genuinely useful. Too often they end up with over-engineered solutions or generic templates that do not fit. We design and build what is actually needed, and we keep it focused on serving a real purpose.</p>
             </div>
             <div class="reveal" style="background:var(--bg-white);border-radius:var(--radius-xl);border:1px solid var(--border);padding:40px;box-shadow:var(--shadow-sm)">
                 <div class="section-tag"><i data-lucide="cpu" size="16"></i>Technology Should Have a Purpose</div>
@@ -62,10 +62,10 @@ require __DIR__ . '/../includes/header.php'; ?>
             <div class="grid grid-3 stagger-children" style="margin-top:40px">
                 <?php $values = [
                     ['icon' => 'wrench', 'title' => 'Practicality', 'desc' => 'We build things that solve real problems, not things that look impressive and gather dust.'],
-                    ['icon' => 'badge-check', 'title' => 'Quality', 'desc' => 'We would rather do a small job properly than a big job sloppily.'],
+                    ['icon' => 'badge-check', 'title' => 'Quality', 'desc' => 'We would rather do the job properly than rush it. Details matter to us.'],
                     ['icon' => 'align-left', 'title' => 'Clarity', 'desc' => 'We explain technical things in plain language, so you always know where things stand.'],
                     ['icon' => 'handshake', 'title' => 'Honesty', 'desc' => 'If something is not worth doing, we will say so before you pay for it.'],
-                    ['icon' => 'book-open', 'title' => 'Learning', 'desc' => 'We are always learning, because web technology changes and we want to stay good at what we do.'],
+                    ['icon' => 'book-open', 'title' => 'Learning', 'desc' => 'We continuously learn and evolve as technology and digital products change, so our work stays sharp and current.'],
                     ['icon' => 'users', 'title' => 'Partnership', 'desc' => 'We work with our clients as collaborators, not as a vendor handing over a finished box.'],
                 ];
                 foreach ($values as $v): ?>
@@ -95,7 +95,7 @@ require __DIR__ . '/../includes/header.php'; ?>
             ?>
             <?php if (empty($realTeam)): ?>
                 <div class="reveal" style="max-width:720px;margin:0 auto;text-align:center;background:var(--bg-white);border-radius:var(--radius-xl);border:1px solid var(--border);padding:40px">
-                    <p style="color:var(--text-secondary);font-size:17px;line-height:1.8;margin:0">ASAAS is run by two people who design and build every project together. Their names and photos will be added here once confirmed.</p>
+                    <p style="color:var(--text-secondary);font-size:17px;line-height:1.8;margin:0">The founders and team behind ASAAS design and build every project together, with direct collaboration from the people doing the work. Their profiles will be added here once confirmed.</p>
                 </div>
             <?php else: ?>
                 <div class="grid grid-2 stagger-children" style="max-width:760px;margin:0 auto">

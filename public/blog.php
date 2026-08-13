@@ -1,6 +1,6 @@
 <?php
 $seoTitle = 'Blog | ASAAS Studio Somalia';
-$seoDesc = 'Notes and articles from ASAAS Studio, a small digital studio in Mogadishu, on building simple, useful websites and web systems.';
+$seoDesc = 'Notes and articles from the ASAAS Studio team on designing and building websites, custom web systems, and digital products.';
 $seoKeywords = 'ASAAS studio blog, web design tips Somalia, web development guide Somalia, building websites, ASAAS studio';
 require __DIR__ . '/../includes/header.php'; ?>
 
@@ -10,7 +10,7 @@ require __DIR__ . '/../includes/header.php'; ?>
             <div class="section-header fade-in-up">
                 <div class="section-tag"><i data-lucide="pen-tool" size="16"></i>Our Blog</div>
                 <h1 class="section-title">Notes & <span class="gradient-text">Resources</span></h1>
-                <p class="section-desc">What we are learning and thinking about as we build websites and web systems.</p>
+                <p class="section-desc">Notes and ideas from our work designing and building websites and web systems.</p>
             </div>
         </div>
     </section>

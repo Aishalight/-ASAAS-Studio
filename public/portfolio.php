@@ -1,6 +1,6 @@
 <?php
 $seoTitle = 'Portfolio | ASAAS Studio Somalia';
-$seoDesc = 'Browse the portfolio of ASAAS Studio, a small digital studio in Mogadishu. Websites, custom web systems, and UI/UX design projects we have built.';
+$seoDesc = 'Browse the ASAAS Studio portfolio: websites, custom web systems, and UI/UX design projects built for businesses and organizations.';
 $seoKeywords = 'ASAAS studio portfolio, web design portfolio Somalia, web development projects Somalia, website projects Mogadishu, ASAAS studio work';
 require __DIR__ . '/../includes/header.php'; ?>
 <style>
@@ -102,7 +102,7 @@ require __DIR__ . '/../includes/header.php'; ?>
         <div class="container">
             <div class="reveal">
                 <h2 style="color:white;margin-bottom:16px">Have a Project in Mind?</h2>
-                <p style="color:var(--text-light);font-size:18px;max-width:500px;margin:0 auto 32px">Let's create something amazing together.</p>
+                <p style="color:var(--text-light);font-size:18px;max-width:500px;margin:0 auto 32px">Tell us about your project and we will get back to you with a clear plan.</p>
                 <a href="<?= BASE_URL ?>contact" class="btn btn-primary btn-lg">Start a Project <i data-lucide="arrow-right" size="20"></i></a>
             </div>
         </div>
