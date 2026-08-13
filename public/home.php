@@ -218,7 +218,7 @@ $db = Database::getInstance()->getConnection();
     ============================================================ -->
     <section class="section" style="background:var(--bg-light)" id="why-us">
         <div class="container">
-            <div class="grid grid-2" style="align-items:center;gap:60px">
+            <div class="grid grid-2" style="align-items:center;gap:80px">
                 <div class="reveal">
                     <div class="section-tag">
                         <i data-lucide="star" size="16"></i>
@@ -226,7 +226,7 @@ $db = Database::getInstance()->getConnection();
                     </div>
                     <h2 style="font-size:clamp(1.75rem,3vw,2.75rem);margin-bottom:20px">
                         Why Work With Us
-                    </div>
+                    </h2>
                     <h2 style="font-size:clamp(1.75rem,3vw,2.75rem);margin-bottom:20px">
                         Focused on <span class="gradient-text">the Work</span>
                     </h2>
