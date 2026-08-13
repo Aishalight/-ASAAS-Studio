@@ -78,6 +78,21 @@ $stats = $db->query("SELECT COUNT(*) as total, ROUND(AVG(rating),1) as avg, SUM(
 $typeCounts = $db->query("SELECT item_type, COUNT(*) as c FROM ratings GROUP BY item_type")->fetchAll();
 $typeCountMap = []; foreach ($typeCounts as $t) $typeCountMap[$t['item_type']] = $t['c'];
 $users = $db->query("SELECT id, name, username FROM users WHERE status = 'active' ORDER BY name ASC")->fetchAll();
+
+$typeLabels = ['business' => 'Business', 'project' => 'Project', 'service' => 'Service', 'post' => 'Post'];
+
+function ratingItemName($db, $type, $id) {
+    $id = (int)$id;
+    if ($type === 'business') return 'ASAAS STUDIO';
+    if ($type === 'project') $table = 'portfolio_projects';
+    elseif ($type === 'service') $table = 'services';
+    elseif ($type === 'post') $table = 'posts';
+    else return '#' . $id;
+    $stmt = $db->prepare("SELECT title FROM $table WHERE id = ?");
+    $stmt->execute([$id]);
+    $title = $stmt->fetchColumn();
+    return $title ?: ('#' . $id);
+}
 ?>
 <style>
 .rating-user{display:flex;align-items:center;gap:8px}
@@ -138,8 +153,13 @@ $users = $db->query("SELECT id, name, username FROM users WHERE status = 'active
                             <span style="font-weight:500;font-size:13px"><?= htmlspecialchars($r['user_name']) ?></span>
                         </div>
                     </td>
-                    <td><span class="rating-item-type"><?= htmlspecialchars($r['item_type']) ?></span></td>
-                    <td style="font-size:13px;font-weight:500">#<?= $r['item_id'] ?></td>
+                    <td><span class="rating-item-type"><?= $typeLabels[$r['item_type']] ?? $r['item_type'] ?></span></td>
+                    <td style="font-size:13px;font-weight:500">
+                        <?= htmlspecialchars(ratingItemName($db, $r['item_type'], $r['item_id'])) ?>
+                        <?php if ($r['item_type'] !== 'business'): ?>
+                            <span style="color:var(--text-muted);font-weight:400">#<?= (int)$r['item_id'] ?></span>
+                        <?php endif; ?>
+                    </td>
                     <td>
                         <span class="rating-stars">
                             <?php for ($i = 0; $i < 5; $i++): ?>
@@ -211,16 +231,17 @@ $users = $db->query("SELECT id, name, username FROM users WHERE status = 'active
                 <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
                     <div class="form-group">
                         <label class="form-label">Item Type</label>
-                        <select name="item_type" class="form-select" required>
+                        <select name="item_type" class="form-select" id="adminItemType" required>
                             <option value="business" selected>Business</option>
                             <option value="project">Project</option>
                             <option value="service">Service</option>
                             <option value="post">Post</option>
                         </select>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" id="adminItemIdGroup">
                         <label class="form-label">Item ID</label>
-                        <input type="number" name="item_id" class="form-input" value="1" min="1" required>
+                        <input type="number" name="item_id" class="form-input" id="adminItemId" value="1" min="1" required>
+                        <span style="font-size:11px;color:var(--text-muted)">Project / service / post ID</span>
                     </div>
                 </div>
                 <div class="form-group">
@@ -254,6 +275,9 @@ lucide.createIcons();
 function openModal(id){document.getElementById(id).classList.add('active')}
 function closeModal(id){document.getElementById(id).classList.remove('active')}
 function toggleUser(el){var cb=el.querySelector('input[type=checkbox]');cb.checked=!cb.checked;el.style.background=cb.checked?'var(--primary-alpha)':''}
+(function(){var sel=document.getElementById('adminItemType'),grp=document.getElementById('adminItemIdGroup');if(!sel||!grp)return;
+function t(){grp.style.display=sel.value==='business'?'none':''}
+sel.addEventListener('change',t);t();})();
 (function(){
 var row=document.getElementById('adminStarRow');if(!row)return;
 var btns=row.querySelectorAll('.admin-star-btn'),hInput=document.getElementById('adminRatingValue');
