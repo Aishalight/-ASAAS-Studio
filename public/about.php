@@ -94,8 +94,16 @@ require __DIR__ . '/../includes/header.php'; ?>
             $realTeam = array_filter($team, function ($m) { return !empty(trim($m['name'] ?? '')); });
             ?>
             <?php if (empty($realTeam)): ?>
-                <div class="reveal" style="max-width:720px;margin:0 auto;text-align:center;background:var(--bg-white);border-radius:var(--radius-xl);border:1px solid var(--border);padding:40px">
-                    <p style="color:var(--text-secondary);font-size:17px;line-height:1.8;margin:0">The founders and team behind ASAAS design and build every project together, with direct collaboration from the people doing the work. Their profiles will be added here once confirmed.</p>
+                <div class="grid grid-2 stagger-children" style="max-width:760px;margin:0 auto">
+                    <?php foreach ([1, 2, 3] as $i): ?>
+                        <div class="card" style="text-align:center;padding:24px">
+                            <div style="width:120px;height:120px;border-radius:50%;background:var(--bg-light);margin:0 auto 16px;display:flex;align-items:center;justify-content:center">
+                                <i data-lucide="user" size="48" style="color:var(--text-muted)"></i>
+                            </div>
+                            <h6 style="font-weight:700;color:var(--text-muted)">Your Name</h6>
+                            <p style="font-size:13px;color:var(--text-muted)">Your Role</p>
+                        </div>
+                    <?php endforeach; ?>
                 </div>
             <?php else: ?>
                 <div class="grid grid-2 stagger-children" style="max-width:760px;margin:0 auto">
