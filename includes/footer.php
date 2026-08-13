@@ -5,7 +5,7 @@
                 <a href="<?= BASE_URL ?>home" class="footer-brand">
                     <img src="<?= BASE_URL ?>uploads/logo2_blackbackground.png" alt="ASAAS" style="height:56px;width:auto">
                 </a>
-                <p class="footer-desc">We craft digital experiences that elevate brands and drive measurable growth. From strategy to execution, every pixel is purposeful.</p>
+                <p class="footer-desc">A small digital studio based in Mogadishu, building simple, useful websites and web systems.</p>
                 <?php
                 $socialTwitter = getSetting('social_twitter', '#');
                 $socialInstagram = getSetting('social_instagram', '#');
@@ -22,11 +22,12 @@
             <div>
                 <h4 class="footer-title">Services</h4>
                 <ul class="footer-links">
-                    <li><a href="<?= BASE_URL ?>services#web-design">Web Design</a></li>
-                    <li><a href="<?= BASE_URL ?>services#web-development">Web Development</a></li>
-                    <li><a href="<?= BASE_URL ?>services#branding">Branding</a></li>
-                    <li><a href="<?= BASE_URL ?>services#ui-ux-design">UI/UX Design</a></li>
-                    <li><a href="<?= BASE_URL ?>services#digital-marketing">Digital Marketing</a></li>
+                    <li><a href="<?= BASE_URL ?>services">Websites</a></li>
+                    <li><a href="<?= BASE_URL ?>services">Custom Web Systems</a></li>
+                    <li><a href="<?= BASE_URL ?>services">UI/UX Design</a></li>
+                    <li><a href="<?= BASE_URL ?>services">Website Maintenance</a></li>
+                    <li><a href="<?= BASE_URL ?>services">SEO & Digital Presence</a></li>
+                    <li><a href="<?= BASE_URL ?>services">Social Media Management</a></li>
                 </ul>
             </div>
             <div>
@@ -51,13 +52,14 @@
                 <h4 class="footer-title">Contact</h4>
                 <ul class="footer-links">
                     <li><a href="mailto:info@asaas-studio.tech">info@asaas-studio.tech</a></li>
-                    <li>Km4 Hodan<br>Mogadishu, Somalia</li>
+                    <li><a href="https://asaas-studio.tech" target="_blank" rel="noopener">asaas-studio.tech</a></li>
+                    <li>Mogadishu, Somalia</li>
                 </ul>
             </div>
         </div>
         <div class="footer-bottom">
             <p>&copy; <?= date('Y') ?> ASAAS. All rights reserved.</p>
-            <p>Crafted with precision by the ASAAS team</p>
+            <p>Made with care by the ASAAS team in Mogadishu, Somalia</p>
         </div>
     </div>
 </footer>

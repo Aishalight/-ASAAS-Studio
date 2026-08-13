@@ -59,7 +59,7 @@
     }
 
     // ============================================================
-    // AUTO-REFRESH — polls for new notifications/messages
+    // AUTO-REFRESH: polls for new notifications/messages
     // ============================================================
     (function startPolling() {
         var lastNotifCount = -1;

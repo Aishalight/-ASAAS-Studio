@@ -1,6 +1,6 @@
 <?php
-$seoTitle = 'Page Not Found — ASAAS Studio Somalia';
-$seoDesc = 'The page you are looking for does not exist. Return to ASAAS Studio Somalia homepage to explore our digital agency services.';
+$seoTitle = 'Page Not Found | ASAAS Studio Somalia';
+$seoDesc = 'The page you are looking for does not exist. Return to the ASAAS Studio Somalia homepage to explore our digital services.';
 $seoKeywords = 'page not found, 404 error, ASAAS studio Somalia';
 require __DIR__ . '/../includes/header.php'; ?>
 

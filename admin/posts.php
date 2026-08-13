@@ -128,7 +128,7 @@ $posts = $db->query("SELECT p.*, c.name as category_name, u.name as author_name 
                     <td><?php
                         $tags = array_filter(array_map('trim', explode(',', $p['tags'] ?? '')));
                         foreach ($tags as $t): ?><span class="badge" style="background:var(--bg-gray);margin-right:4px;font-size:11px"><?= htmlspecialchars($t) ?></span><?php endforeach;
-                        if (empty($tags)) echo '<span style="color:var(--text-muted)">—</span>';
+                        if (empty($tags)) echo '<span style="color:var(--text-muted)">-</span>';
                     ?></td>
                     <td><span class="badge badge-<?= $p['status'] === 'published' ? 'success' : ($p['status'] === 'archived' ? '' : 'warning') ?>"><?= ucfirst($p['status']) ?></span></td>
                     <td><?= $p['featured'] ? '<span style="color:#FF9800" title="Featured">&#9733;</span>' : '<span style="color:var(--border)">☆</span>' ?></td>
@@ -168,7 +168,7 @@ $posts = $db->query("SELECT p.*, c.name as category_name, u.name as author_name 
                     <div class="form-group">
                         <label class="form-label">Category</label>
                         <select name="category_id" class="form-select">
-                            <option value="">— None —</option>
+                            <option value="">- None -</option>
                             <?php foreach ($blogCategories as $c): ?>
                             <option value="<?= $c['id'] ?>"><?= htmlspecialchars($c['name']) ?></option>
                             <?php endforeach; ?>
@@ -246,7 +246,7 @@ $posts = $db->query("SELECT p.*, c.name as category_name, u.name as author_name 
                     <div class="form-group">
                         <label class="form-label">Category</label>
                         <select name="category_id" id="edit_post_category" class="form-select">
-                            <option value="">— None —</option>
+                            <option value="">- None -</option>
                             <?php foreach ($blogCategories as $c): ?>
                             <option value="<?= $c['id'] ?>"><?= htmlspecialchars($c['name']) ?></option>
                             <?php endforeach; ?>

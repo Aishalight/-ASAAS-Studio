@@ -24,7 +24,7 @@ if (empty($project)) {
     <?php require __DIR__ . '/../includes/footer.php'; exit;
 }
 
-$seoTitle = htmlspecialchars($project['title']) . ' — Case Study';
+$seoTitle = htmlspecialchars($project['title']) . ' | ASAAS Studio Portfolio';
 $seoDesc = htmlspecialchars($project['description'] ?? '');
 $techs = array_filter(array_map('trim', explode(',', $project['technologies'] ?? '')));
 $galleryImages = json_decode($project['gallery_images'] ?? '[]', true) ?: [];
@@ -71,6 +71,10 @@ require __DIR__ . '/../includes/header.php';
             <div class="fade-in-up" style="max-width:800px">
                 <?php if ($project['category_name']): ?>
                 <span class="badge" style="background:#2196F3;color:white;margin-bottom:16px"><?= htmlspecialchars($project['category_name']) ?></span>
+                <?php endif; ?>
+                <?php $pTypeLabel = ['client' => 'Client', 'internal' => 'Internal', 'concept' => 'Concept', 'student' => 'Student'][$project['project_type'] ?? ''] ?? ''; ?>
+                <?php if ($pTypeLabel): ?>
+                <span class="badge" style="background:rgba(255,255,255,0.15);color:white;border:1px solid rgba(255,255,255,0.3);margin-bottom:16px"><?= $pTypeLabel ?> Project</span>
                 <?php endif; ?>
                 <h1 style="color:white;font-size:clamp(2rem,4vw,3.5rem);margin-bottom:16px"><?= htmlspecialchars($project['title']) ?></h1>
                 <?php if ($project['description']): ?>

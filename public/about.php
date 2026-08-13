@@ -1,7 +1,7 @@
 <?php
-$seoTitle = 'About — Premium Digital Agency in Somalia';
-$seoDesc = 'Learn about ASAAS Studio — our mission, values, and the team behind Somalia premier digital agency specializing in web design, development, branding, and digital strategy.';
-$seoKeywords = 'about ASAAS studio, digital agency Somalia, web design company Somalia, branding agency Mogadishu, digital agency team';
+$seoTitle = 'About | ASAAS Studio Somalia';
+$seoDesc = 'ASAAS Studio is a small digital studio based in Mogadishu, Somalia, run by two people. We build simple, useful websites, custom web systems, and clear UI/UX design.';
+$seoKeywords = 'about ASAAS studio, digital studio Somalia, web design company Somalia, web development Mogadishu, two founders studio';
 require __DIR__ . '/../includes/header.php'; ?>
 
 <main class="page-transition">
@@ -11,44 +11,62 @@ require __DIR__ . '/../includes/header.php'; ?>
                 <div class="fade-in-up">
                     <div class="section-tag"><i data-lucide="info" size="16"></i>About</div>
                     <h1 style="font-size:clamp(2rem,4vw,3.5rem);margin-bottom:16px">We Are <span class="gradient-text">ASAAS</span></h1>
-                    <p style="color:var(--text-secondary);font-size:18px;line-height:1.8;margin-bottom:24px">We design and engineer digital products for brands that aim higher. A team of strategists, designers, and engineers — we've been turning ambitious ideas into scalable realities since 2014.</p>
-                    <p style="color:var(--text-secondary);line-height:1.8">Our philosophy is straightforward: every line of code, every pixel, every interaction should serve a purpose. Great digital experiences don't happen by accident — they are designed, tested, and refined with relentless attention to detail.</p>
+                    <p style="color:var(--text-secondary);font-size:18px;line-height:1.8;margin-bottom:24px">ASAAS is a small digital studio based in Mogadishu, founded by two people who believe good digital products should be simple, useful, and built with care.</p>
+                    <p style="color:var(--text-secondary);line-height:1.8">We do not try to be everything to everyone. We focus on websites, custom web systems, and clear UI/UX design, and we take on projects we can genuinely do well.</p>
                     <div style="display:flex;gap:24px;margin-top:32px">
                         <div>
-                            <div style="font-size:36px;font-weight:800;color:var(--primary)">150+</div>
-                            <div style="font-size:14px;color:var(--text-muted)">Projects</div>
+                            <div style="font-size:36px;font-weight:800;color:var(--primary)">2</div>
+                            <div style="font-size:14px;color:var(--text-muted)">Founders</div>
                         </div>
                         <div>
-                            <div style="font-size:36px;font-weight:800;color:var(--primary)">3</div>
-                            <div style="font-size:14px;color:var(--text-muted)">Team Members</div>
+                            <div style="font-size:36px;font-weight:800;color:var(--primary)">Mogadishu</div>
+                            <div style="font-size:14px;color:var(--text-muted)">Based in</div>
                         </div>
                         <div>
-                            <div style="font-size:36px;font-weight:800;color:var(--primary)">12+</div>
-                            <div style="font-size:14px;color:var(--text-muted)">Years</div>
+                            <div style="font-size:36px;font-weight:800;color:var(--primary)">$99</div>
+                            <div style="font-size:14px;color:var(--text-muted)">Starting price</div>
                         </div>
                     </div>
                 </div>
                 <div class="fade-in-right">
-                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=600&fit=crop" alt="ASAAS Studio Team" style="width:100%;border-radius:var(--radius-xl);box-shadow:var(--shadow-lg)">
+                    <div style="width:100%;aspect-ratio:1/1;border-radius:var(--radius-xl);box-shadow:var(--shadow-lg);background:linear-gradient(135deg,#14141f,#1a1a2e);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;padding:40px;text-align:center">
+                        <img src="<?= BASE_URL ?>uploads/logo2_blackbackground.png" alt="ASAAS" style="height:64px;width:auto">
+                        <p style="color:#aab;font-size:15px;max-width:260px;margin:0">A small studio building simple, useful digital products.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="section" style="text-align:center">
+    <section class="section" style="padding-top:0">
+        <div class="container" style="max-width:820px">
+            <div class="reveal" style="background:var(--bg-white);border-radius:var(--radius-xl);border:1px solid var(--border);padding:40px;box-shadow:var(--shadow-sm);margin-bottom:24px">
+                <div class="section-tag"><i data-lucide="compass" size="16"></i>Why ASAAS Exists</div>
+                <h2 style="font-size:clamp(1.5rem,2.5vw,2.25rem);margin:16px 0 12px">Good software should not be hard to get</h2>
+                <p style="color:var(--text-secondary);font-size:16px;line-height:1.8;margin:0">Most businesses in Mogadishu do not need a huge team or a big budget. They need someone who can listen, build what is actually needed, and keep it simple. That is what we set out to do.</p>
+            </div>
+            <div class="reveal" style="background:var(--bg-white);border-radius:var(--radius-xl);border:1px solid var(--border);padding:40px;box-shadow:var(--shadow-sm)">
+                <div class="section-tag"><i data-lucide="cpu" size="16"></i>Technology Should Have a Purpose</div>
+                <h2 style="font-size:clamp(1.5rem,2.5vw,2.25rem);margin:16px 0 12px">Built for the job, not for the trend</h2>
+                <p style="color:var(--text-secondary);font-size:16px;line-height:1.8;margin:0">A tool is only good if it solves a problem. We use the simplest technology that does the job, we avoid unnecessary complexity, and we tell you honestly when something is not worth building.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" style="text-align:center;padding-top:0">
         <div class="container">
             <div class="section-header reveal">
                 <h2 class="section-title">What We <span class="gradient-text">Stand For</span></h2>
-                <p class="section-desc">The principles that guide every decision, every design, and every line of code.</p>
+                <p class="section-desc">The principles that guide every project we take on.</p>
             </div>
             <div class="grid grid-3 stagger-children" style="margin-top:40px">
                 <?php $values = [
-                    ['icon' => 'target', 'title' => 'Excellence', 'desc' => 'We never settle for good enough. Every project receives our full dedication to quality and craftsmanship.'],
-                    ['icon' => 'lightbulb', 'title' => 'Innovation', 'desc' => 'We stay ahead of the curve, embracing new technologies and creative approaches to solve complex problems.'],
-                    ['icon' => 'heart', 'title' => 'Passion', 'desc' => 'We genuinely love what we do. Our passion drives us to create extraordinary digital experiences.'],
-                    ['icon' => 'users', 'title' => 'Collaboration', 'desc' => 'We believe in the power of teamwork. Great results come from diverse perspectives working together.'],
-                    ['icon' => 'shield', 'title' => 'Integrity', 'desc' => 'Honesty and transparency are at the core of every relationship we build with our clients and partners.'],
-                    ['icon' => 'trending-up', 'title' => 'Growth', 'desc' => 'We are committed to continuous learning and improvement, both for ourselves and for the businesses we serve.'],
+                    ['icon' => 'wrench', 'title' => 'Practicality', 'desc' => 'We build things that solve real problems, not things that look impressive and gather dust.'],
+                    ['icon' => 'badge-check', 'title' => 'Quality', 'desc' => 'We would rather do a small job properly than a big job sloppily.'],
+                    ['icon' => 'align-left', 'title' => 'Clarity', 'desc' => 'We explain technical things in plain language, so you always know where things stand.'],
+                    ['icon' => 'handshake', 'title' => 'Honesty', 'desc' => 'If something is not worth doing, we will say so before you pay for it.'],
+                    ['icon' => 'book-open', 'title' => 'Learning', 'desc' => 'We are always learning, because web technology changes and we want to stay good at what we do.'],
+                    ['icon' => 'users', 'title' => 'Partnership', 'desc' => 'We work with our clients as collaborators, not as a vendor handing over a finished box.'],
                 ];
                 foreach ($values as $v): ?>
                     <div class="card hover-lift" style="padding:32px;text-align:center">
@@ -67,36 +85,40 @@ require __DIR__ . '/../includes/header.php'; ?>
         <div class="container">
             <div class="section-header reveal">
                 <div class="section-tag"><i data-lucide="users" size="16"></i>Leadership</div>
-                <h2 class="section-title">Meet Our <span class="gradient-text">Team</span></h2>
+                <h2 class="section-title">The People <span class="gradient-text">Behind ASAAS</span></h2>
             </div>
-            <div class="grid grid-3 stagger-children">
-                <?php
-                $teamJson = getSetting('team_members', '');
-                $team = $teamJson ? json_decode($teamJson, true) : [];
-                if (!is_array($team) || empty($team)) {
-                    $team = [
-                        ['name' => 'Alex Mercer', 'role' => 'CEO & Founder', 'img' => 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=300&h=300&fit=crop'],
-                        ['name' => 'Sarah Chen', 'role' => 'Creative Director', 'img' => 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300&h=300&fit=crop'],
-                        ['name' => 'Marcus Williams', 'role' => 'Technical Lead', 'img' => 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop'],
-                    ];
-                }
-                foreach ($team as $t): ?>
-                    <div class="card hover-lift" style="text-align:center;padding:24px">
-                        <img src="<?= strpos($t['img'] ?? '', 'uploads/') === 0 ? BASE_URL . $t['img'] : htmlspecialchars($t['img'] ?? '') ?>" alt="<?= htmlspecialchars($t['name']) ?>" style="width:120px;height:120px;border-radius:50%;object-fit:cover;margin:0 auto 16px">
-                        <h6 style="font-weight:700"><?= htmlspecialchars($t['name']) ?></h6>
-                        <p style="font-size:13px;color:var(--text-muted)"><?= htmlspecialchars($t['role']) ?></p>
-                    </div>
-                <?php endforeach; ?>
-            </div>
+            <?php
+            $teamJson = getSetting('team_members', '');
+            $team = $teamJson ? json_decode($teamJson, true) : [];
+            if (!is_array($team)) $team = [];
+            $realTeam = array_filter($team, function ($m) { return !empty(trim($m['name'] ?? '')); });
+            ?>
+            <?php if (empty($realTeam)): ?>
+                <div class="reveal" style="max-width:720px;margin:0 auto;text-align:center;background:var(--bg-white);border-radius:var(--radius-xl);border:1px solid var(--border);padding:40px">
+                    <p style="color:var(--text-secondary);font-size:17px;line-height:1.8;margin:0">ASAAS is run by two people who design and build every project together. Their names and photos will be added here once confirmed.</p>
+                </div>
+            <?php else: ?>
+                <div class="grid grid-2 stagger-children" style="max-width:760px;margin:0 auto">
+                    <?php foreach ($realTeam as $t): ?>
+                        <div class="card hover-lift" style="text-align:center;padding:24px">
+                            <?php if (!empty($t['img'])): ?>
+                                <img src="<?= strpos($t['img'], 'uploads/') === 0 ? BASE_URL . $t['img'] : htmlspecialchars($t['img']) ?>" alt="<?= htmlspecialchars($t['name']) ?>" style="width:120px;height:120px;border-radius:50%;object-fit:cover;margin:0 auto 16px">
+                            <?php endif; ?>
+                            <h6 style="font-weight:700"><?= htmlspecialchars($t['name']) ?></h6>
+                            <p style="font-size:13px;color:var(--text-muted)"><?= htmlspecialchars($t['role'] ?? '') ?></p>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
         </div>
     </section>
 
     <section style="background:var(--bg-dark);padding:80px 0;text-align:center">
         <div class="container">
             <div class="reveal">
-                <h2 style="color:white;margin-bottom:16px">Help Us Shape the Future</h2>
-                <p style="color:var(--text-light);font-size:18px;max-width:500px;margin:0 auto 32px">We're always looking for sharp minds who care deeply about their craft.</p>
-                <a href="<?= BASE_URL ?>contact" class="btn btn-primary btn-lg">View Open Positions <i data-lucide="arrow-right" size="20"></i></a>
+                <h2 style="color:white;margin-bottom:16px">Have Something You Want to Build?</h2>
+                <p style="color:var(--text-light);font-size:18px;max-width:520px;margin:0 auto 32px">Tell us what you have in mind and we will get back to you with an honest answer.</p>
+                <a href="<?= BASE_URL ?>contact" class="btn btn-primary btn-lg">Start a Project <i data-lucide="arrow-right" size="20"></i></a>
             </div>
         </div>
     </section>

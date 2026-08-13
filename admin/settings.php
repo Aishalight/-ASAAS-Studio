@@ -60,7 +60,7 @@ if ($teamJson) {
 
     <div class="reveal" style="background:var(--bg-white);border-radius:var(--radius-lg);border:1px solid var(--border);padding:32px;margin-bottom:24px">
         <h3 style="font-size:18px;font-weight:700;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--border)">Team Members</h3>
-        <p style="font-size:13px;color:var(--text-muted);margin-bottom:24px">Shown in the "Meet Our Team" section on the About page. Leave the photo empty to keep the current one.</p>
+        <p style="font-size:13px;color:var(--text-muted);margin-bottom:24px">Shown in the "The People Behind ASAAS" section on the About page. Leave a name empty to hide that card.</p>
         <?php for ($i = 0; $i < 3; $i++): ?>
             <?php $m = $teamMembers[$i] ?? ['name' => '', 'role' => '', 'img' => '']; $n = $i + 1; ?>
             <div style="border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;margin-bottom:16px">
@@ -94,20 +94,13 @@ if ($teamJson) {
     </div>
 
     <div class="reveal" style="background:var(--bg-white);border-radius:var(--radius-lg);border:1px solid var(--border);padding:32px;margin-bottom:24px">
-        <h3 style="font-size:18px;font-weight:700;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--border)">Homepage</h3>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
-            <div class="form-group" style="grid-column:1/-1"><label class="form-label">Trusted By Client Names</label><input type="text" name="trusted_clients" class="form-input" value="<?= htmlspecialchars(getSetting('trusted_clients', 'TechVolve,GreenLeaf,Pulse,FinFlow,Bloom,CloudBase')) ?>"><p style="font-size:12px;color:var(--text-muted);margin-top:4px">Comma-separated list of company names shown in the "Trusted by teams at" section on the homepage.</p></div>
-        </div>
-    </div>
-
-    <div class="reveal" style="background:var(--bg-white);border-radius:var(--radius-lg);border:1px solid var(--border);padding:32px;margin-bottom:24px">
         <h3 style="font-size:18px;font-weight:700;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--border)">Social Media</h3>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
             <div class="form-group"><label class="form-label">Twitter URL</label><input type="url" name="social_twitter" class="form-input" value="<?= htmlspecialchars(getSetting('social_twitter')) ?>"></div>
             <div class="form-group"><label class="form-label">Instagram URL</label><input type="url" name="social_instagram" class="form-input" value="<?= htmlspecialchars(getSetting('social_instagram')) ?>"></div>
             <div class="form-group"><label class="form-label">LinkedIn URL</label><input type="url" name="social_linkedin" class="form-input" value="<?= htmlspecialchars(getSetting('social_linkedin')) ?>"></div>
             <div class="form-group"><label class="form-label">GitHub URL</label><input type="url" name="social_github" class="form-input" value="<?= htmlspecialchars(getSetting('social_github')) ?>"></div>
-            <div class="form-group"><label class="form-label">WhatsApp Number</label><input type="tel" name="social_whatsapp" class="form-input" value="<?= htmlspecialchars(getSetting('social_whatsapp')) ?>" placeholder="+252 61 234 5678"><p style="font-size:12px;color:var(--text-muted);margin-top:4px">Include country code. E.g. +252612345678</p></div>
+            <div class="form-group"><label class="form-label">WhatsApp Number</label><input type="tel" name="social_whatsapp" class="form-input" value="<?= htmlspecialchars(getSetting('social_whatsapp')) ?>" placeholder="+252XXXXXXXXX"><p style="font-size:12px;color:var(--text-muted);margin-top:4px">Include country code. E.g. +252612345678</p></div>
         </div>
     </div>
 

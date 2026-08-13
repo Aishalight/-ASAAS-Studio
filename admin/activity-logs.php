@@ -202,7 +202,7 @@ $actions = $db->query("SELECT DISTINCT action FROM activity_logs ORDER BY action
 <div class="page-header fade-in-up">
     <div>
         <h1 class="page-title">Security Logs</h1>
-        <p class="page-subtitle">SIEM-style monitoring — real-time detection, alerts & response actions</p>
+        <p class="page-subtitle">SIEM-style monitoring - real-time detection, alerts & response actions</p>
     </div>
 </div>
 
@@ -328,7 +328,7 @@ $actions = $db->query("SELECT DISTINCT action FROM activity_logs ORDER BY action
                 <td style="max-width:240px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:13px;color:var(--text-secondary)"><?= htmlspecialchars($l['description'] ?? '') ?></td>
                 <td><span class="siem-badge <?= $sevClass ?>"><span class="severity-dot <?= $sevClass ?>"></span><?= ucfirst($sevClass) ?></span></td>
                 <td><span class="siem-badge <?= $l['status'] ?: 'normal' ?>"><?= ucfirst($l['status'] ?: 'normal') ?></span></td>
-                <td style="font-size:12px;font-family:monospace;color:var(--text-muted)"><?= htmlspecialchars($l['ip_address'] ?? '—') ?></td>
+                <td style="font-size:12px;font-family:monospace;color:var(--text-muted)"><?= htmlspecialchars($l['ip_address'] ?? '-') ?></td>
                 <td style="font-size:12px;color:var(--text-muted);white-space:nowrap"><?= formatTimeAgo($l['created_at']) ?></td>
             </tr>
             <tr id="detail-<?= $l['id'] ?>" class="log-detail">
@@ -337,11 +337,11 @@ $actions = $db->query("SELECT DISTINCT action FROM activity_logs ORDER BY action
                         <div class="log-detail-item"><label>Log ID</label><div>#<?= $l['id'] ?></div></div>
                         <div class="log-detail-item"><label>User</label><div><?= htmlspecialchars($l['user_name'] ?? 'System') ?> (<?= htmlspecialchars($l['user_role'] ?? 'N/A') ?>)</div></div>
                         <div class="log-detail-item"><label>Action</label><div><code><?= htmlspecialchars($l['action']) ?></code></div></div>
-                        <div class="log-detail-item"><label>Description</label><div><?= htmlspecialchars($l['description'] ?? '—') ?></div></div>
-                        <div class="log-detail-item"><label>IP Address</label><div><?= htmlspecialchars($l['ip_address'] ?? '—') ?></div></div>
-                        <div class="log-detail-item"><label>User Agent</label><div style="font-size:11px"><?= htmlspecialchars($l['user_agent'] ?? '—') ?></div></div>
-                        <div class="log-detail-item"><label>Request URL</label><div style="font-size:11px"><?= htmlspecialchars($l['request_url'] ?? '—') ?></div></div>
-                        <div class="log-detail-item"><label>Request Method</label><div><?= htmlspecialchars($l['request_method'] ?? '—') ?></div></div>
+                        <div class="log-detail-item"><label>Description</label><div><?= htmlspecialchars($l['description'] ?? '-') ?></div></div>
+                        <div class="log-detail-item"><label>IP Address</label><div><?= htmlspecialchars($l['ip_address'] ?? '-') ?></div></div>
+                        <div class="log-detail-item"><label>User Agent</label><div style="font-size:11px"><?= htmlspecialchars($l['user_agent'] ?? '-') ?></div></div>
+                        <div class="log-detail-item"><label>Request URL</label><div style="font-size:11px"><?= htmlspecialchars($l['request_url'] ?? '-') ?></div></div>
+                        <div class="log-detail-item"><label>Request Method</label><div><?= htmlspecialchars($l['request_method'] ?? '-') ?></div></div>
                         <?php if (!empty($details) && is_array($details)): ?>
                             <div class="log-detail-item" style="grid-column:1/-1"><label>Details (JSON)</label><div><pre style="font-size:11px;background:var(--bg-white);padding:8px;border-radius:4px;max-height:120px;overflow:auto;margin:0"><?= htmlspecialchars(json_encode($details, JSON_PRETTY_PRINT)) ?></pre></div></div>
                         <?php endif; ?>
@@ -619,7 +619,7 @@ function fetchInvestigation(logId, type){
                 html+='<table class="investigate-table"><thead><tr><th>Time</th><th>User</th><th>Action</th><th>Sev</th><th>Status</th><th>IP</th></tr></thead><tbody>';
                 logs.forEach(function(lg){
                     var sev=lg.severity||'low';
-                    html+='<tr><td style="white-space:nowrap">'+timeAgo(lg.created_at)+'</td><td>'+(lg.user_name||'System')+'</td><td><code style="font-size:10px">'+esc(lg.action)+'</code></td><td><span class="sev-dot '+sev+'"></span>'+sev+'</td><td><span class="siem-badge '+(lg.status||'normal')+'">'+(lg.status||'normal')+'</span></td><td style="font-family:monospace">'+(lg.ip_address||'—')+'</td></tr>';
+                    html+='<tr><td style="white-space:nowrap">'+timeAgo(lg.created_at)+'</td><td>'+(lg.user_name||'System')+'</td><td><code style="font-size:10px">'+esc(lg.action)+'</code></td><td><span class="sev-dot '+sev+'"></span>'+sev+'</td><td><span class="siem-badge '+(lg.status||'normal')+'">'+(lg.status||'normal')+'</span></td><td style="font-family:monospace">'+(lg.ip_address||'-')+'</td></tr>';
                 });
                 html+='</tbody></table>';
             }
@@ -630,7 +630,7 @@ function fetchInvestigation(logId, type){
                 html='<p style="font-size:13px;color:var(--text-muted);margin-bottom:12px">Found '+j.data.count+' action(s)</p>';
                 html+='<table class="investigate-table"><thead><tr><th>Time</th><th>Admin</th><th>Action Type</th><th>Target</th></tr></thead><tbody>';
                 acts.forEach(function(a){
-                    html+='<tr><td style="white-space:nowrap">'+timeAgo(a.created_at)+'</td><td>'+(a.performed_by_name||'System')+'</td><td><code style="font-size:10px">'+esc(a.action_type)+'</code></td><td>'+(a.target_user_id?'User #'+a.target_user_id:'')+(a.target_ip?' IP: '+a.target_ip:'—')+'</td></tr>';
+                    html+='<tr><td style="white-space:nowrap">'+timeAgo(a.created_at)+'</td><td>'+(a.performed_by_name||'System')+'</td><td><code style="font-size:10px">'+esc(a.action_type)+'</code></td><td>'+(a.target_user_id?'User #'+a.target_user_id:'')+(a.target_ip?' IP: '+a.target_ip:'-')+'</td></tr>';
                 });
                 html+='</tbody></table>';
             }
@@ -638,11 +638,11 @@ function fetchInvestigation(logId, type){
             var ulogs=j.data.logs;
             if(ulogs.length===0){html='<div class="investigate-empty">No activity found for this user</div>'}
             else{
-                html='<p style="font-size:13px;color:var(--text-muted);margin-bottom:12px">User activity timeline — '+j.data.count+' event(s)</p>';
+                html='<p style="font-size:13px;color:var(--text-muted);margin-bottom:12px">User activity timeline - '+j.data.count+' event(s)</p>';
                 html+='<table class="investigate-table"><thead><tr><th>Time</th><th>Action</th><th>Description</th><th>Sev</th><th>IP</th></tr></thead><tbody>';
                 ulogs.forEach(function(lg){
                     var sev=lg.severity||'low';
-                    html+='<tr><td style="white-space:nowrap">'+timeAgo(lg.created_at)+'</td><td><code style="font-size:10px">'+esc(lg.action)+'</code></td><td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+esc(lg.description||'')+'</td><td><span class="sev-dot '+sev+'"></span>'+sev+'</td><td style="font-family:monospace">'+(lg.ip_address||'—')+'</td></tr>';
+                    html+='<tr><td style="white-space:nowrap">'+timeAgo(lg.created_at)+'</td><td><code style="font-size:10px">'+esc(lg.action)+'</code></td><td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+esc(lg.description||'')+'</td><td><span class="sev-dot '+sev+'"></span>'+sev+'</td><td style="font-family:monospace">'+(lg.ip_address||'-')+'</td></tr>';
                 });
                 html+='</tbody></table>';
             }
@@ -650,7 +650,7 @@ function fetchInvestigation(logId, type){
             var ilogs=j.data.logs;
             if(ilogs.length===0){html='<div class="investigate-empty">No activity found for this IP</div>'}
             else{
-                html='<p style="font-size:13px;color:var(--text-muted);margin-bottom:12px">IP activity history — '+j.data.count+' event(s)</p>';
+                html='<p style="font-size:13px;color:var(--text-muted);margin-bottom:12px">IP activity history - '+j.data.count+' event(s)</p>';
                 html+='<table class="investigate-table"><thead><tr><th>Time</th><th>User</th><th>Action</th><th>Sev</th><th>Status</th></tr></thead><tbody>';
                 ilogs.forEach(function(lg){
                     var sev=lg.severity||'low';
@@ -757,11 +757,11 @@ document.addEventListener('DOMContentLoaded',function(){
             .then(function(r){return r.json()})
             .then(function(j){
                 if(!j.success){document.getElementById('investigateContent').innerHTML='<div class="investigate-empty">Failed to load</div>';return}
-                var html='<p style="font-size:13px;color:var(--text-muted);margin-bottom:12px">User activity timeline — '+j.data.count+' event(s)</p>';
+                var html='<p style="font-size:13px;color:var(--text-muted);margin-bottom:12px">User activity timeline - '+j.data.count+' event(s)</p>';
                 html+='<table class="investigate-table"><thead><tr><th>Time</th><th>Action</th><th>Description</th><th>Sev</th><th>Status</th><th>IP</th></tr></thead><tbody>';
                 (j.data.logs||[]).forEach(function(lg){
                     var sev=lg.severity||'low';
-                    html+='<tr><td style="white-space:nowrap">'+timeAgo(lg.created_at)+'</td><td><code style="font-size:10px">'+esc(lg.action)+'</code></td><td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+esc(lg.description||'')+'</td><td><span class="sev-dot '+sev+'"></span>'+sev+'</td><td><span class="siem-badge '+(lg.status||'normal')+'">'+(lg.status||'normal')+'</span></td><td style="font-family:monospace">'+(lg.ip_address||'—')+'</td></tr>';
+                    html+='<tr><td style="white-space:nowrap">'+timeAgo(lg.created_at)+'</td><td><code style="font-size:10px">'+esc(lg.action)+'</code></td><td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+esc(lg.description||'')+'</td><td><span class="sev-dot '+sev+'"></span>'+sev+'</td><td><span class="siem-badge '+(lg.status||'normal')+'">'+(lg.status||'normal')+'</span></td><td style="font-family:monospace">'+(lg.ip_address||'-')+'</td></tr>';
                 });
                 html+='</tbody></table>';
                 document.getElementById('investigateContent').innerHTML=html;
@@ -777,7 +777,7 @@ document.addEventListener('DOMContentLoaded',function(){
             .then(function(r){return r.json()})
             .then(function(j){
                 if(!j.success){document.getElementById('investigateContent').innerHTML='<div class="investigate-empty">Failed to load</div>';return}
-                var html='<p style="font-size:13px;color:var(--text-muted);margin-bottom:12px">IP activity history — '+j.data.count+' event(s)</p>';
+                var html='<p style="font-size:13px;color:var(--text-muted);margin-bottom:12px">IP activity history - '+j.data.count+' event(s)</p>';
                 html+='<table class="investigate-table"><thead><tr><th>Time</th><th>User</th><th>Action</th><th>Sev</th><th>Status</th></tr></thead><tbody>';
                 (j.data.logs||[]).forEach(function(lg){
                     var sev=lg.severity||'low';

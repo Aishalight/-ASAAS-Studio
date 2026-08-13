@@ -1,6 +1,6 @@
 /* ============================================================
    ASAAS STUDIO - User Dashboard Styles
-   Premium SaaS Design — user dashboard only (not admin)
+   Premium SaaS Design: user dashboard only (not admin)
    ============================================================ */
 
 .dashboard-layout {
@@ -10,7 +10,7 @@
 }
 
 /* ============================================================
-   SIDEBAR — Dark theme (matches admin sidebar)
+   SIDEBAR: Dark theme (matches admin sidebar)
    ============================================================ */
 .user-sidebar {
     width: var(--sidebar-width);

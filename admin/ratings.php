@@ -110,7 +110,7 @@ $users = $db->query("SELECT id, name, username FROM users WHERE status = 'active
     </div>
     <div class="stat-card reveal">
         <div class="stat-icon" style="background:rgba(76,175,80,0.1);color:#4CAF50"><i data-lucide="award" size="22"></i></div>
-        <div><div class="stat-value"><?= $stats['avg'] ?? '—' ?></div><div class="stat-label">Average Rating</div></div>
+        <div><div class="stat-value"><?= $stats['avg'] ?? '-' ?></div><div class="stat-label">Average Rating</div></div>
     </div>
     <div class="stat-card reveal">
         <div class="stat-icon" style="background:rgba(255,152,0,0.1);color:#FF9800"><i data-lucide="clock" size="22"></i></div>
@@ -147,7 +147,7 @@ $users = $db->query("SELECT id, name, username FROM users WHERE status = 'active
                             <?php endfor; ?>
                         </span>
                     </td>
-                    <td><div class="rating-review" title="<?= htmlspecialchars($r['review'] ?? '') ?>"><?= htmlspecialchars($r['review'] ?? '—') ?></div></td>
+                    <td><div class="rating-review" title="<?= htmlspecialchars($r['review'] ?? '') ?>"><?= htmlspecialchars($r['review'] ?? '-') ?></div></td>
                     <td><span class="badge badge-<?= $r['is_approved'] ? 'success' : 'warning' ?>"><?= $r['is_approved'] ? 'Approved' : 'Pending' ?></span></td>
                     <td style="font-size:12px;color:var(--text-muted)"><?= date('M j, Y', strtotime($r['created_at'])) ?></td>
                     <td>

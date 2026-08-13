@@ -1,4 +1,4 @@
-# ASAAS STUDIO - Premium Digital Agency Platform
+# ASAAS STUDIO - Small Digital Studio Platform
 
 ## Quick Setup
 

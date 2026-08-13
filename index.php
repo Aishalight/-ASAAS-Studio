@@ -184,7 +184,7 @@ if (!in_array($page, $fullPages) && strpos($page, 'admin') !== 0) {
         <link rel="icon" type="image/png" sizes="192x192" href="<?= BASE_URL ?>assets/images/favicon_io/android-chrome-192x192.png">
         <link rel="icon" type="image/png" sizes="512x512" href="<?= BASE_URL ?>assets/images/favicon_io/android-chrome-512x512.png">
         <link rel="manifest" href="<?= BASE_URL ?>assets/images/favicon_io/site.webmanifest">
-        <?= getSEOTags($seoTitle ?? 'Premium Digital Agency', $seoDesc ?? '', $seoImage ?? '', $seoUrl ?? '', $seoKeywords ?? '') ?>
+        <?= getSEOTags($seoTitle ?? 'ASAAS STUDIO | Digital Studio in Somalia', $seoDesc ?? '', $seoImage ?? '', $seoUrl ?? '', $seoKeywords ?? '') ?>
     </head>
     <body>
         <?= $content ?>

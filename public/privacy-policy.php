@@ -1,6 +1,6 @@
 <?php
-$seoTitle = 'Privacy Policy — ASAAS Studio Somalia';
-$seoDesc = 'ASAAS Studio Somalia privacy policy — how we collect, use, and protect your personal information when you use our website and services.';
+$seoTitle = 'Privacy Policy | ASAAS Studio Somalia';
+$seoDesc = 'ASAAS Studio Somalia privacy policy. How we collect, use, and protect your personal information when you use our website and services.';
 $seoKeywords = 'privacy policy Somalia, data protection Somalia, ASAAS studio privacy, website privacy terms';
 require __DIR__ . '/../includes/header.php'; ?>
 

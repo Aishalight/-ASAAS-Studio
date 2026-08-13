@@ -48,6 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $description = trim($_POST['description'] ?? '');
             $content = $_POST['content'] ?? '';
             $client = trim($_POST['client'] ?? '');
+            $projectType = in_array($_POST['project_type'] ?? '', ['client','internal','concept','student']) ? $_POST['project_type'] : 'client';
             $categoryId = (int)($_POST['category_id'] ?? 0);
             $status = in_array($_POST['status'] ?? '', ['draft','published','archived']) ? $_POST['status'] : 'draft';
             $projectDate = !empty($_POST['project_date']) ? $_POST['project_date'] : null;
@@ -68,8 +69,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if ($existingSlug->fetch()) $slug .= '-' . time();
                 $featuredImage = handlePortfolioImageUpload('image');
                 $galleryJson = handlePortfolioGalleryUpload();
-                $stmt = $db->prepare("INSERT INTO portfolio_projects (title, slug, description, content, client, project_date, project_url, github_url, technologies, category_id, featured_image, gallery_images, featured, sort_order, testimonial, testimonial_author, testimonial_position, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-                $stmt->execute([$title, $slug, $description ?: null, $content ?: null, $client ?: null, $projectDate, $projectUrl ?: null, $githubUrl ?: null, $technologies ?: null, $categoryId ?: null, $featuredImage, $galleryJson, $featured, $sortOrder, $testimonial ?: null, $testimonialAuthor ?: null, $testimonialPosition ?: null, $status]);
+                $stmt = $db->prepare("INSERT INTO portfolio_projects (title, slug, description, content, client, project_type, project_date, project_url, github_url, technologies, category_id, featured_image, gallery_images, featured, sort_order, testimonial, testimonial_author, testimonial_position, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                $stmt->execute([$title, $slug, $description ?: null, $content ?: null, $client ?: null, $projectType, $projectDate, $projectUrl ?: null, $githubUrl ?: null, $technologies ?: null, $categoryId ?: null, $featuredImage, $galleryJson, $featured, $sortOrder, $testimonial ?: null, $testimonialAuthor ?: null, $testimonialPosition ?: null, $status]);
                 logActivity('portfolio_create', "Portfolio project created: $title", [], 'info');
                 header('Location: ' . BASE_URL . 'admin-portfolio');
                 exit;
@@ -83,6 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $description = trim($_POST['description'] ?? '');
             $content = $_POST['content'] ?? '';
             $client = trim($_POST['client'] ?? '');
+            $projectType = in_array($_POST['project_type'] ?? '', ['client','internal','concept','student']) ? $_POST['project_type'] : 'client';
             $categoryId = (int)($_POST['category_id'] ?? 0);
             $status = in_array($_POST['status'] ?? '', ['draft','published','archived']) ? $_POST['status'] : 'draft';
             $projectDate = !empty($_POST['project_date']) ? $_POST['project_date'] : null;
@@ -100,12 +102,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             } else {
                 $featuredImage = handlePortfolioImageUpload('image');
                 $galleryJson = handlePortfolioGalleryUpload();
-                $params = [$title, $slug, $description ?: null, $content ?: null, $client ?: null, $projectDate, $projectUrl ?: null, $githubUrl ?: null, $technologies ?: null, $categoryId ?: null, $status, $featured, $sortOrder, $testimonial ?: null, $testimonialAuthor ?: null, $testimonialPosition ?: null];
+                $params = [$title, $slug, $description ?: null, $content ?: null, $client ?: null, $projectType, $projectDate, $projectUrl ?: null, $githubUrl ?: null, $technologies ?: null, $categoryId ?: null, $status, $featured, $sortOrder, $testimonial ?: null, $testimonialAuthor ?: null, $testimonialPosition ?: null];
                 if ($featuredImage) {
-                    $stmt = $db->prepare("UPDATE portfolio_projects SET title=?, slug=?, description=?, content=?, client=?, project_date=?, project_url=?, github_url=?, technologies=?, category_id=?, status=?, featured=?, sort_order=?, testimonial=?, testimonial_author=?, testimonial_position=?, featured_image=? WHERE id=?");
+                    $stmt = $db->prepare("UPDATE portfolio_projects SET title=?, slug=?, description=?, content=?, client=?, project_type=?, project_date=?, project_url=?, github_url=?, technologies=?, category_id=?, status=?, featured=?, sort_order=?, testimonial=?, testimonial_author=?, testimonial_position=?, featured_image=? WHERE id=?");
                     $params[] = $featuredImage;
                 } else {
-                    $stmt = $db->prepare("UPDATE portfolio_projects SET title=?, slug=?, description=?, content=?, client=?, project_date=?, project_url=?, github_url=?, technologies=?, category_id=?, status=?, featured=?, sort_order=?, testimonial=?, testimonial_author=?, testimonial_position=? WHERE id=?");
+                    $stmt = $db->prepare("UPDATE portfolio_projects SET title=?, slug=?, description=?, content=?, client=?, project_type=?, project_date=?, project_url=?, github_url=?, technologies=?, category_id=?, status=?, featured=?, sort_order=?, testimonial=?, testimonial_author=?, testimonial_position=? WHERE id=?");
                 }
                 if ($galleryJson) {
                     $db->prepare("UPDATE portfolio_projects SET gallery_images = ? WHERE id = ?")->execute([$galleryJson, $projectId]);
@@ -144,10 +146,10 @@ $projects = $db->query("SELECT p.*, c.name as category_name FROM portfolio_proje
 
 <div class="table-container reveal">
     <table class="table">
-        <thead><tr><th>Project</th><th>Category</th><th>Client</th><th>Status</th><th>Featured</th><th>Order</th><th>Date</th><th>Actions</th></tr></thead>
+        <thead><tr><th>Project</th><th>Category</th><th>Client</th><th>Type</th><th>Status</th><th>Featured</th><th>Order</th><th>Date</th><th>Actions</th></tr></thead>
         <tbody>
             <?php if (empty($projects)): ?>
-            <tr><td colspan="8" style="text-align:center;padding:40px;color:var(--text-muted)">No projects yet. Click "New Project" to create your first portfolio project.</td></tr>
+            <tr><td colspan="9" style="text-align:center;padding:40px;color:var(--text-muted)">No projects yet. Click "New Project" to create your first portfolio project.</td></tr>
             <?php else: foreach ($projects as $p): ?>
                 <tr>
                     <td>
@@ -155,7 +157,8 @@ $projects = $db->query("SELECT p.*, c.name as category_name FROM portfolio_proje
                         <?php if ($p['technologies']): ?><br><span style="font-size:11px;color:var(--text-muted)"><?= htmlspecialchars($p['technologies']) ?></span><?php endif; ?>
                     </td>
                     <td><span class="badge badge-primary"><?= htmlspecialchars($p['category_name'] ?? 'Uncategorized') ?></span></td>
-                    <td><?= htmlspecialchars($p['client'] ?? '—') ?></td>
+                    <td><?= htmlspecialchars($p['client'] ?? '-') ?></td>
+                    <td><span class="badge"><?= ucfirst(htmlspecialchars($p['project_type'] ?? 'client')) ?></span></td>
                     <td><span class="badge badge-<?= $p['status'] === 'published' ? 'success' : 'warning' ?>"><?= ucfirst($p['status']) ?></span></td>
                     <td><?= $p['featured'] ? '<span style="color:#FF9800" title="Featured">&#9733;</span>' : '<span style="color:var(--border)">☆</span>' ?></td>
                     <td><?= $p['sort_order'] ?></td>
@@ -192,13 +195,24 @@ $projects = $db->query("SELECT p.*, c.name as category_name FROM portfolio_proje
                     <div class="form-group">
                         <label class="form-label">Category</label>
                         <select name="category_id" class="form-select">
-                            <option value="">— None —</option>
+                            <option value="">- None -</option>
                             <?php foreach ($portfolioCategories as $c): ?>
                             <option value="<?= $c['id'] ?>"><?= htmlspecialchars($c['name']) ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
                     <div class="form-group"><label class="form-label">Client</label><input type="text" name="client" class="form-input" placeholder="Client name"></div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Project Type</label>
+                    <select name="project_type" class="form-select">
+                        <option value="client">Client</option>
+                        <option value="internal">Internal</option>
+                        <option value="concept">Concept</option>
+                        <option value="student">Student</option>
+                    </select>
+                    <p style="font-size:12px;color:var(--text-muted);margin-top:4px">Labels this project on the portfolio. Only publish real projects.</p>
                 </div>
 
                 <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px">
@@ -275,13 +289,23 @@ $projects = $db->query("SELECT p.*, c.name as category_name FROM portfolio_proje
                     <div class="form-group">
                         <label class="form-label">Category</label>
                         <select name="category_id" id="edit_project_category" class="form-select">
-                            <option value="">— None —</option>
+                            <option value="">- None -</option>
                             <?php foreach ($portfolioCategories as $c): ?>
                             <option value="<?= $c['id'] ?>"><?= htmlspecialchars($c['name']) ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
                     <div class="form-group"><label class="form-label">Client</label><input type="text" name="client" id="edit_project_client" class="form-input"></div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Project Type</label>
+                    <select name="project_type" id="edit_project_type" class="form-select">
+                        <option value="client">Client</option>
+                        <option value="internal">Internal</option>
+                        <option value="concept">Concept</option>
+                        <option value="student">Student</option>
+                    </select>
                 </div>
 
                 <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px">
@@ -348,6 +372,7 @@ function editProject(p) {
     document.getElementById('edit_project_title').value = p.title || '';
     document.getElementById('edit_project_category').value = p.category_id || '';
     document.getElementById('edit_project_client').value = p.client || '';
+    document.getElementById('edit_project_type').value = p.project_type || 'client';
     document.getElementById('edit_project_status').value = p.status || 'draft';
     document.getElementById('edit_project_date').value = p.project_date || '';
     document.getElementById('edit_project_sort').value = p.sort_order || 0;

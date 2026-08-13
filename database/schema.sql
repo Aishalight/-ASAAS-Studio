@@ -1,6 +1,6 @@
 -- ============================================================
 -- ASAAS STUDIO - Complete Database Schema
--- Production-Grade Digital Agency Platform
+-- Small Digital Studio Platform
 -- ============================================================
 
 CREATE DATABASE IF NOT EXISTS sas_studio CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -125,6 +125,7 @@ CREATE TABLE portfolio_projects (
     content LONGTEXT DEFAULT NULL,
     category_id INT DEFAULT NULL,
     client VARCHAR(255) DEFAULT NULL,
+    project_type ENUM('client','internal','concept','student') DEFAULT 'client',
     project_date DATE DEFAULT NULL,
     project_url VARCHAR(500) DEFAULT NULL,
     github_url VARCHAR(500) DEFAULT NULL,
@@ -470,27 +471,6 @@ CREATE TABLE page_visits (
     INDEX idx_ip (visitor_ip)
 ) ENGINE=InnoDB;
 
--- Sample analytics data
-INSERT INTO page_visits (page_url, visitor_ip, user_agent, device_type, browser, os, referrer, visit_date) VALUES
-('/', '192.168.1.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36', 'desktop', 'Chrome', 'Windows 10', 'https://google.com', CURDATE()),
-('/services', '192.168.1.2', 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Mobile/15E148', 'mobile', 'Safari', 'iOS 17.0', 'https://facebook.com', CURDATE()),
-('/portfolio', '192.168.1.3', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Edge/120.0.0.0 Safari/537.36', 'desktop', 'Edge', 'Windows 10', NULL, CURDATE()),
-('/blog', '192.168.1.4', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36', 'desktop', 'Chrome', 'macOS 10.15', 'https://twitter.com', DATE_SUB(CURDATE(), INTERVAL 1 DAY)),
-('/about', '192.168.1.5', 'Mozilla/5.0 (Linux; Android 14) AppleWebKit/537.36 Chrome/120.0.0.0 Mobile Safari/537.36', 'mobile', 'Chrome', 'Android 14', NULL, DATE_SUB(CURDATE(), INTERVAL 1 DAY)),
-('/contact', '192.168.1.6', 'Mozilla/5.0 (iPad; CPU OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Mobile/15E148', 'tablet', 'Safari', 'iOS 17.0', 'https://google.com', DATE_SUB(CURDATE(), INTERVAL 2 DAY)),
-('/services', '192.168.1.7', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Firefox/121.0 Gecko/20100101 Firefox/121.0', 'desktop', 'Firefox', 'Windows 10', NULL, DATE_SUB(CURDATE(), INTERVAL 2 DAY)),
-('/', '192.168.1.8', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0.0.0 Safari/537.36', 'desktop', 'Chrome', 'Windows 10', 'https://google.com', DATE_SUB(CURDATE(), INTERVAL 3 DAY)),
-('/portfolio', '192.168.1.9', 'Mozilla/5.0 (Linux; Android 13) AppleWebKit/537.36 Chrome/119.0.0.0 Mobile Safari/537.36', 'mobile', 'Chrome', 'Android 13', NULL, DATE_SUB(CURDATE(), INTERVAL 3 DAY)),
-('/blog', '192.168.1.10', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15', 'desktop', 'Safari', 'macOS 10.15', 'https://linkedin.com', DATE_SUB(CURDATE(), INTERVAL 4 DAY)),
-('/', '192.168.1.11', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/119.0.0.0 Safari/537.36', 'desktop', 'Chrome', 'Windows 10', NULL, DATE_SUB(CURDATE(), INTERVAL 4 DAY)),
-('/services', '192.168.1.12', 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 Mobile/15E148', 'mobile', 'Safari', 'iOS 16.6', 'https://google.com', DATE_SUB(CURDATE(), INTERVAL 5 DAY)),
-('/', '192.168.1.13', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Edge/119.0.0.0 Safari/537.36', 'desktop', 'Edge', 'Windows 10', NULL, DATE_SUB(CURDATE(), INTERVAL 5 DAY)),
-('/contact', '192.168.1.14', 'Mozilla/5.0 (Linux; Android 14) AppleWebKit/537.36 Chrome/120.0.0.0 Mobile Safari/537.36', 'mobile', 'Chrome', 'Android 14', 'https://instagram.com', DATE_SUB(CURDATE(), INTERVAL 6 DAY)),
-('/portfolio', '192.168.1.15', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Chrome/120.0.0.0 Safari/537.36', 'desktop', 'Chrome', 'macOS 10.15', NULL, DATE_SUB(CURDATE(), INTERVAL 6 DAY)),
-('/about', '192.168.1.16', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Firefox/121.0 Gecko/20100101 Firefox/121.0', 'desktop', 'Firefox', 'Windows 10', 'https://google.com', DATE_SUB(CURDATE(), INTERVAL 7 DAY)),
-('/', '192.168.1.17', 'Mozilla/5.0 (iPad; CPU OS 16_6 like Mac OS X) AppleWebKit/605.1.15 Mobile/15E148', 'tablet', 'Safari', 'iOS 16.6', NULL, DATE_SUB(CURDATE(), INTERVAL 7 DAY)),
-('/blog', '192.168.1.18', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0.0.0 Safari/537.36', 'desktop', 'Chrome', 'Windows 10', 'https://twitter.com', DATE_SUB(CURDATE(), INTERVAL 7 DAY));
-
 -- ============================================================
 -- DEFAULT DATA
 -- ============================================================
@@ -503,10 +483,10 @@ INSERT INTO users (name, username, email, password, role, status, email_verified
 -- Default Settings
 INSERT INTO settings (setting_key, setting_value, setting_group, type, is_public) VALUES
 ('site_name', 'ASAAS STUDIO', 'general', 'text', 1),
-('site_description', 'Premium Digital Agency – Branding, Web Development & Creative Design', 'general', 'text', 1),
+('site_description', 'ASAAS STUDIO is a small digital studio based in Mogadishu, Somalia. We build simple, useful websites and custom web systems.', 'general', 'text', 1),
 ('site_email', 'info@asaas-studio.tech', 'general', 'email', 1),
 ('site_phone', '', 'general', 'text', 1),
-('site_address', 'Km4 Hodan, Mogadishu, Somalia', 'general', 'text', 1),
+('site_address', 'Mogadishu, Somalia', 'general', 'text', 1),
 ('social_twitter', 'https://twitter.com/asaasstudio', 'social', 'url', 1),
 ('social_instagram', 'https://instagram.com/asaasstudio', 'social', 'url', 1),
 ('social_linkedin', 'https://linkedin.com/company/asaasstudio', 'social', 'url', 1),
@@ -530,29 +510,23 @@ INSERT INTO categories (name, slug, description, type, icon, color, sort_order) 
 ('Branding', 'branding-portfolio', 'Branding portfolio', 'portfolio', 'award', '#9C27B0', 3);
 
 -- Default Services
-INSERT INTO services (title, slug, description, icon, features, sort_order) VALUES
-('Web Design', 'web-design', 'Beautiful, responsive websites that captivate your audience and drive results.', 'palette', '["Custom UI/UX Design","Responsive Design","Wireframing & Prototyping","Animation & Micro-interactions","SEO Optimization","Performance Optimization"]', 1),
-('Web Development', 'web-development', 'Powerful web applications built with cutting-edge technologies and best practices.', 'code', '["Full-Stack Development","API Development","Database Design","Cloud Deployment","Security Implementation","Performance Tuning"]', 2),
-('Branding', 'branding', 'Strategic brand identity that tells your story and connects with your audience.', 'award', '["Brand Strategy","Logo Design","Visual Identity","Brand Guidelines","Packaging Design","Brand Voice"]', 3),
-('UI/UX Design', 'ui-ux-design', 'Intuitive user experiences that delight users and achieve business goals.', 'layers', '["User Research","Information Architecture","Interaction Design","Usability Testing","Design Systems","Prototyping"]', 4),
-('Digital Marketing', 'digital-marketing', 'Data-driven marketing strategies that grow your brand and increase revenue.', 'trending-up', '["SEO Strategy","Social Media Marketing","Content Marketing","Email Campaigns","Analytics & Reporting","PPC Advertising"]', 5),
-('Mobile Development', 'mobile-development', 'Native and cross-platform mobile apps that deliver exceptional user experiences.', 'smartphone', '["iOS Development","Android Development","Cross-Platform Apps","App Store Optimization","Push Notifications","Analytics Integration"]', 6);
-
--- Default Testimonials
-INSERT INTO testimonials (name, position, company, content, rating, sort_order) VALUES
-('Sarah Johnson', 'CEO', 'TechVolve', 'ASAAS Studio transformed our digital presence completely. Our traffic increased by 300% in just 3 months. The team is incredibly talented and professional.', 5, 1),
-('Michael Chen', 'Founder', 'GreenLeaf Organics', 'Working with ASAAS was a game-changer for our brand. Their design thinking and execution are simply outstanding. Highly recommended!', 5, 2),
-('Emily Rodriguez', 'Marketing Director', 'Pulse Fitness', 'The website ASAAS built for us is absolutely stunning. The attention to detail and user experience is remarkable. Our conversion rate doubled!', 5, 3),
-('David Kim', 'CTO', 'FinFlow', 'Exceptional technical expertise and creative vision. ASAAS delivered our platform on time and exceeded all expectations. A true partnership.', 5, 4),
-('Lisa Thompson', 'Product Manager', 'Bloom Cosmetics', 'From concept to launch, ASAAS Studio was professional, creative, and responsive. Our new brand identity is exactly what we needed.', 4, 5);
+INSERT INTO services (title, slug, description, icon, price, features, sort_order) VALUES
+('Starter Website', 'starter-website', 'A clean, fast single-page website to get you online.', 'layout', '$99', '["Single Page","Contact Form","Mobile Responsive","Basic SEO"]', 1),
+('Business Website', 'business-website', 'A multi-page business website for a full professional presence.', 'globe', '$299', '["Up to 5 Pages","Contact Form","Mobile Responsive","SEO Basics","WhatsApp Integration"]', 2),
+('Custom Web System', 'custom-web-system', 'Bespoke web systems built around how your work actually happens.', 'code', '$999', '["Custom Requirements","Database Design","Admin Panel","Ongoing Support"]', 3),
+('SEO Service', 'seo-service', 'Monthly search engine optimisation to help people find you.', 'trending-up', '$99/mo', '["Keyword Research","On-Page SEO","Monthly Reports","Local SEO"]', 4),
+('Social Media Management', 'social-media-management', 'Monthly management of your social media presence.', 'share-2', '$149/mo', '["Content Creation","Scheduling","Community Replies","Monthly Reports"]', 5),
+('Website Maintenance', 'website-maintenance', 'Monthly updates, backups and security for your site.', 'shield-check', '$49/mo', '["Updates","Backups","Security","Small Changes"]', 6),
+('UI/UX Design', 'ui-ux-design', 'User interface and experience design, quoted per project.', 'layers', 'Custom', '["User Research","Wireframes","UI Design","Prototypes"]', 7);
 
 -- Default FAQs
 INSERT INTO faqs (question, answer, category, sort_order) VALUES
-('What is the typical timeline for a web development project?', 'Timelines vary based on project scope. A typical website takes 4-8 weeks, while complex web applications may take 3-6 months. We provide detailed timelines during the proposal phase.', 'process', 1),
-('How much does a website cost?', 'Our projects start from $5,000 for basic websites and go up to $50,000+ for complex web applications. Every project is custom-quoted based on your specific needs and requirements.', 'pricing', 2),
-('Do you offer ongoing maintenance and support?', 'Yes! We offer flexible maintenance plans to keep your website secure, updated, and performing at its best. Our support team is available 24/7 for critical issues.', 'support', 3),
-('What technologies do you use?', 'We use modern technologies including React, Vue.js, Node.js, PHP, Python, and various CMS platforms. We choose the best tech stack for each project based on requirements.', 'technical', 4),
-('How do we get started?', 'Simply reach out through our contact form or schedule a free consultation call. We will discuss your project, goals, and budget, then provide a tailored proposal within 48 hours.', 'process', 5),
-('Do you work with startups?', 'Absolutely! We love working with startups. We offer flexible engagement models and can work within startup budgets while delivering enterprise-quality results.', 'general', 6),
-('Can you redesign an existing website?', 'Yes, we specialize in website redesigns. We analyze your current site, identify improvement opportunities, and create a modern, high-performing website that meets your goals.', 'services', 7),
-('What is your revision process?', 'We include 2-3 rounds of revisions in our standard packages. Our collaborative process ensures you are involved at every stage, with clear milestones and feedback opportunities.', 'process', 8);
+('How much does a website cost?', 'Starter websites start at $99, business websites at $299, and custom web systems at $999. Every project is different, so we give you a clear quote based on your specific requirements before any work starts.', 'pricing', 1),
+('What is the typical timeline for a project?', 'It depends on the scope. A simple website can take about a week, while a custom web system takes longer. We agree on a timeline before we start and keep you updated as we go.', 'process', 2),
+('Do you offer ongoing maintenance and support?', 'Yes. Our maintenance plan starts at $49/month and covers updates, security, backups, and small changes, so your website stays secure and running smoothly.', 'support', 3),
+('What technologies do you use?', 'We choose tools that fit the project. We build with PHP, JavaScript, and standard web technologies, and we keep things simple and maintainable.', 'technical', 4),
+('How do we get started?', 'Reach out through our contact form or book a call. Tell us what you want to build and we will reply with next steps and a quote.', 'process', 5),
+('Do you work with clients outside Mogadishu?', 'Yes. We work remotely and can serve clients anywhere with an internet connection.', 'general', 6),
+('What information do you need to provide a quote?', 'A short description of what you want to build is enough to start. Examples of sites you like and details about your users help us give a more accurate quote.', 'services', 7),
+('What is your revision policy?', 'Our agreements include a defined number of revision rounds for each phase. Additional revisions beyond the agreed scope are quoted separately.', 'process', 8),
+('Do you offer refunds?', 'Because our work is custom, we do not offer full refunds. If you are not satisfied with a phase of the project, we will work with you to make it right. Terms are outlined in each service agreement.', 'support', 9);

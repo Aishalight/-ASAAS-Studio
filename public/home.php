@@ -1,13 +1,9 @@
 <?php
-$seoTitle = 'Digital Agency Somalia — Web Design, Branding & Development';
-$seoDesc = 'ASAAS Studio is a premium digital agency in Somalia specializing in web design, web development, branding, UI/UX, and digital marketing. We engineer digital growth from vision to reality.';
-$seoKeywords = 'digital agency Somalia, web design agency Somalia, branding agency Somalia, web development Somalia, UI UX design Somalia, digital marketing Somalia, ASAAS studio';
+$seoTitle = 'ASAAS Studio | Web Design and Web Systems in Somalia';
+$seoDesc = 'ASAAS Studio is a small digital studio based in Mogadishu, Somalia. We design and build simple, useful websites, custom web systems, and clear UI/UX.';
+$seoKeywords = 'ASAAS studio, web design Somalia, web development Somalia, custom web systems, UI UX design Mogadishu, websites Somalia';
 require __DIR__ . '/../includes/header.php';
 $db = Database::getInstance()->getConnection();
-$totalProjectsCount = (int)$db->query("SELECT COUNT(*) FROM portfolio_projects WHERE status='published'")->fetchColumn() ?: 0;
-$avgRatingVal = $db->query("SELECT ROUND(AVG(rating),1) FROM ratings WHERE is_approved=1")->fetchColumn() ?: 0;
-$totalRatingsCount = (int)$db->query("SELECT COUNT(*) FROM ratings WHERE is_approved=1")->fetchColumn() ?: 0;
-$totalUsersCount = (int)$db->query("SELECT COUNT(*) FROM users WHERE status='active'")->fetchColumn() ?: 0;
 ?>
 
 <main class="page-transition">
@@ -28,45 +24,39 @@ $totalUsersCount = (int)$db->query("SELECT COUNT(*) FROM users WHERE status='act
                 <div class="hero-content fade-in-up">
                     <div class="hero-tag">
                         <span class="hero-tag-dot"></span>
-                        Digital Agency
+                        A Small Digital Studio in Mogadishu
                     </div>
                     <h1 class="hero-title">
-                        We Engineer Your<br>
-                        <span class="gradient-text">Digital Growth</span><br>
-                        From Vision to Reality
+                        Turning Ideas Into<br>
+                        <span class="gradient-text">Digital Products</span>
                     </h1>
                     <p class="hero-desc">
-                        Strategy-first digital agency. We turn your brand into a lead-generating machine — through high-performance websites, conversion-focused design, and marketing that actually moves the needle.
+                        We are a two-person studio that designs and builds simple, useful websites, custom web systems, and interfaces that do their job well.
                     </p>
                     <div class="hero-actions">
-                        <a href="<?= BASE_URL ?>contact#booking" class="btn btn-primary btn-lg">
-                            Book a Call
-                            <i data-lucide="calendar" size="20"></i>
+                        <a href="<?= BASE_URL ?>contact" class="btn btn-primary btn-lg">
+                            Start a Project
+                            <i data-lucide="arrow-right" size="20"></i>
                         </a>
                         <a href="<?= BASE_URL ?>portfolio" class="btn btn-secondary btn-lg">
-                            Our Work
+                            Explore Our Work
                             <i data-lucide="eye" size="20"></i>
                         </a>
                     </div>
                     <div class="hero-stats">
                         <div>
-                            <div class="hero-stat-value"><span class="counter" data-target="<?= max($totalProjectsCount, 1) ?>" data-duration="2000">0</span><span class="hero-stat-suffix">+</span></div>
-                            <div class="hero-stat-label">Projects</div>
+                            <div class="hero-stat-value">Mogadishu</div>
+                            <div class="hero-stat-label">Based in</div>
                         </div>
                         <div class="hero-stat-divider"></div>
                         <div>
-                            <div class="hero-stat-value"><span class="counter" data-target="<?= max(round($avgRatingVal * 20), 1) ?>" data-duration="2000">0</span><span class="hero-stat-suffix">%</span></div>
-                            <div class="hero-stat-label">Satisfaction</div>
+                            <div class="hero-stat-value">2</div>
+                            <div class="hero-stat-label">Founders</div>
                         </div>
                         <div class="hero-stat-divider"></div>
                         <div>
-                            <div class="hero-stat-value"><span class="counter" data-target="12" data-duration="2000">0</span><span class="hero-stat-suffix">+</span></div>
-                            <div class="hero-stat-label">Years</div>
-                        </div>
-                        <div class="hero-stat-divider"></div>
-                        <div>
-                            <div class="hero-stat-value"><span class="counter" data-target="<?= max($totalUsersCount, 2) ?>" data-duration="2000">0</span><span class="hero-stat-suffix">+</span></div>
-                            <div class="hero-stat-label">Team</div>
+                            <div class="hero-stat-value" style="font-size:20px">Websites, Systems &amp; UI/UX</div>
+                            <div class="hero-stat-label">Focus</div>
                         </div>
                     </div>
                 </div>
@@ -74,15 +64,8 @@ $totalUsersCount = (int)$db->query("SELECT COUNT(*) FROM users WHERE status='act
                     <div style="position:relative;width:100%">
                         <?php
                         $heroProjects = $db->query("SELECT id, title, slug, featured_image FROM portfolio_projects WHERE status='published' AND featured_image IS NOT NULL AND featured_image != '' ORDER BY featured DESC, created_at DESC LIMIT 6")->fetchAll();
-                        if (empty($heroProjects)) {
-                            $heroProjects = [
-                                ['id' => 1, 'title' => 'TechVolve Platform', 'slug' => 'techvolve-platform', 'featured_image' => 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=500&fit=crop'],
-                                ['id' => 2, 'title' => 'FinFlow Dashboard', 'slug' => 'finflow-dashboard', 'featured_image' => 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=500&fit=crop'],
-                                ['id' => 3, 'title' => 'Bloom E-Commerce', 'slug' => 'bloom-ecommerce', 'featured_image' => 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=500&fit=crop'],
-                                ['id' => 4, 'title' => 'CloudBase SaaS', 'slug' => 'cloudbase-saas', 'featured_image' => 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&h=500&fit=crop'],
-                            ];
-                        }
                         ?>
+                        <?php if (!empty($heroProjects)): ?>
                         <div class="hero-carousel">
                             <div class="hero-carousel-viewport">
                                 <?php foreach ($heroProjects as $hi => $hp):
@@ -91,9 +74,9 @@ $totalUsersCount = (int)$db->query("SELECT COUNT(*) FROM users WHERE status='act
                                     <a class="hero-slide<?= $hi === 0 ? ' active' : '' ?>" href="<?= $hUrl ?>" data-title="<?= htmlspecialchars($hp['title']) ?>" data-url="<?= $hUrl ?>" style="background-image:url('<?= $hImg ?>')" aria-label="<?= htmlspecialchars($hp['title']) ?>"></a>
                                 <?php endforeach; ?>
                                 <div class="hero-slide-overlay">
-                                    <span class="hero-slide-tag">Featured Work</span>
+                                    <span class="hero-slide-tag">Our Work</span>
                                     <h3 class="hero-slide-title"><?= htmlspecialchars($heroProjects[0]['title']) ?></h3>
-                                    <a class="hero-slide-link" href="<?= BASE_URL . 'portfolio/' . htmlspecialchars($heroProjects[0]['slug'] ?? 'project') ?>">View Case Study <span>&rarr;</span></a>
+                                    <a class="hero-slide-link" href="<?= BASE_URL . 'portfolio/' . htmlspecialchars($heroProjects[0]['slug'] ?? 'project') ?>">View Project <span>&rarr;</span></a>
                                 </div>
                                 <?php if (count($heroProjects) > 1): ?>
                                 <span class="hero-slide-counter">01 / <?= count($heroProjects) ?></span>
@@ -107,6 +90,12 @@ $totalUsersCount = (int)$db->query("SELECT COUNT(*) FROM users WHERE status='act
                                 <?php endif; ?>
                             </div>
                         </div>
+                        <?php else: ?>
+                        <div style="width:100%;aspect-ratio:4/3;min-height:440px;border-radius:20px;overflow:hidden;box-shadow:0 40px 100px rgba(0,0,0,0.35);background:linear-gradient(135deg,#14141f,#1a1a2e);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;padding:40px;text-align:center">
+                            <img src="<?= BASE_URL ?>uploads/logo2_blackbackground.png" alt="ASAAS" style="height:64px;width:auto;opacity:0.9">
+                            <p style="color:#aab;font-size:16px;max-width:360px;margin:0">Simple, useful digital products. New project showcases will appear here as we ship them.</p>
+                        </div>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
@@ -177,22 +166,6 @@ $totalUsersCount = (int)$db->query("SELECT COUNT(*) FROM users WHERE status='act
     </section>
 
     <!-- ============================================================
-    TRUSTED BY
-    ============================================================ -->
-    <section class="section-sm" style="background:var(--bg-light)">
-        <div class="container">
-            <div class="reveal" style="text-align:center;margin-bottom:48px">
-                <p style="font-size:12px;color:var(--text-muted);letter-spacing:2.5px;text-transform:uppercase;font-weight:600">Trusted by teams at</p>
-            </div>
-            <div class="reveal" style="display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:24px 64px">
-                <?php $clients = array_filter(array_map('trim', explode(',', getSetting('trusted_clients', 'TechVolve,GreenLeaf,Pulse,FinFlow,Bloom,CloudBase')))); foreach ($clients as $c): ?>
-                    <span style="font-size:20px;font-weight:700;color:var(--text-muted);letter-spacing:0.5px;opacity:0.4;transition:opacity var(--transition);white-space:nowrap" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='0.4'"><?= htmlspecialchars($c) ?></span>
-                <?php endforeach; ?>
-            </div>
-        </div>
-    </section>
-
-    <!-- ============================================================
     SERVICES PREVIEW
     ============================================================ -->
     <section class="section" id="services">
@@ -200,21 +173,21 @@ $totalUsersCount = (int)$db->query("SELECT COUNT(*) FROM users WHERE status='act
             <div class="section-header reveal">
                 <div class="section-tag">
                     <i data-lucide="sparkles" size="16"></i>
-                    Our Capabilities
+                    What We Do
                 </div>
-                <h2 class="section-title">Full-Spectrum <span class="gradient-text">Digital Services</span></h2>
-                <p class="section-desc">From brand identity to scalable platforms — every capability designed to move your business forward.</p>
+                <h2 class="section-title">Focused on the <span class="gradient-text">Essentials</span></h2>
+                <p class="section-desc">A small studio, focused on the essentials: clear design, solid development, and honest communication.</p>
             </div>
 
             <div class="grid grid-3 stagger-children">
                 <?php
                 $services = [
-                    ['icon' => 'palette', 'title' => 'Web Design', 'desc' => 'Beautiful, responsive websites that captivate your audience and drive conversions.', 'features' => ['Custom UI/UX', 'Responsive Design', 'Wireframing']],
-                    ['icon' => 'code', 'title' => 'Web Development', 'desc' => 'Powerful web applications built with cutting-edge technologies and best practices.', 'features' => ['Full-Stack Dev', 'API Development', 'Cloud Solutions']],
-                    ['icon' => 'award', 'title' => 'Branding', 'desc' => 'Strategic brand identity that tells your story and connects with your audience.', 'features' => ['Brand Strategy', 'Logo Design', 'Visual Identity']],
-                    ['icon' => 'layers', 'title' => 'UI/UX Design', 'desc' => 'Intuitive user experiences that delight users and achieve business goals.', 'features' => ['User Research', 'Prototyping', 'Usability Testing']],
-                    ['icon' => 'trending-up', 'title' => 'Digital Marketing', 'desc' => 'Data-driven marketing strategies that grow your brand and increase revenue.', 'features' => ['SEO Strategy', 'Content Marketing', 'Analytics']],
-                    ['icon' => 'smartphone', 'title' => 'Mobile Development', 'desc' => 'Native and cross-platform mobile apps that deliver exceptional experiences.', 'features' => ['iOS & Android', 'Cross-Platform', 'App Store SEO']]
+                    ['icon' => 'globe', 'title' => 'Websites', 'desc' => 'Fast, responsive websites for businesses, organizations, and personal brands.', 'features' => ['Landing pages', 'Business websites', 'Portfolio sites']],
+                    ['icon' => 'code', 'title' => 'Custom Web Systems', 'desc' => 'Tailored web applications that solve a specific problem for your business.', 'features' => ['Admin panels', 'Dashboards', 'Database-driven apps']],
+                    ['icon' => 'pen-tool', 'title' => 'UI/UX Design', 'desc' => 'Clear, usable interfaces designed around how your users actually work.', 'features' => ['Wireframes', 'Design systems', 'Prototypes']],
+                    ['icon' => 'wrench', 'title' => 'Website Maintenance', 'desc' => 'Keep your website secure, updated, and running smoothly after launch.', 'features' => ['Bug fixes', 'Security updates', 'Backups']],
+                    ['icon' => 'trending-up', 'title' => 'SEO & Digital Presence', 'desc' => 'Help people find your website and present it well across the web.', 'features' => ['On-page SEO', 'Speed optimization', 'Search Console setup']],
+                    ['icon' => 'share-2', 'title' => 'Social Media Management', 'desc' => 'Plan and manage your social pages so your presence stays active.', 'features' => ['Content planning', 'Posting', 'Engagement']]
                 ];
                 foreach ($services as $s): ?>
                     <div class="card hover-lift" style="padding:32px">
@@ -252,17 +225,20 @@ $totalUsersCount = (int)$db->query("SELECT COUNT(*) FROM users WHERE status='act
                         Why Choose Us
                     </div>
                     <h2 style="font-size:clamp(1.75rem,3vw,2.75rem);margin-bottom:20px">
-                        We Don't Just Build Websites — We Build <span class="gradient-text">Business Growth</span>
+                        Why Work With Us
+                    </div>
+                    <h2 style="font-size:clamp(1.75rem,3vw,2.75rem);margin-bottom:20px">
+                        A Small Team, Focused on <span class="gradient-text">the Work</span>
                     </h2>
                     <p style="color:var(--text-secondary);margin-bottom:32px;font-size:17px">
-                        Every engagement begins with understanding your business deeply. Here's why clients trust us with their most ambitious projects.
+                        ASAAS is run by two people. That means you talk directly with the people building your project, with no account managers and no handoffs.
                     </p>
                     <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
                         <?php $features = [
-                            ['icon' => 'zap', 'title' => 'Fast Delivery', 'desc' => 'Agile sprints with zero compromise on quality'],
-                            ['icon' => 'shield', 'title' => 'Quality Assured', 'desc' => 'Every deliverable tested, reviewed, and refined'],
-                            ['icon' => 'users', 'title' => 'Dedicated Team', 'desc' => 'A focused squad aligned with your goals'],
-                            ['icon' => 'headphones', 'title' => '24/7 Support', 'desc' => 'We are there when you need us, always']
+                            ['icon' => 'message-circle', 'title' => 'Direct Communication', 'desc' => 'You work directly with the founders on every project'],
+                            ['icon' => 'wallet', 'title' => 'Transparent Pricing', 'desc' => 'Clear starting prices and honest quotes before we start'],
+                            ['icon' => 'clock', 'title' => 'Realistic Timelines', 'desc' => 'We commit to schedules we can actually meet, and keep you updated'],
+                            ['icon' => 'shield', 'title' => 'Built to Last', 'desc' => 'Clean, maintainable code and documentation you can extend later']
                         ];
                         foreach ($features as $f): ?>
                             <div style="display:flex;gap:16px">
@@ -279,22 +255,23 @@ $totalUsersCount = (int)$db->query("SELECT COUNT(*) FROM users WHERE status='act
                 </div>
                 <div class="reveal">
                     <div style="background:var(--bg-white);border-radius:var(--radius-xl);padding:40px;box-shadow:var(--shadow-lg);border:1px solid var(--border)">
+                        <h4 style="font-size:18px;font-weight:700;margin-bottom:24px">Quick Facts</h4>
                         <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
                             <div style="text-align:center;padding:24px;background:var(--bg-light);border-radius:var(--radius-md)">
-                                <div style="font-size:36px;font-weight:800;color:var(--primary)"><?= max(round($avgRatingVal * 20), 1) ?>%</div>
-                                <div style="font-size:14px;color:var(--text-muted)">Client Satisfaction</div>
+                                <div style="font-size:24px;font-weight:800;color:var(--primary)">Mogadishu</div>
+                                <div style="font-size:14px;color:var(--text-muted)">Based in</div>
                             </div>
                             <div style="text-align:center;padding:24px;background:var(--bg-light);border-radius:var(--radius-md)">
-                                <div style="font-size:36px;font-weight:800;color:var(--primary)"><?= $avgRatingVal > 0 ? number_format($avgRatingVal, 1) : '0.0' ?></div>
-                                <div style="font-size:14px;color:var(--text-muted)">Average Rating</div>
+                                <div style="font-size:24px;font-weight:800;color:var(--primary)">Two founders</div>
+                                <div style="font-size:14px;color:var(--text-muted)">Team</div>
                             </div>
                             <div style="text-align:center;padding:24px;background:var(--bg-light);border-radius:var(--radius-md)">
-                                <div style="font-size:36px;font-weight:800;color:var(--primary)"><?= $totalProjectsCount ?>+</div>
-                                <div style="font-size:14px;color:var(--text-muted)">Projects Done</div>
+                                <div style="font-size:24px;font-weight:800;color:var(--primary)">Websites, Systems &amp; UI/UX</div>
+                                <div style="font-size:14px;color:var(--text-muted)">Focus</div>
                             </div>
                             <div style="text-align:center;padding:24px;background:var(--bg-light);border-radius:var(--radius-md)">
-                                <div style="font-size:36px;font-weight:800;color:var(--primary)">12+</div>
-                                <div style="font-size:14px;color:var(--text-muted)">Years Experience</div>
+                                <div style="font-size:24px;font-weight:800;color:var(--primary)">$99</div>
+                                <div style="font-size:14px;color:var(--text-muted)">Starting price</div>
                             </div>
                         </div>
                     </div>
@@ -311,19 +288,19 @@ $totalUsersCount = (int)$db->query("SELECT COUNT(*) FROM users WHERE status='act
             <div class="section-header reveal">
                 <div class="section-tag">
                     <i data-lucide="route" size="16"></i>
-                    Our Methodology
+                    How We Work
                 </div>
                 <h2 class="section-title">How We Bring <span class="gradient-text">Ideas to Life</span></h2>
-                <p class="section-desc">A proven, iterative framework that takes your project from concept to launch with precision.</p>
+                <p class="section-desc">A simple process: we listen, plan, build, and hand over something that works.</p>
             </div>
 
             <?php $steps = [
-                ['num' => '01', 'title' => 'Discovery', 'desc' => 'We immerse ourselves in your business landscape — understanding goals, audience, and competitive edge to define a clear roadmap.', 'icon' => 'search'],
-                ['num' => '02', 'title' => 'Strategy', 'desc' => 'A tailored blueprint emerges — aligning creative vision with measurable outcomes, budget, and timeline.', 'icon' => 'map'],
-                ['num' => '03', 'title' => 'Design', 'desc' => 'Every pixel is intentional. Our designers craft interfaces that are as intuitive as they are beautiful.', 'icon' => 'palette'],
-                ['num' => '04', 'title' => 'Development', 'desc' => 'Clean code, modern stacks, and rigorous architecture — built for speed, security, and scale.', 'icon' => 'code'],
-                ['num' => '05', 'title' => 'Testing', 'desc' => 'Every edge case, every interaction. We QA obsessively so your users experience zero friction.', 'icon' => 'shield'],
-                ['num' => '06', 'title' => 'Launch & Support', 'desc' => 'A seamless go-live backed by ongoing monitoring, maintenance, and a team that has your back 24/7.', 'icon' => 'rocket']
+                ['num' => '01', 'title' => 'Discovery', 'desc' => 'We start by listening. We ask about your goals, your users, and what you want the project to do.', 'icon' => 'search'],
+                ['num' => '02', 'title' => 'Planning', 'desc' => 'We turn the conversation into a clear plan: scope, timeline, and cost, agreed before we build.', 'icon' => 'map'],
+                ['num' => '03', 'title' => 'Design', 'desc' => 'We design clean, simple interfaces and show you the direction before any code is written.', 'icon' => 'palette'],
+                ['num' => '04', 'title' => 'Development', 'desc' => 'We build the site or system step by step, keeping you involved as we go.', 'icon' => 'code'],
+                ['num' => '05', 'title' => 'Testing', 'desc' => 'We test on real devices and browsers so the finished product works reliably.', 'icon' => 'shield'],
+                ['num' => '06', 'title' => 'Launch & Support', 'desc' => 'We put the project live and stay available afterwards to fix issues and make updates.', 'icon' => 'rocket']
             ];
             foreach ($steps as $i => $s): ?>
                 <div class="reveal" style="display:grid;grid-template-columns:80px 1fr;gap:24px;margin-bottom:32px;padding:24px;background:var(--bg-white);border-radius:var(--radius-lg);border:1px solid var(--border);transition:all var(--transition)">
@@ -355,34 +332,36 @@ $totalUsersCount = (int)$db->query("SELECT COUNT(*) FROM users WHERE status='act
                     Portfolio
                 </div>
                 <h2 class="section-title">Selected <span class="gradient-text">Work</span></h2>
-                <p class="section-desc">A glimpse into the products and platforms we have designed and engineered for ambitious brands.</p>
+                <p class="section-desc">A selection of projects we have designed and built.</p>
             </div>
 
             <div class="grid grid-3 stagger-children">
                 <?php
                 $homeProjects = $db->query("SELECT p.*, c.name as category_name FROM portfolio_projects p LEFT JOIN categories c ON p.category_id = c.id WHERE p.status = 'published' ORDER BY p.featured DESC, p.created_at DESC LIMIT 6")->fetchAll();
                 $homeColorMap = ['#2196F3','#4CAF50','#E8632A','#9C27B0','#FF9800','#00BCD4'];
+                $typeLabels = ['client' => 'Client', 'internal' => 'Internal', 'concept' => 'Concept', 'student' => 'Student'];
                 if (empty($homeProjects)) {
-                    $homeProjects = [
-                        ['title' => 'TechVolve Platform', 'category_name' => 'Web Development', 'featured_image' => 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop', 'slug' => 'techvolve-platform'],
-                        ['title' => 'GreenLeaf Brand', 'category_name' => 'Branding', 'featured_image' => 'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&h=400&fit=crop', 'slug' => 'greenleaf-brand-identity'],
-                        ['title' => 'Pulse Fitness App', 'category_name' => 'Mobile Dev', 'featured_image' => 'https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=600&h=400&fit=crop', 'slug' => 'pulse-fitness-app'],
-                    ];
+                    echo '<div style="grid-column:1/-1;text-align:center;padding:60px 20px;background:var(--bg-white);border-radius:var(--radius-xl);border:1px solid var(--border)">';
+                    echo '<p style="font-size:18px;font-weight:600;margin-bottom:8px">New Work Coming Soon</p>';
+                    echo '<p style="color:var(--text-muted);margin:0">We publish our projects here as they are completed.</p>';
+                    echo '</div>';
                 }
                 foreach ($homeProjects as $idx => $hp):
                     $hcolor = $homeColorMap[$idx % count($homeColorMap)];
+                    $hType = $typeLabels[$hp['project_type'] ?? ''] ?? '';
                 ?>
                     <div class="card hover-lift">
                         <div style="position:relative;overflow:hidden;height:220px">
-                            <img src="<?= $hp['featured_image'] ?? 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop' ?>" alt="<?= htmlspecialchars($hp['title']) ?>" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease">
-                            <div style="position:absolute;top:12px;left:12px">
+                            <img src="<?= htmlspecialchars($hp['featured_image'] ?? '') ?>" alt="<?= htmlspecialchars($hp['title']) ?>" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease">
+                            <div style="position:absolute;top:12px;left:12px;display:flex;gap:6px">
                                 <span class="badge" style="background:<?= $hcolor ?>;color:white"><?= htmlspecialchars($hp['category_name'] ?? 'General') ?></span>
+                                <?php if ($hType): ?><span class="badge" style="background:rgba(0,0,0,0.55);color:white;border:1px solid rgba(255,255,255,0.3)"><?= $hType ?></span><?php endif; ?>
                             </div>
                         </div>
                         <div style="padding:20px 24px">
                             <h5 style="margin-bottom:4px"><?= htmlspecialchars($hp['title']) ?></h5>
                             <a href="<?= BASE_URL ?>portfolio/<?= htmlspecialchars($hp['slug'] ?? 'project') ?>" class="btn btn-ghost btn-sm" style="padding-left:0">
-                                View Case Study <i data-lucide="arrow-right" size="14"></i>
+                                View Project <i data-lucide="arrow-right" size="14"></i>
                             </a>
                         </div>
                     </div>
@@ -438,8 +417,8 @@ $totalUsersCount = (int)$db->query("SELECT COUNT(*) FROM users WHERE status='act
                     <i data-lucide="message-square" size="16"></i>
                     Client Voices
                 </div>
-                <h2 class="section-title">Trusted by <span class="gradient-text">Ambitious Brands</span></h2>
-                <p class="section-desc">Real feedback from the teams we have partnered with to build and scale their digital presence.</p>
+                <h2 class="section-title">What People <span class="gradient-text">Say About Us</span></h2>
+                <p class="section-desc">Ratings and reviews from people who have worked with us.</p>
             </div>
 
             <?php
@@ -457,7 +436,7 @@ $totalUsersCount = (int)$db->query("SELECT COUNT(*) FROM users WHERE status='act
             <div class="reveal" style="text-align:center;margin-bottom:32px">
                 <div style="display:inline-flex;align-items:center;gap:16px;padding:16px 32px;background:var(--bg-white);border-radius:var(--radius-lg);border:1px solid var(--border);box-shadow:var(--shadow-sm);flex-wrap:wrap;justify-content:center">
                     <div style="text-align:center">
-                        <div style="font-size:32px;font-weight:800;color:var(--primary)"><?= $avgRating ?: '&mdash;' ?></div>
+                        <div style="font-size:32px;font-weight:800;color:var(--primary)"><?= $avgRating ?: '0.0' ?></div>
                         <div style="font-size:12px;color:var(--text-muted)">Average</div>
                     </div>
                     <div style="width:1px;height:40px;background:var(--border)"></div>
@@ -480,7 +459,7 @@ $totalUsersCount = (int)$db->query("SELECT COUNT(*) FROM users WHERE status='act
                     <div style="text-align:center;padding:60px 20px;background:var(--bg-white);border-radius:var(--radius-xl);border:1px solid var(--border)">
                         <div style="font-size:48px;margin-bottom:16px;opacity:0.3"><i data-lucide="message-square" size="48" style="color:var(--text-muted)"></i></div>
                         <h4 style="margin-bottom:8px">No Reviews Yet</h4>
-                        <p style="color:var(--text-muted);margin-bottom:20px">Share your experience — your feedback helps us keep raising the bar.</p>
+                        <p style="color:var(--text-muted);margin-bottom:20px">Share your experience. Your feedback helps us improve.</p>
                         <button class="btn btn-primary" data-rate-item data-item-id="1" data-item-type="business" data-item-name="ASAAS STUDIO">
                             <i data-lucide="star" size="16"></i> Write a Review
                         </button>
@@ -528,16 +507,17 @@ $totalUsersCount = (int)$db->query("SELECT COUNT(*) FROM users WHERE status='act
                     Common Questions
                 </div>
                 <h2 class="section-title">Everything You Need <span class="gradient-text">to Know</span></h2>
-                <p class="section-desc">Straight answers about how we work, what we deliver, and what to expect when we partner together.</p>
+                <p class="section-desc">Straight answers about how we work, what we deliver, and what to expect.</p>
             </div>
 
             <div style="max-width:800px;margin:0 auto">
                 <?php $faqs = [
-                    ['q' => 'What is the typical timeline for a web development project?', 'a' => 'Timelines depend on scope. A standard website typically ships in 4-8 weeks; larger platforms may take 3-6 months. We provide a detailed roadmap during the proposal phase — no surprises.'],
-                    ['q' => 'How much does a website cost?', 'a' => 'Projects start at $5,000 for polished brochure sites and scale to $50,000+ for complex web applications. Every estimate is tailored to your specific needs — you only pay for what moves your business forward.'],
-                    ['q' => 'Do you offer ongoing maintenance and support?', 'a' => 'Absolutely. We offer flexible retainer plans to keep your digital products secure, up-to-date, and performing optimally. Our team is available around the clock for critical issues.'],
-                    ['q' => 'What technologies do you use?', 'a' => 'We select the optimal stack for each project — whether that is React, Node.js, PHP, Python, or cloud-native architectures. The technology serves the solution, not the other way around.'],
-                    ['q' => 'How do we get started?', 'a' => 'Reach out through our contact form or schedule a discovery call. We will discuss your goals, challenges, and timeline — and deliver a tailored proposal within 48 hours. No pressure, just clarity.']
+                    ['q' => 'How much does a website cost?', 'a' => 'Starter websites start at $99, business websites at $299, and custom web systems at $999. The final price depends on your specific requirements, and we give you a clear quote before we start.'],
+                    ['q' => 'What is the typical timeline for a project?', 'a' => 'It depends on the scope. A simple website can take about a week, while a custom web system takes longer. We agree on a timeline before work starts and keep you updated as we go.'],
+                    ['q' => 'Do you offer ongoing maintenance and support?', 'a' => 'Yes. Our maintenance plan starts at $49/month and covers updates, security, and small changes, so your website stays secure and running smoothly.'],
+                    ['q' => 'What technologies do you use?', 'a' => 'We choose tools that fit the project. We build with PHP, JavaScript, and standard web technologies, and we keep things simple and maintainable.'],
+                    ['q' => 'How do we get started?', 'a' => 'Send us a message through the contact form or book a call. Tell us what you want to build and we will reply with next steps and a quote.'],
+                    ['q' => 'Do you work with clients outside Mogadishu?', 'a' => 'Yes. We work remotely and can serve clients anywhere with an internet connection.']
                 ];
                 foreach ($faqs as $i => $f): ?>
                     <div style="margin-bottom:12px;background:var(--bg-white);border-radius:var(--radius-md);border:1px solid var(--border)">
@@ -595,14 +575,14 @@ $totalUsersCount = (int)$db->query("SELECT COUNT(*) FROM users WHERE status='act
         <div class="container" style="position:relative;z-index:1">
             <div class="text-center reveal" style="max-width:700px;margin:0 auto">
                 <div class="section-tag" style="background:rgba(232,99,42,0.15);color:#f07840">Start a Conversation</div>
-                <h2 style="color:white;margin-bottom:16px">Ready to Build Your <span class="gradient-text">Next Big Idea</span>?</h2>
+                <h2 style="color:white;margin-bottom:16px">Have Something You Want to <span class="gradient-text">Build</span>?</h2>
                 <p style="color:var(--text-light);font-size:18px;margin-bottom:32px">
-                    Let's talk about your vision. No obligation, just a focused conversation about what's possible.
+                    Tell us what you have in mind. We will get back to you with an honest answer about what is possible.
                 </p>
                 <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
-                    <a href="<?= BASE_URL ?>contact#booking" class="btn btn-primary btn-lg">
-                        Schedule a Call
-                        <i data-lucide="calendar" size="20"></i>
+                    <a href="<?= BASE_URL ?>contact" class="btn btn-primary btn-lg">
+                        Start a Project
+                        <i data-lucide="arrow-right" size="20"></i>
                     </a>
                     <a href="<?= BASE_URL ?>contact" class="btn btn-light btn-lg">
                         Send a Message

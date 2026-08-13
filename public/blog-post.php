@@ -24,7 +24,7 @@ if (empty($post)) {
     <?php require __DIR__ . '/../includes/footer.php'; exit;
 }
 
-$seoTitle = htmlspecialchars($post['title']) . ' — ASAAS Studio Blog';
+$seoTitle = htmlspecialchars($post['title']) . ' | ASAAS Studio Blog';
 $seoDesc = htmlspecialchars($post['excerpt'] ?? mb_substr(strip_tags($post['content']), 0, 160));
 $seoKeywords = $post['tags'] ?? 'blog, asaas studio';
 $readTime = max(1, round(str_word_count(strip_tags($post['content'])) / 200));

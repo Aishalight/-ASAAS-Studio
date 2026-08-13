@@ -1,7 +1,7 @@
 <?php
-$seoTitle = 'Portfolio Somalia — Our Recent Work & Case Studies';
-$seoDesc = 'Browse ASAAS Studio portfolio of web design, development, branding, and mobile projects in Somalia. See how we deliver measurable results for our clients.';
-$seoKeywords = 'digital agency portfolio Somalia, web design portfolio Somalia, web development projects Somalia, branding case studies Somalia, ASAAS studio work';
+$seoTitle = 'Portfolio | ASAAS Studio Somalia';
+$seoDesc = 'Browse the portfolio of ASAAS Studio, a small digital studio in Mogadishu. Websites, custom web systems, and UI/UX design projects we have built.';
+$seoKeywords = 'ASAAS studio portfolio, web design portfolio Somalia, web development projects Somalia, website projects Mogadishu, ASAAS studio work';
 require __DIR__ . '/../includes/header.php'; ?>
 <style>
 .rating-modal{position:fixed;inset:0;z-index:10000;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.5);backdrop-filter:blur(4px);opacity:0;visibility:hidden;transition:all .3s ease}
@@ -41,7 +41,7 @@ require __DIR__ . '/../includes/header.php'; ?>
             <div class="section-header fade-in-up">
                 <div class="section-tag"><i data-lucide="briefcase" size="16"></i>Our Portfolio</div>
                 <h1 class="section-title">Projects We're <span class="gradient-text">Proud Of</span></h1>
-                <p class="section-desc">Explore our latest work across web development, design, branding, and more.</p>
+                <p class="section-desc">A selection of projects we have designed and built.</p>
             </div>
             <div class="flex-center" style="gap:8px;flex-wrap:wrap;margin-bottom:40px">
                 <button class="tab active" data-filter="all">All Projects</button>
@@ -60,35 +60,32 @@ require __DIR__ . '/../includes/header.php'; ?>
                 $db = Database::getInstance()->getConnection();
                 $projects = $db->query("SELECT p.*, c.name as category_name FROM portfolio_projects p LEFT JOIN categories c ON p.category_id = c.id WHERE p.status = 'published' ORDER BY p.featured DESC, p.created_at DESC LIMIT 12")->fetchAll();
                 $colorMap = ['#2196F3','#4CAF50','#E8632A','#9C27B0','#FF9800','#00BCD4','#E91E63','#607D8B','#3F51B5'];
+                $typeLabels = ['client' => 'Client', 'internal' => 'Internal', 'concept' => 'Concept', 'student' => 'Student'];
                 if (empty($projects)) {
-                    $projects = [
-                        ['id' => 1, 'title' => 'TechVolve Platform', 'category_name' => 'Web Development', 'featured_image' => 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop', 'client' => 'TechVolve Inc.', 'slug' => 'techvolve-platform'],
-                        ['id' => 2, 'title' => 'GreenLeaf Brand Identity', 'category_name' => 'Branding', 'featured_image' => 'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&h=400&fit=crop', 'client' => 'GreenLeaf Organics', 'slug' => 'greenleaf-brand'],
-                        ['id' => 3, 'title' => 'Pulse Fitness App', 'category_name' => 'Mobile', 'featured_image' => 'https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=600&h=400&fit=crop', 'client' => 'Pulse Fitness', 'slug' => 'pulse-fitness-app'],
-                        ['id' => 4, 'title' => 'FinFlow Dashboard', 'category_name' => 'Web Design', 'featured_image' => 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop', 'client' => 'FinFlow Corp', 'slug' => 'finflow-dashboard'],
-                        ['id' => 5, 'title' => 'Bloom E-Commerce', 'category_name' => 'Web Design', 'featured_image' => 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop', 'client' => 'Bloom Cosmetics', 'slug' => 'bloom-ecommerce'],
-                        ['id' => 6, 'title' => 'CloudBase SaaS', 'category_name' => 'Web Development', 'featured_image' => 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=400&fit=crop', 'client' => 'CloudBase Inc.', 'slug' => 'cloudbase-saas'],
-                        ['id' => 7, 'title' => 'Vibe Social Platform', 'category_name' => 'Mobile', 'featured_image' => 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=400&fit=crop', 'client' => 'Vibe Media', 'slug' => 'vibe-social'],
-                        ['id' => 8, 'title' => 'Apex Brand Redesign', 'category_name' => 'Branding', 'featured_image' => 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600&h=400&fit=crop', 'client' => 'Apex Corp', 'slug' => 'apex-brand-redesign'],
-                        ['id' => 9, 'title' => 'NexGen Website', 'category_name' => 'Web Development', 'featured_image' => 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&h=400&fit=crop', 'client' => 'NexGen Tech', 'slug' => 'nexgen-website'],
-                    ];
+                    echo '<div style="grid-column:1/-1;text-align:center;padding:60px 20px;background:var(--bg-white);border-radius:var(--radius-xl);border:1px solid var(--border)">';
+                    echo '<div style="font-size:48px;margin-bottom:16px;opacity:0.3"><i data-lucide="briefcase" size="48" style="color:var(--text-muted)"></i></div>';
+                    echo '<h4 style="margin-bottom:8px">No Projects Published Yet</h4>';
+                    echo '<p style="color:var(--text-muted);margin:0">We publish our work here as projects are completed.</p>';
+                    echo '</div>';
                 }
                 foreach ($projects as $idx => $p):
                     $cat = $p['category_name'] ?? 'General';
                     $filter = strtolower(str_replace(' ', '-', $cat));
                     $color = $colorMap[$idx % count($colorMap)];
+                    $pType = $typeLabels[$p['project_type'] ?? ''] ?? '';
                     ?>
                     <div class="card hover-lift portfolio-item" data-filter="<?= $filter ?>">
                         <div style="position:relative;overflow:hidden;height:220px">
-                            <img src="<?= $p['featured_image'] ?? 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop' ?>" alt="<?= htmlspecialchars($p['title']) ?>" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease" loading="lazy">
-                            <div style="position:absolute;top:12px;left:12px">
+                            <img src="<?= htmlspecialchars($p['featured_image'] ?? '') ?>" alt="<?= htmlspecialchars($p['title']) ?>" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease" loading="lazy">
+                            <div style="position:absolute;top:12px;left:12px;display:flex;gap:6px">
                                 <span class="badge" style="background:<?= $color ?>;color:white"><?= htmlspecialchars($cat) ?></span>
+                                <?php if ($pType): ?><span class="badge" style="background:rgba(0,0,0,0.55);color:white;border:1px solid rgba(255,255,255,0.3)"><?= $pType ?></span><?php endif; ?>
                             </div>
                         </div>
                         <div style="padding:20px 24px">
                             <p style="font-size:13px;color:var(--text-muted);margin-bottom:4px"><?= htmlspecialchars($p['client'] ?? '') ?></p>
                             <h5 style="margin-bottom:12px"><?= htmlspecialchars($p['title']) ?></h5>
-                            <a href="<?= BASE_URL ?>portfolio/<?= htmlspecialchars($p['slug'] ?? 'project') ?>" class="btn btn-outline btn-sm">View Case Study <i data-lucide="arrow-right" size="14"></i></a>
+                            <a href="<?= BASE_URL ?>portfolio/<?= htmlspecialchars($p['slug'] ?? 'project') ?>" class="btn btn-outline btn-sm">View Project <i data-lucide="arrow-right" size="14"></i></a>
                             <div class="portfolio-rating-row">
                                 <button class="rate-btn" data-rate-item data-item-id="<?= $p['id'] ?>" data-item-type="project" data-item-name="<?= htmlspecialchars($p['title']) ?>">
                                     <i data-lucide="star" size="14"></i> Rate

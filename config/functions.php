@@ -698,9 +698,9 @@ function jsonSuccess($data = [], $message = 'Success') {
 
 function getSEOTags($title, $description = '', $image = '', $url = '', $keywords = '') {
     $siteName = APP_NAME;
-    $defaultDesc = 'Premium Digital Agency in Somalia – Branding, Web Development & Creative Design';
+    $defaultDesc = 'ASAAS Studio is a small digital studio based in Mogadishu, Somalia. We build simple, useful websites and custom web systems.';
     $description = $description ?: $defaultDesc;
-    $defaultKeywords = 'digital agency Somalia, web design Somalia, web development Somalia, branding Somalia, digital marketing Somalia, ASAAS studio';
+    $defaultKeywords = 'ASAAS studio, web design Somalia, web development Somalia, custom web systems, websites Somalia, ASAAS studio Mogadishu';
     $keywords = $keywords ?: $defaultKeywords;
 
     $canonical = $url ?: APP_URL;
@@ -872,7 +872,7 @@ function trackPageVisit($pageUrl) {
         $stmt = $db->prepare($sql);
         $stmt->execute([$pageUrl, $ip, $ua, $deviceType, $browser, $os, $referrer]);
     } catch (Exception $e) {
-        // Silently fail — tracking should never break the page
+        // Silently fail: tracking should never break the page
     }
 }
 

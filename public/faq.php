@@ -1,7 +1,7 @@
 <?php
-$seoTitle = 'FAQ — Digital Agency Somalia Frequently Asked Questions';
-$seoDesc = 'Find answers to common questions about ASAAS Studio Somalia services, pricing, process, and timelines. Everything you need to know before starting your project.';
-$seoKeywords = 'digital agency Somalia FAQ, web design questions Somalia, agency pricing Somalia, website process, ASAAS studio help';
+$seoTitle = 'FAQ | ASAAS Studio Somalia';
+$seoDesc = 'Frequently asked questions about ASAAS Studio: services, starting prices, process, and timelines. Everything you need to know before starting a project.';
+$seoKeywords = 'ASAAS studio FAQ, web design questions Somalia, studio pricing Somalia, website process, ASAAS studio help';
 require __DIR__ . '/../includes/header.php'; ?>
 
 <main class="page-transition">
@@ -19,44 +19,40 @@ require __DIR__ . '/../includes/header.php'; ?>
         <div class="container" style="max-width:800px;margin:0 auto">
             <?php $faqs = [
                 [
-                    'q' => 'What is the typical timeline for a web development project?',
-                    'a' => 'Timelines vary based on scope and complexity. A standard marketing website typically ships in 4-8 weeks. E-commerce platforms may take 8-16 weeks. Complex web applications can span 3-6 months or more. We provide a detailed project roadmap during the proposal phase — no surprises, no ambiguity.'
+                    'q' => 'How much does a website cost?',
+                    'a' => 'Starter websites start at $99, business websites at $299, and custom web systems at $999. Every project is different, so we give you a clear quote based on your specific requirements before any work starts.'
                 ],
                 [
-                    'q' => 'How much does a website cost?',
-                    'a' => 'Every project is unique, so we custom-quote based on your specific needs. Broadly speaking, polished brochure sites start around $5,000, mid-range business websites range from $10,000 to $30,000, and complex web applications or platforms start at $50,000. We believe in transparent pricing — you only pay for what moves your business forward.'
+                    'q' => 'What is the typical timeline for a project?',
+                    'a' => 'It depends on the scope. A simple website can take about a week, while a custom web system takes longer. We agree on a timeline before we start and keep you updated as we go.'
                 ],
                 [
                     'q' => 'Do you offer ongoing maintenance and support?',
-                    'a' => 'Absolutely. We offer flexible retainer plans that cover security updates, performance monitoring, content updates, and technical support. Our team is available around the clock for critical issues. Retainers start at $500/month and scale with your needs.'
+                    'a' => 'Yes. Our maintenance plan starts at $49/month and covers updates, security, backups, and small changes, so your website stays secure and running smoothly.'
                 ],
                 [
                     'q' => 'What technologies do you use?',
-                    'a' => 'We select the optimal technology stack for each project. Frontend work typically uses React, Next.js, or Vue.js. Backend development spans Node.js, Python (Django), and PHP (Laravel). For hosting, we work with AWS, Vercel, and Netlify. The technology serves the solution — we never force a one-size-fits-all approach.'
+                    'a' => 'We choose tools that fit the project. We build with PHP, JavaScript, and standard web technologies, and we keep things simple and maintainable.'
                 ],
                 [
                     'q' => 'How do we get started?',
-                    'a' => 'Reach out through our <a href="' . BASE_URL . 'contact" style="color:var(--primary)">contact form</a> or <a href="' . BASE_URL . 'contact#booking" style="color:var(--primary)">schedule a discovery call</a>. We will discuss your goals, challenges, timeline, and budget — then deliver a tailored proposal within 48 hours. No pressure, just clarity and a clear path forward.'
+                    'a' => 'Reach out through our <a href="' . BASE_URL . 'contact" style="color:var(--primary)">contact form</a> or book a call. Tell us what you want to build and we will reply with next steps and a quote.'
                 ],
                 [
-                    'q' => 'Do you work with startups or only established businesses?',
-                    'a' => 'We work with businesses at every stage — from early-stage startups building their first product to established enterprises undergoing digital transformation. We tailor our engagement model to fit your stage and budget.'
+                    'q' => 'Do you work with clients outside Mogadishu?',
+                    'a' => 'Yes. We work remotely and can serve clients anywhere with an internet connection.'
                 ],
                 [
                     'q' => 'What information do you need to provide a quote?',
-                    'a' => 'The more context, the better. A clear project brief, examples of sites or apps you admire, your target audience, key features, budget range, and any technical constraints are helpful. But even a rough idea is enough to start the conversation.'
-                ],
-                [
-                    'q' => 'Can you work with our existing team or agency?',
-                    'a' => 'Yes. We often collaborate with in-house teams, design agencies, and marketing firms. Whether you need us to lead a project end-to-end or augment your existing team with specialized expertise, we can adapt to your workflow.'
+                    'a' => 'A short description of what you want to build is enough to start. Examples of sites you like and details about your users help us give a more accurate quote.'
                 ],
                 [
                     'q' => 'What is your revision policy?',
-                    'a' => 'Our service agreements include a defined number of revision rounds for each phase (design, development). Additional revisions beyond the agreed scope are billed at our standard hourly rate. We recommend aligning on all feedback in batch to keep the process efficient.'
+                    'a' => 'Our agreements include a defined number of revision rounds for each phase. Additional revisions beyond the agreed scope are quoted separately.'
                 ],
                 [
                     'q' => 'Do you offer refunds?',
-                    'a' => 'We do not offer full refunds for custom work due to the nature of the services provided. If you are unsatisfied with any phase of the project, we will work with you to make it right. Detailed terms are outlined in each service agreement.'
+                    'a' => 'Because our work is custom, we do not offer full refunds. If you are not satisfied with a phase of the project, we will work with you to make it right. Terms are outlined in each service agreement.'
                 ],
             ];
             foreach ($faqs as $i => $f):

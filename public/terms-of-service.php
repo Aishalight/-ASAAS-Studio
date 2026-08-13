@@ -1,6 +1,6 @@
 <?php
-$seoTitle = 'Terms of Service — ASAAS Studio Somalia';
-$seoDesc = 'ASAAS Studio Somalia terms of service — the terms and conditions governing the use of our website and the services we provide to our clients.';
+$seoTitle = 'Terms of Service | ASAAS Studio Somalia';
+$seoDesc = 'ASAAS Studio Somalia terms of service. The terms and conditions governing the use of our website and the services we provide to our clients.';
 $seoKeywords = 'terms of service Somalia, terms and conditions Somalia, ASAAS studio terms, website terms of use';
 require __DIR__ . '/../includes/header.php'; ?>
 
@@ -22,7 +22,7 @@ require __DIR__ . '/../includes/header.php'; ?>
                 <p style="margin-bottom:24px">By accessing or using the ASAAS website and services, you agree to be bound by these Terms of Service. If you do not agree with any part of these terms, you may not use our services.</p>
 
                 <h2 style="color:var(--text-white);margin-bottom:16px">2. Services</h2>
-                <p style="margin-bottom:24px">ASAAS provides digital agency services including but not limited to web design, web development, branding, UI/UX design, and digital marketing. The scope, timeline, and deliverables for each project are defined in a separate service agreement signed by both parties.</p>
+                <p style="margin-bottom:24px">ASAAS provides digital services including but not limited to web design, web development, custom web systems, UI/UX design, SEO, and social media management. The scope, timeline, and deliverables for each project are defined in a separate service agreement signed by both parties.</p>
 
                 <h2 style="color:var(--text-white);margin-bottom:16px">3. Intellectual Property</h2>
                 <p style="margin-bottom:12px">Upon full payment for services rendered:</p>

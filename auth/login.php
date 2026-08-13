@@ -245,7 +245,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="auth-hero-content">
                     <div style="font-size:64px;margin-bottom:24px">🚀</div>
                     <h2>Build Something Amazing</h2>
-                    <p>Access your dashboard, manage projects, track progress, and collaborate with our team — all in one place.</p>
+                    <p>Access your dashboard, manage projects, track progress, and collaborate with our team, all in one place.</p>
                     <div style="margin-top:32px;display:flex;gap:12px;justify-content:center">
                         <div style="width:8px;height:8px;border-radius:50%;background:var(--primary)"></div>
                         <div style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.3)"></div>

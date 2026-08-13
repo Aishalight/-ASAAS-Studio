@@ -467,7 +467,7 @@ try {
             jsonSuccess($stats);
 
         // ============================================================
-        // POLL — lightweight unread counts for auto-refresh
+        // POLL: lightweight unread counts for auto-refresh
         // ============================================================
         case 'poll':
             if (!isLoggedIn()) jsonError('Unauthorized', 401);

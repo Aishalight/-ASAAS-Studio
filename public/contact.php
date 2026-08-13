@@ -1,7 +1,7 @@
 <?php
-$seoTitle = 'Contact Somalia — Get in Touch with ASAAS Studio';
-$seoDesc = 'Reach out to ASAAS Studio in Somalia for your next project. Book a free consultation call and let discuss how we can engineer your digital growth.';
-$seoKeywords = 'contact digital agency Somalia, hire web designer Somalia, book consultation Somalia, web design inquiry Mogadishu, ASAAS studio contact';
+$seoTitle = 'Contact | ASAAS Studio Somalia';
+$seoDesc = 'Get in touch with ASAAS Studio, a small digital studio in Mogadishu, Somalia. We build simple, useful websites and custom web systems.';
+$seoKeywords = 'contact ASAAS studio, hire web designer Somalia, book consultation Somalia, web design inquiry Mogadishu, ASAAS studio contact';
 require __DIR__ . '/../includes/header.php'; ?>
 
 <?php
@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $formType === 'contact') {
                 $stmt = $db->prepare($sql);
                 $stmt->execute([$name, $email, $subject, $message]);
                 $_SESSION[$rateKey] = time();
-                $success = 'Thanks for reaching out. We review every message personally and will respond within 24 hours.';
+                $success = 'Thanks for reaching out. We review every message personally and will respond by email.';
             } catch (Exception $e) {
                 error_log('Contact form error: ' . $e->getMessage());
                 $error = 'Something went wrong. Please try again.';
@@ -138,17 +138,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $formType === 'booking') {
                                     <i data-lucide="map-pin" size="18"></i>
                                 </div>
                                 <div>
-                                    <p style="font-size:13px;font-weight:600;color:var(--text-muted);margin-bottom:1px">Office</p>
-                                    <p style="font-size:14px;color:var(--text-primary)">Km4 Hodan<br>Mogadishu, Somalia</p>
+                                    <p style="font-size:13px;font-weight:600;color:var(--text-muted);margin-bottom:1px">Location</p>
+                                    <p style="font-size:14px;color:var(--text-primary)">Mogadishu, Somalia</p>
                                 </div>
                             </div>
                             <div style="display:flex;align-items:center;gap:14px">
                                 <div style="width:40px;height:40px;min-width:40px;border-radius:var(--radius-sm);background:var(--primary-alpha);display:flex;align-items:center;justify-content:center;color:var(--primary)">
-                                    <i data-lucide="clock" size="18"></i>
+                                    <i data-lucide="globe" size="18"></i>
                                 </div>
                                 <div>
-                                    <p style="font-size:13px;font-weight:600;color:var(--text-muted);margin-bottom:1px">Hours</p>
-                                    <p style="font-size:14px;color:var(--text-primary)">Mon-Fri: 9:00 AM - 6:00 PM</p>
+                                    <p style="font-size:13px;font-weight:600;color:var(--text-muted);margin-bottom:1px">Website</p>
+                                    <a href="https://asaas-studio.tech" target="_blank" rel="noopener" style="font-size:14px;color:var(--text-primary);text-decoration:none">asaas-studio.tech</a>
                                 </div>
                             </div>
                         </div>
@@ -163,7 +163,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $formType === 'booking') {
                     <div style="text-align:center;margin-bottom:24px">
                         <div class="section-tag" style="background:rgba(232,99,42,0.15);color:#f07840;margin-bottom:10px"><i data-lucide="calendar" size="14"></i>Free Consultation</div>
                         <h4 style="color:white;font-size:18px;margin-bottom:4px">Book a Call</h4>
-                        <p style="color:var(--text-light);font-size:13px">Pick a date and time that works for you. We will confirm within 24 hours.</p>
+                        <p style="color:var(--text-light);font-size:13px">Pick a date and time that works for you. We will confirm by email.</p>
                     </div>
 
                     <?php if (isset($bookingSuccess)): ?>
@@ -189,7 +189,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $formType === 'booking') {
                         <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:12px">
                             <div class="form-group" style="margin-bottom:0">
                                 <label class="form-label" style="color:rgba(255,255,255,0.6);font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:0.5px">Phone</label>
-                                <input type="tel" name="phone" class="form-input" placeholder="+252 61 234 5678" style="background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.1);color:white;font-size:13px;padding:10px 12px">
+                                <input type="tel" name="phone" class="form-input" placeholder="Phone (optional)" style="background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.1);color:white;font-size:13px;padding:10px 12px">
                             </div>
                             <div class="form-group" style="margin-bottom:0">
                                 <label class="form-label" style="color:rgba(255,255,255,0.6);font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:0.5px">Date <span style="color:var(--primary)">*</span></label>
