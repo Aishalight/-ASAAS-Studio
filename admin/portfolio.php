@@ -243,7 +243,18 @@ $projects = $db->query("SELECT p.*, c.name as category_name FROM portfolio_proje
 
                 <div class="form-group">
                     <label class="form-label">Content</label>
-                    <textarea name="content" class="form-textarea" rows="8" style="min-height:180px" placeholder="Full project content, case study, details..."></textarea>
+                    <div class="editor-toolbar" data-target="new_project_content">
+                        <button type="button" data-fmt="h2" title="Heading 2">H2</button>
+                        <button type="button" data-fmt="h3" title="Heading 3">H3</button>
+                        <button type="button" data-fmt="strong" title="Bold"><b>B</b></button>
+                        <button type="button" data-fmt="em" title="Italic"><i>I</i></button>
+                        <button type="button" data-fmt="p" title="Paragraph">P</button>
+                        <button type="button" data-fmt="ul" title="Bullet list">&#8226; List</button>
+                        <button type="button" data-fmt="blockquote" title="Quote">Quote</button>
+                        <button type="button" data-fmt="a" title="Link">Link</button>
+                        <button type="button" data-fmt="br" title="Line break">BR</button>
+                    </div>
+                    <textarea name="content" id="new_project_content" class="form-textarea" rows="8" style="min-height:180px" placeholder="Full project content, case study, details..."></textarea>
                 </div>
 
                 <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
@@ -336,6 +347,17 @@ $projects = $db->query("SELECT p.*, c.name as category_name FROM portfolio_proje
 
                 <div class="form-group">
                     <label class="form-label">Content</label>
+                    <div class="editor-toolbar" data-target="edit_project_content">
+                        <button type="button" data-fmt="h2" title="Heading 2">H2</button>
+                        <button type="button" data-fmt="h3" title="Heading 3">H3</button>
+                        <button type="button" data-fmt="strong" title="Bold"><b>B</b></button>
+                        <button type="button" data-fmt="em" title="Italic"><i>I</i></button>
+                        <button type="button" data-fmt="p" title="Paragraph">P</button>
+                        <button type="button" data-fmt="ul" title="Bullet list">&#8226; List</button>
+                        <button type="button" data-fmt="blockquote" title="Quote">Quote</button>
+                        <button type="button" data-fmt="a" title="Link">Link</button>
+                        <button type="button" data-fmt="br" title="Line break">BR</button>
+                    </div>
                     <textarea name="content" id="edit_project_content" class="form-textarea" rows="8" style="min-height:180px"></textarea>
                 </div>
 
