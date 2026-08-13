@@ -29,9 +29,13 @@ require __DIR__ . '/../includes/header.php'; ?>
                     </div>
                 </div>
                 <div class="fade-in-right">
-                    <div style="width:100%;aspect-ratio:1/1;border-radius:var(--radius-xl);box-shadow:var(--shadow-lg);background:linear-gradient(135deg,#14141f,#1a1a2e);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;padding:40px;text-align:center">
-                        <img src="<?= BASE_URL ?>assets/images/logo1_whitebackground.png" alt="ASAAS" style="height:72px;width:auto;border-radius:12px">
-                        <p style="color:#aab;font-size:15px;max-width:260px;margin:0">Designing and building digital products for businesses and organizations.</p>
+                    <div style="width:100%;aspect-ratio:1/1;border-radius:var(--radius-xl);box-shadow:var(--shadow-lg);position:relative;overflow:hidden;background:linear-gradient(135deg,#14141f,#1a1a2e)">
+                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=900&q=80" alt="The ASAAS team at work" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.5">
+                        <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,13,26,0.35),rgba(13,13,26,0.85))"></div>
+                        <div style="position:relative;z-index:2;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;padding:40px;text-align:center">
+                            <img src="<?= BASE_URL ?>assets/images/logo1_whitebackground.png" alt="ASAAS" style="height:72px;width:auto;border-radius:12px;box-shadow:0 12px 32px rgba(0,0,0,0.45)">
+                            <p style="color:#eef;font-size:15px;max-width:260px;margin:0">Designing and building digital products for businesses and organizations.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -101,7 +105,8 @@ require __DIR__ . '/../includes/header.php'; ?>
                                 <i data-lucide="user" size="48" style="color:var(--text-muted)"></i>
                             </div>
                             <h6 style="font-weight:700;color:var(--text-muted)">Your Name</h6>
-                            <p style="font-size:13px;color:var(--text-muted)">Your Role</p>
+                            <p style="font-size:13px;color:var(--text-muted);font-weight:600;margin:4px 0 0">Your Role</p>
+                            <p style="font-size:13px;color:var(--text-muted);margin:4px 0 0">Your Description</p>
                         </div>
                     <?php endforeach; ?>
                 </div>
@@ -113,7 +118,10 @@ require __DIR__ . '/../includes/header.php'; ?>
                                 <img src="<?= strpos($t['img'], 'uploads/') === 0 ? BASE_URL . $t['img'] : htmlspecialchars($t['img']) ?>" alt="<?= htmlspecialchars($t['name']) ?>" style="width:120px;height:120px;border-radius:50%;object-fit:cover;margin:0 auto 16px">
                             <?php endif; ?>
                             <h6 style="font-weight:700"><?= htmlspecialchars($t['name']) ?></h6>
-                            <p style="font-size:13px;color:var(--text-muted)"><?= htmlspecialchars($t['role'] ?? '') ?></p>
+                            <p style="font-size:13px;color:var(--text-secondary);font-weight:600;margin:4px 0 0"><?= htmlspecialchars($t['role'] ?? '') ?></p>
+                            <?php if (!empty($t['desc'])): ?>
+                                <p style="font-size:13px;color:var(--text-muted);margin:4px 0 0"><?= htmlspecialchars($t['desc']) ?></p>
+                            <?php endif; ?>
                         </div>
                     <?php endforeach; ?>
                 </div>

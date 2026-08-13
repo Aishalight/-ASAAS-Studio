@@ -6,9 +6,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $success = 'Invalid security token.';
     } else {
         $team = [];
-        for ($i = 1; $i <= 3; $i++) {
+        for ($i = 1; $i <= 2; $i++) {
             $name = trim($_POST["team_member_name_$i"] ?? '');
             $role = trim($_POST["team_member_role_$i"] ?? '');
+            $desc = trim($_POST["team_member_desc_$i"] ?? '');
             $img = trim($_POST["team_member_img_$i"] ?? '');
             if (!empty($_FILES["team_member_photo_$i"]['tmp_name']) && $_FILES["team_member_photo_$i"]['error'] === UPLOAD_ERR_OK) {
                 $file = $_FILES["team_member_photo_$i"];
@@ -23,10 +24,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     }
                 }
             }
-            if ($name || $role || $img) {
-                $team[] = ['name' => $name, 'role' => $role, 'img' => $img];
+            if ($name || $role || $desc || $img) {
+                $team[] = ['name' => $name, 'role' => $role, 'desc' => $desc, 'img' => $img];
             }
-            unset($_POST["team_member_name_$i"], $_POST["team_member_role_$i"], $_POST["team_member_img_$i"]);
+            unset($_POST["team_member_name_$i"], $_POST["team_member_role_$i"], $_POST["team_member_desc_$i"], $_POST["team_member_img_$i"]);
         }
         updateSetting('team_members', json_encode($team));
         foreach ($_POST as $key => $value) {
@@ -61,14 +62,15 @@ if ($teamJson) {
     <div class="reveal" style="background:var(--bg-white);border-radius:var(--radius-lg);border:1px solid var(--border);padding:32px;margin-bottom:24px">
         <h3 style="font-size:18px;font-weight:700;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--border)">Team Members</h3>
         <p style="font-size:13px;color:var(--text-muted);margin-bottom:24px">Shown in the "The People Behind ASAAS" section on the About page. Leave a name empty to hide that card.</p>
-        <?php for ($i = 0; $i < 3; $i++): ?>
-            <?php $m = $teamMembers[$i] ?? ['name' => '', 'role' => '', 'img' => '']; $n = $i + 1; ?>
+        <?php for ($i = 0; $i < 2; $i++): ?>
+            <?php $m = $teamMembers[$i] ?? ['name' => '', 'role' => '', 'desc' => '', 'img' => '']; $n = $i + 1; ?>
             <div style="border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;margin-bottom:16px">
                 <h4 style="font-size:14px;font-weight:700;margin-bottom:16px;color:var(--text-muted)">Member <?= $n ?></h4>
                 <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
                     <div class="form-group"><label class="form-label">Name</label><input type="text" name="team_member_name_<?= $n ?>" class="form-input" value="<?= htmlspecialchars($m['name']) ?>"></div>
-                    <div class="form-group"><label class="form-label">Role</label><input type="text" name="team_member_role_<?= $n ?>" class="form-input" value="<?= htmlspecialchars($m['role']) ?>"></div>
+                    <div class="form-group"><label class="form-label">Role</label><input type="text" name="team_member_role_<?= $n ?>" class="form-input" value="<?= htmlspecialchars($m['role']) ?>" placeholder="e.g. Co-Founder"></div>
                 </div>
+                <div class="form-group"><label class="form-label">Description</label><input type="text" name="team_member_desc_<?= $n ?>" class="form-input" value="<?= htmlspecialchars($m['desc'] ?? '') ?>" placeholder="e.g. Product, Design & Development"></div>
                 <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:center">
                     <div class="form-group"><label class="form-label">Photo</label><input type="file" name="team_member_photo_<?= $n ?>" class="form-input" accept="image/*"></div>
                     <?php if (!empty($m['img'])): ?>
