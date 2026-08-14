@@ -984,11 +984,12 @@
     }
 }
 
-/* === EDITOR FORMATTING TOOLBAR === */
+/* === RICH TEXT EDITOR (Word-style) === */
 .editor-toolbar {
     display: flex;
     flex-wrap: wrap;
     gap: 4px;
+    align-items: center;
     padding: 8px;
     background: var(--bg-gray);
     border: 2px solid var(--border);
@@ -996,16 +997,16 @@
     border-radius: var(--radius-sm) var(--radius-sm) 0 0;
 }
 .editor-toolbar button {
-    min-width: 34px;
+    min-width: 30px;
     height: 30px;
-    padding: 0 8px;
+    padding: 0 6px;
     border: 1px solid var(--border);
     background: var(--bg-white);
     border-radius: 4px;
     cursor: pointer;
-    font-family: var(--font-family);
-    font-size: 12px;
-    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     color: var(--text-secondary);
     transition: background 0.15s, color 0.15s;
 }
@@ -1013,8 +1014,39 @@
     background: var(--primary-alpha);
     color: var(--primary);
 }
-.editor-toolbar + .form-textarea {
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
+.editor-toolbar .editor-sep {
+    width: 1px;
+    height: 20px;
+    background: var(--border);
+    margin: 0 4px;
 }
+.editor-box {
+    width: 100%;
+    min-height: 180px;
+    padding: 12px 16px;
+    border: 2px solid var(--border);
+    border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+    font-family: var(--font-family);
+    font-size: 15px;
+    color: var(--text-primary);
+    background: var(--bg-white);
+    transition: all var(--transition);
+    outline: none;
+    overflow-y: auto;
+}
+.editor-box:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px var(--primary-alpha);
+}
+.editor-box h2, .editor-box h3 { margin: 8px 0 4px; }
+.editor-box ul, .editor-box ol { padding-left: 24px; }
+.editor-box blockquote {
+    margin: 8px 0;
+    padding: 8px 14px;
+    border-left: 3px solid var(--primary);
+    background: var(--bg-gray);
+    color: var(--text-secondary);
+}
+.editor-box a { color: var(--primary); text-decoration: underline; }
+.editor-source { display: none; }
 

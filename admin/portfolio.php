@@ -3,6 +3,15 @@
 $db = Database::getInstance()->getConnection();
 $portfolioCategories = $db->query("SELECT id, name FROM categories WHERE type IN ('portfolio','project') ORDER BY name ASC")->fetchAll();
 
+try {
+    $cols = $db->query("SHOW COLUMNS FROM portfolio_projects")->fetchAll(PDO::FETCH_COLUMN);
+    if (!in_array('project_type', $cols, true)) {
+        $db->exec("ALTER TABLE portfolio_projects ADD COLUMN project_type ENUM('client','internal','concept','student') NOT NULL DEFAULT 'client' AFTER client");
+    }
+} catch (Exception $e) {
+    // Table may not exist yet; ignore so the page still loads.
+}
+
 function handlePortfolioImageUpload($fieldName) {
     if (empty($_FILES[$fieldName]['tmp_name']) || $_FILES[$fieldName]['error'] !== UPLOAD_ERR_OK) return null;
     $file = $_FILES[$fieldName];
@@ -243,18 +252,23 @@ $projects = $db->query("SELECT p.*, c.name as category_name FROM portfolio_proje
 
                 <div class="form-group">
                     <label class="form-label">Content</label>
-                    <div class="editor-toolbar" data-target="new_project_content">
-                        <button type="button" data-fmt="h2" title="Heading 2">H2</button>
-                        <button type="button" data-fmt="h3" title="Heading 3">H3</button>
-                        <button type="button" data-fmt="strong" title="Bold"><b>B</b></button>
-                        <button type="button" data-fmt="em" title="Italic"><i>I</i></button>
-                        <button type="button" data-fmt="p" title="Paragraph">P</button>
-                        <button type="button" data-fmt="ul" title="Bullet list">&#8226; List</button>
-                        <button type="button" data-fmt="blockquote" title="Quote">Quote</button>
-                        <button type="button" data-fmt="a" title="Link">Link</button>
-                        <button type="button" data-fmt="br" title="Line break">BR</button>
+                    <div class="editor-toolbar" data-editor="new_project_content">
+                        <button type="button" data-cmd="bold" title="Bold"><i data-lucide="bold" size="15"></i></button>
+                        <button type="button" data-cmd="italic" title="Italic"><i data-lucide="italic" size="15"></i></button>
+                        <button type="button" data-cmd="underline" title="Underline"><i data-lucide="underline" size="15"></i></button>
+                        <span class="editor-sep"></span>
+                        <button type="button" data-cmd="formatBlock" data-val="h2" title="Heading 2"><i data-lucide="heading-2" size="15"></i></button>
+                        <button type="button" data-cmd="formatBlock" data-val="h3" title="Heading 3"><i data-lucide="heading-3" size="15"></i></button>
+                        <button type="button" data-cmd="formatBlock" data-val="p" title="Paragraph"><i data-lucide="pilcrow" size="15"></i></button>
+                        <span class="editor-sep"></span>
+                        <button type="button" data-cmd="insertUnorderedList" title="Bullet list"><i data-lucide="list" size="15"></i></button>
+                        <button type="button" data-cmd="insertOrderedList" title="Numbered list"><i data-lucide="list-ordered" size="15"></i></button>
+                        <button type="button" data-cmd="formatBlock" data-val="blockquote" title="Quote"><i data-lucide="quote" size="15"></i></button>
+                        <button type="button" data-cmd="link" title="Link"><i data-lucide="link" size="15"></i></button>
+                        <button type="button" data-cmd="removeFormat" title="Clear formatting"><i data-lucide="remove-formatting" size="15"></i></button>
                     </div>
-                    <textarea name="content" id="new_project_content" class="form-textarea" rows="8" style="min-height:180px" placeholder="Full project content, case study, details..."></textarea>
+                    <div class="editor-box" data-editor-target="new_project_content" contenteditable="true"></div>
+                    <textarea name="content" id="new_project_content" class="form-textarea editor-source" style="min-height:180px"></textarea>
                 </div>
 
                 <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
@@ -347,18 +361,23 @@ $projects = $db->query("SELECT p.*, c.name as category_name FROM portfolio_proje
 
                 <div class="form-group">
                     <label class="form-label">Content</label>
-                    <div class="editor-toolbar" data-target="edit_project_content">
-                        <button type="button" data-fmt="h2" title="Heading 2">H2</button>
-                        <button type="button" data-fmt="h3" title="Heading 3">H3</button>
-                        <button type="button" data-fmt="strong" title="Bold"><b>B</b></button>
-                        <button type="button" data-fmt="em" title="Italic"><i>I</i></button>
-                        <button type="button" data-fmt="p" title="Paragraph">P</button>
-                        <button type="button" data-fmt="ul" title="Bullet list">&#8226; List</button>
-                        <button type="button" data-fmt="blockquote" title="Quote">Quote</button>
-                        <button type="button" data-fmt="a" title="Link">Link</button>
-                        <button type="button" data-fmt="br" title="Line break">BR</button>
+                    <div class="editor-toolbar" data-editor="edit_project_content">
+                        <button type="button" data-cmd="bold" title="Bold"><i data-lucide="bold" size="15"></i></button>
+                        <button type="button" data-cmd="italic" title="Italic"><i data-lucide="italic" size="15"></i></button>
+                        <button type="button" data-cmd="underline" title="Underline"><i data-lucide="underline" size="15"></i></button>
+                        <span class="editor-sep"></span>
+                        <button type="button" data-cmd="formatBlock" data-val="h2" title="Heading 2"><i data-lucide="heading-2" size="15"></i></button>
+                        <button type="button" data-cmd="formatBlock" data-val="h3" title="Heading 3"><i data-lucide="heading-3" size="15"></i></button>
+                        <button type="button" data-cmd="formatBlock" data-val="p" title="Paragraph"><i data-lucide="pilcrow" size="15"></i></button>
+                        <span class="editor-sep"></span>
+                        <button type="button" data-cmd="insertUnorderedList" title="Bullet list"><i data-lucide="list" size="15"></i></button>
+                        <button type="button" data-cmd="insertOrderedList" title="Numbered list"><i data-lucide="list-ordered" size="15"></i></button>
+                        <button type="button" data-cmd="formatBlock" data-val="blockquote" title="Quote"><i data-lucide="quote" size="15"></i></button>
+                        <button type="button" data-cmd="link" title="Link"><i data-lucide="link" size="15"></i></button>
+                        <button type="button" data-cmd="removeFormat" title="Clear formatting"><i data-lucide="remove-formatting" size="15"></i></button>
                     </div>
-                    <textarea name="content" id="edit_project_content" class="form-textarea" rows="8" style="min-height:180px"></textarea>
+                    <div class="editor-box" data-editor-target="edit_project_content" contenteditable="true"></div>
+                    <textarea name="content" id="edit_project_content" class="form-textarea editor-source" style="min-height:180px"></textarea>
                 </div>
 
                 <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
@@ -408,6 +427,8 @@ function editProject(p) {
     document.getElementById('edit_project_sort').value = p.sort_order || 0;
     document.getElementById('edit_project_description').value = p.description || '';
     document.getElementById('edit_project_content').value = p.content || '';
+    var projectEditorBox = document.querySelector('.editor-box[data-editor-target="edit_project_content"]');
+    if (projectEditorBox) projectEditorBox.innerHTML = p.content || '';
     document.getElementById('edit_project_url').value = p.project_url || '';
     document.getElementById('edit_project_github').value = p.github_url || '';
     document.getElementById('edit_project_tech').value = p.technologies || '';

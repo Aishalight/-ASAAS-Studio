@@ -15,7 +15,7 @@
         initSelectAll();
         initInlineEdit();
         initNotificationsCenter();
-        initEditorToolbar();
+        document.querySelectorAll('.editor-source').forEach(initRichEditor);
 
         // Active sidebar item
         const currentPath = window.location.pathname;
@@ -451,67 +451,43 @@
     }
 
     // ============================================================
-    // EDITOR FORMATTING TOOLBAR
+    // RICH TEXT EDITOR (Word-style)
     // ============================================================
-    function initEditorToolbar() {
-        document.addEventListener('click', function(e) {
-            const btn = e.target.closest('.editor-toolbar button[data-fmt]');
-            if (!btn) return;
-            e.preventDefault();
-            const toolbar = btn.closest('.editor-toolbar');
-            const ta = document.getElementById(toolbar.dataset.target);
-            if (ta) applyEditorFormat(ta, btn.dataset.fmt);
+    function initRichEditor(textarea) {
+        const id = textarea.id;
+        const toolbar = document.querySelector('.editor-toolbar[data-editor="' + id + '"]');
+        const box = document.querySelector('.editor-box[data-editor-target="' + id + '"]');
+        if (!toolbar || !box) return;
+
+        box.innerHTML = textarea.value || '';
+
+        function sync() { textarea.value = box.innerHTML; }
+
+        box.addEventListener('input', sync);
+        box.addEventListener('blur', sync);
+
+        toolbar.querySelectorAll('button[data-cmd]').forEach(function(btn) {
+            btn.addEventListener('mousedown', function(e) { e.preventDefault(); });
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                box.focus();
+                const cmd = btn.dataset.cmd;
+                if (cmd === 'formatBlock') {
+                    document.execCommand('formatBlock', false, btn.dataset.val);
+                } else if (cmd === 'link') {
+                    const url = prompt('Enter link URL (https://...):', 'https://');
+                    if (url === null) return;
+                    if (window.getSelection().toString()) {
+                        document.execCommand('createLink', false, url);
+                    } else {
+                        document.execCommand('insertHTML', false, '<a href="' + url + '">link text</a>');
+                    }
+                } else {
+                    document.execCommand(cmd);
+                }
+                sync();
+            });
         });
-    }
-
-    function applyEditorFormat(ta, fmt) {
-        const start = ta.selectionStart;
-        const end = ta.selectionEnd;
-        const sel = ta.value.substring(start, end);
-        let out = null;
-        let caret = 0;
-
-        if (fmt === 'a') {
-            const url = prompt('Enter link URL (https://...):', 'https://');
-            if (url === null) return;
-            const text = sel || 'link text';
-            out = '<a href="' + url + '">' + text + '</a>';
-            if (!sel) caret = start + out.indexOf('link text');
-        } else if (fmt === 'strong') {
-            out = '<strong>' + (sel || 'bold text') + '</strong>';
-            if (!sel) caret = start + 8;
-        } else if (fmt === 'em') {
-            out = '<em>' + (sel || 'italic text') + '</em>';
-            if (!sel) caret = start + 4;
-        } else if (fmt === 'h2') {
-            out = '\n<h2>' + (sel || 'Heading') + '</h2>\n';
-            if (!sel) caret = start + 5;
-        } else if (fmt === 'h3') {
-            out = '\n<h3>' + (sel || 'Heading') + '</h3>\n';
-            if (!sel) caret = start + 5;
-        } else if (fmt === 'p') {
-            out = '\n<p>' + (sel || 'Paragraph') + '</p>\n';
-            if (!sel) caret = start + 4;
-        } else if (fmt === 'blockquote') {
-            out = '\n<blockquote>' + (sel || 'Quote') + '</blockquote>\n';
-            if (!sel) caret = start + 12;
-        } else if (fmt === 'ul') {
-            if (sel) {
-                const items = sel.split('\n').filter(function(l) { return l.trim() !== ''; }).map(function(l) { return '<li>' + l.trim() + '</li>'; });
-                out = '\n<ul>\n' + items.join('\n') + '\n</ul>\n';
-            } else {
-                out = '\n<ul>\n<li>List item</li>\n</ul>\n';
-                caret = start + out.indexOf('List item');
-            }
-        } else if (fmt === 'br') {
-            out = '<br>\n';
-        }
-
-        if (out === null) return;
-        ta.value = ta.value.substring(0, start) + out + ta.value.substring(end);
-        ta.focus();
-        if (caret === 0) caret = start + out.length;
-        ta.setSelectionRange(caret, caret);
     }
 
     // ============================================================

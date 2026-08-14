@@ -212,18 +212,23 @@ $posts = $db->query("SELECT p.*, c.name as category_name, u.name as author_name 
 
                 <div class="form-group">
                     <label class="form-label">Content *</label>
-                    <div class="editor-toolbar" data-target="post_content">
-                        <button type="button" data-fmt="h2" title="Heading 2">H2</button>
-                        <button type="button" data-fmt="h3" title="Heading 3">H3</button>
-                        <button type="button" data-fmt="strong" title="Bold"><b>B</b></button>
-                        <button type="button" data-fmt="em" title="Italic"><i>I</i></button>
-                        <button type="button" data-fmt="p" title="Paragraph">P</button>
-                        <button type="button" data-fmt="ul" title="Bullet list">&#8226; List</button>
-                        <button type="button" data-fmt="blockquote" title="Quote">Quote</button>
-                        <button type="button" data-fmt="a" title="Link">Link</button>
-                        <button type="button" data-fmt="br" title="Line break">BR</button>
+                    <div class="editor-toolbar" data-editor="post_content">
+                        <button type="button" data-cmd="bold" title="Bold"><i data-lucide="bold" size="15"></i></button>
+                        <button type="button" data-cmd="italic" title="Italic"><i data-lucide="italic" size="15"></i></button>
+                        <button type="button" data-cmd="underline" title="Underline"><i data-lucide="underline" size="15"></i></button>
+                        <span class="editor-sep"></span>
+                        <button type="button" data-cmd="formatBlock" data-val="h2" title="Heading 2"><i data-lucide="heading-2" size="15"></i></button>
+                        <button type="button" data-cmd="formatBlock" data-val="h3" title="Heading 3"><i data-lucide="heading-3" size="15"></i></button>
+                        <button type="button" data-cmd="formatBlock" data-val="p" title="Paragraph"><i data-lucide="pilcrow" size="15"></i></button>
+                        <span class="editor-sep"></span>
+                        <button type="button" data-cmd="insertUnorderedList" title="Bullet list"><i data-lucide="list" size="15"></i></button>
+                        <button type="button" data-cmd="insertOrderedList" title="Numbered list"><i data-lucide="list-ordered" size="15"></i></button>
+                        <button type="button" data-cmd="formatBlock" data-val="blockquote" title="Quote"><i data-lucide="quote" size="15"></i></button>
+                        <button type="button" data-cmd="link" title="Link"><i data-lucide="link" size="15"></i></button>
+                        <button type="button" data-cmd="removeFormat" title="Clear formatting"><i data-lucide="remove-formatting" size="15"></i></button>
                     </div>
-                    <textarea name="content" id="post_content" class="form-textarea" rows="12" style="min-height:250px" required placeholder="Write your post content here..."></textarea>
+                    <div class="editor-box" data-editor-target="post_content" contenteditable="true"></div>
+                    <textarea name="content" id="post_content" class="form-textarea editor-source" style="min-height:250px"></textarea>
                 </div>
 
                 <div class="form-group">
@@ -301,18 +306,23 @@ $posts = $db->query("SELECT p.*, c.name as category_name, u.name as author_name 
 
                 <div class="form-group">
                     <label class="form-label">Content *</label>
-                    <div class="editor-toolbar" data-target="edit_post_content">
-                        <button type="button" data-fmt="h2" title="Heading 2">H2</button>
-                        <button type="button" data-fmt="h3" title="Heading 3">H3</button>
-                        <button type="button" data-fmt="strong" title="Bold"><b>B</b></button>
-                        <button type="button" data-fmt="em" title="Italic"><i>I</i></button>
-                        <button type="button" data-fmt="p" title="Paragraph">P</button>
-                        <button type="button" data-fmt="ul" title="Bullet list">&#8226; List</button>
-                        <button type="button" data-fmt="blockquote" title="Quote">Quote</button>
-                        <button type="button" data-fmt="a" title="Link">Link</button>
-                        <button type="button" data-fmt="br" title="Line break">BR</button>
+                    <div class="editor-toolbar" data-editor="edit_post_content">
+                        <button type="button" data-cmd="bold" title="Bold"><i data-lucide="bold" size="15"></i></button>
+                        <button type="button" data-cmd="italic" title="Italic"><i data-lucide="italic" size="15"></i></button>
+                        <button type="button" data-cmd="underline" title="Underline"><i data-lucide="underline" size="15"></i></button>
+                        <span class="editor-sep"></span>
+                        <button type="button" data-cmd="formatBlock" data-val="h2" title="Heading 2"><i data-lucide="heading-2" size="15"></i></button>
+                        <button type="button" data-cmd="formatBlock" data-val="h3" title="Heading 3"><i data-lucide="heading-3" size="15"></i></button>
+                        <button type="button" data-cmd="formatBlock" data-val="p" title="Paragraph"><i data-lucide="pilcrow" size="15"></i></button>
+                        <span class="editor-sep"></span>
+                        <button type="button" data-cmd="insertUnorderedList" title="Bullet list"><i data-lucide="list" size="15"></i></button>
+                        <button type="button" data-cmd="insertOrderedList" title="Numbered list"><i data-lucide="list-ordered" size="15"></i></button>
+                        <button type="button" data-cmd="formatBlock" data-val="blockquote" title="Quote"><i data-lucide="quote" size="15"></i></button>
+                        <button type="button" data-cmd="link" title="Link"><i data-lucide="link" size="15"></i></button>
+                        <button type="button" data-cmd="removeFormat" title="Clear formatting"><i data-lucide="remove-formatting" size="15"></i></button>
                     </div>
-                    <textarea name="content" id="edit_post_content" class="form-textarea" rows="12" style="min-height:250px" required></textarea>
+                    <div class="editor-box" data-editor-target="edit_post_content" contenteditable="true"></div>
+                    <textarea name="content" id="edit_post_content" class="form-textarea editor-source" style="min-height:250px"></textarea>
                 </div>
 
                 <div class="form-group">
@@ -343,6 +353,8 @@ function editPost(p) {
     document.getElementById('edit_post_category').value = p.category_id || '';
     document.getElementById('edit_post_status').value = p.status || 'draft';
     document.getElementById('edit_post_content').value = p.content || '';
+    var postEditorBox = document.querySelector('.editor-box[data-editor-target="edit_post_content"]');
+    if (postEditorBox) postEditorBox.innerHTML = p.content || '';
     document.getElementById('edit_post_excerpt').value = p.excerpt || '';
     document.getElementById('edit_post_tags').value = p.tags || '';
     document.getElementById('edit_post_author_display').value = p.author_name || 'Unknown';
