@@ -119,7 +119,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $stmt = $db->prepare("UPDATE portfolio_projects SET title=?, slug=?, description=?, content=?, client=?, project_type=?, project_date=?, project_url=?, github_url=?, technologies=?, category_id=?, status=?, featured=?, sort_order=?, testimonial=?, testimonial_author=?, testimonial_position=? WHERE id=?");
                 }
                 if ($galleryJson) {
-                    $db->prepare("UPDATE portfolio_projects SET gallery_images = ? WHERE id = ?")->execute([$galleryJson, $projectId]);
+                    $existing = $db->query("SELECT gallery_images FROM portfolio_projects WHERE id = " . (int)$projectId)->fetchColumn();
+                    $merged = [];
+                    if ($existing) {
+                        $decoded = json_decode($existing, true);
+                        if (is_array($decoded)) $merged = $decoded;
+                    }
+                    foreach (json_decode($galleryJson, true) ?: [] as $img) {
+                        if (count($merged) >= 5) break;
+                        if (!in_array($img, $merged, true)) $merged[] = $img;
+                    }
+                    $db->prepare("UPDATE portfolio_projects SET gallery_images = ? WHERE id = ?")->execute([json_encode($merged), $projectId]);
                 }
                 $params[] = $projectId;
                 $stmt->execute($params);
@@ -280,7 +290,7 @@ $projects = $db->query("SELECT p.*, c.name as category_name FROM portfolio_proje
 
                 <div class="form-group"><label class="form-label">Featured Image</label><input type="file" name="image" class="form-input" accept="image/*"></div>
 
-                <div class="form-group"><label class="form-label">Gallery Images (up to 5)</label><input type="file" name="gallery_images[]" class="form-input" accept="image/*" multiple></div>
+                <div class="form-group"><label class="form-label">Gallery Images (up to 5)</label><input type="file" name="gallery_images[]" class="form-input" accept="image/*" multiple><small style="display:block;color:var(--text-muted);margin-top:6px">Hold Ctrl (Windows) or Cmd (Mac) to select multiple images at once.</small></div>
 
                 <hr style="border:none;border-top:1px solid var(--border);margin:16px 0">
                 <h4 style="font-size:14px;font-weight:600;margin-bottom:12px;color:var(--text-muted)">Testimonial</h4>
@@ -389,7 +399,7 @@ $projects = $db->query("SELECT p.*, c.name as category_name FROM portfolio_proje
 
                 <div class="form-group"><label class="form-label">Featured Image (leave empty to keep current)</label><input type="file" name="image" class="form-input" accept="image/*"></div>
 
-                <div class="form-group"><label class="form-label">Add More Gallery Images</label><input type="file" name="gallery_images[]" class="form-input" accept="image/*" multiple></div>
+                <div class="form-group"><label class="form-label">Add More Gallery Images</label><input type="file" name="gallery_images[]" class="form-input" accept="image/*" multiple><small style="display:block;color:var(--text-muted);margin-top:6px">New images are added to the existing gallery (max 5 total). Hold Ctrl (Windows) or Cmd (Mac) to select multiple at once.</small></div>
 
                 <hr style="border:none;border-top:1px solid var(--border);margin:16px 0">
                 <h4 style="font-size:14px;font-weight:600;margin-bottom:12px;color:var(--text-muted)">Testimonial</h4>
